@@ -1,0 +1,4 @@
+#ifndef ADVENT_2025_MAIN_H
+#define ADVENT_2025_MAIN_H
+
+#endif //ADVENT_2025_MAIN_H
