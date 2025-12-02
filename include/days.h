@@ -1,0 +1,4 @@
+#ifndef ADVENT_2025_DAYS_H
+#define ADVENT_2025_DAYS_H
+
+#endif //ADVENT_2025_DAYS_H
