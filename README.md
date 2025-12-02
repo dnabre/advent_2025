@@ -2,7 +2,7 @@
 
 ### Language of the Year: C
 
-Using C17+, CLion, cmake/msys2/clangarm64/clang toolchain
+Using C17+, though will likely be C99 compatible.
 
 | Problem                                          |                                 | 1                                                                                        | 2                                                                                        |
 |--------------------------------------------------|---------------------------------|------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------|
@@ -23,3 +23,10 @@ Using C17+, CLion, cmake/msys2/clangarm64/clang toolchain
 I'm using C, in part, to knock a little of the massive amount of rust on my C skills.
 Between that, and using opinionated rather than idiomatic stuff, this is code-base is not
 a good learning resource for C programming.
+
+
+Toolchain:
+* clang version 21.1.5
+* Target: aarch64-w64-windows-gnu
+* Using msys/clangarm64/clang
+* Clion IDE

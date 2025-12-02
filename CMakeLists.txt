@@ -6,8 +6,12 @@ set(CMAKE_C_STANDARD_REQUIRED ON)
 
 set(CMAKE_C_FLAGS "-Wall -Werror -O2")
 
-include_directories(.)
+
+include_directories(${CMAKE_SOURCE_DIR}/include)
 
 add_executable(advent_2025
-        main.c
-        main.h)
+        src/main.c
+        src/io.c
+        src/parse.c
+        include/parse.h
+)
