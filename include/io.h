@@ -10,7 +10,7 @@
 
 #ifndef ADVENT_2025_IO_H
 #define ADVENT_2025_IO_H
-
+#include "main.h"
 /**
  * Read contents of `filename`. on error, program will exit with -1 status
  * The number of bytes read will be placed into `bytes_read`, and the
@@ -38,9 +38,5 @@ static inline void println()
 }
 
 
-struct line_input
-{
-    size_t count;
-    char** lines;
-};
+
 #endif //ADVENT_2025_IO_H

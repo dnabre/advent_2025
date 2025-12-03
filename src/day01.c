@@ -1,5 +1,5 @@
 #include <stdbool.h>
-#include <windows.h>
+
 
 #include "days.h"
 #include "io.h"
@@ -18,29 +18,18 @@ void day1(const char* filename)
 {
     struct line_input day1_lines =  read_full_file_to_lines(filename);
 
-    LARGE_INTEGER freq, start, end;
-    double elapsed1, elapsed2;
-
-    QueryPerformanceFrequency(&freq);
 
     printf("Advent of Code, Day 01\n");
     printf("    ---------------------------------------------\n");
     printf("\t part 1: ");
 
-    QueryPerformanceCounter(&start);
-    char* answer_part1  = day1_part1(filename);
-    QueryPerformanceCounter(&end);
-    elapsed1 = (double)(end.QuadPart - start.QuadPart) * 1000.0 / freq.QuadPart;
-    printf("\t %s\t (%.3f ms)\n", answer_part1, elapsed1 );
-
+    char* answer_part1  = day1_part1(day1_lines);
+    printf("\t %s\n", answer_part1);
 
     printf("\t part 2: ");
-    QueryPerformanceCounter(&start);
-    char* answer_part2 = day1_part2(filename);
+    char* answer_part2 = day1_part2(day1_lines);
 
-    QueryPerformanceCounter(&end);
-    elapsed2 = (double)(end.QuadPart - start.QuadPart) * 1000.0 / freq.QuadPart;
-    printf("\t %s\t (%.3f ms)\n", answer_part2, elapsed2);
+    printf("\t %s\n", answer_part2);
     printf("    ---------------------------------------------\n");
 
     if (answer_part1) { free(answer_part1); };
@@ -49,13 +38,16 @@ void day1(const char* filename)
 
 
 
-char* day1_part1(const char* filename)
+char* day1_part1( struct line_input line_array )
 {
-    size_t bytes_read;
-    char* input = read_full_file(filename, &bytes_read);
-    size_t line_count;
-    char** lines = lines_from_buffer(input, bytes_read, &line_count);
+    // size_t bytes_read;
+    // char* input = read_full_file(filename, &bytes_read);
+    // size_t line_count;
+    // char** lines = lines_from_buffer(input, bytes_read, &line_count);
 
+
+    size_t line_count = line_array.count;
+    char** lines = line_array.lines;
 
     int dial = DIAL_START;
     int zero_count = 0;
@@ -92,15 +84,12 @@ char* day1_part1(const char* filename)
 }
 
 
-char* day1_part2(const char* filename)
+char* day1_part2( struct line_input line_array )
 {
 
-    size_t bytes_read;
-    char* input = read_full_file(filename, &bytes_read);
 
-    size_t line_count;
-    char** lines = lines_from_buffer(input, bytes_read, &line_count);
-
+    size_t line_count = line_array.count;
+    char** lines = line_array.lines;
     int dial = DIAL_START;
     int clicks = 0;
 

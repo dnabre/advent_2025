@@ -4,10 +4,11 @@
 #include <stdlib.h>
 #include <time.h>
 #define ANSWER_BUFFER_SIZE  32
+#include "main.h"
 
 void  day1(const char* filename);
-char* day1_part1(const char* filename);
-char* day1_part2(const char* filename);
+char* day1_part1(struct line_input);
+char* day1_part2(struct line_input);
 
 
 
