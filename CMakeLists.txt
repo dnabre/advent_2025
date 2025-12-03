@@ -14,4 +14,5 @@ add_executable(advent_2025
         src/io.c
         src/parse.c
         src/day01.c
+        src/day02.c
 )

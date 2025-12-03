@@ -14,7 +14,8 @@
 /**
  * Read contents of `filename`. on error, program will exit with -1 status
  * The number of bytes read will be placed into `bytes_read`, and the
- * data read will be returned in a newly allocated.
+ * data read will be returned in a newly allocated. A null byte is added to the
+ * end of the `buffer`, this is not included in bytes_read
  */
 char* read_full_file(const char* filename, size_t* bytes_read);
 
@@ -25,18 +26,23 @@ char* read_full_file(const char* filename, size_t* bytes_read);
 *
 */
 
-char** lines_from_buffer( char* buffer, size_t size, size_t* number_of_lines);
+char** lines_from_buffer(char* buffer, size_t size, size_t* number_of_lines);
 
 /**
  *  Merges `read_full_file` and `lines_from_buffer`, and bundles result
  */
-struct line_input read_full_file_to_lines(const char* filename);
+struct problem_inputs read_full_file_to_lines(const char* filename);
 
-static inline void println()
-{
-  printf("\n");
+/**
+ * Reads a single line file containing entries separated by commas
+ * Building an array of the entries, backed into a problem_inputs struct.
+ */
+struct problem_inputs read_full_from_csv(const char* filename);
+
+
+static inline void println() {
+    printf("\n");
 }
-
 
 
 #endif //ADVENT_2025_IO_H

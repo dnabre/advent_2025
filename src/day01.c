@@ -1,9 +1,9 @@
 #include <stdbool.h>
+#include <string.h>
 
 
 #include "days.h"
 #include "io.h"
-
 
 
 const char* DAY1_PART1_ANSWER = "995";
@@ -13,17 +13,15 @@ const int DIAL_START = 50;
 const int DIAL_SIZE = 100;
 
 
-
-void day1(const char* filename)
-{
-    struct line_input day1_lines =  read_full_file_to_lines(filename);
+void day1(const char* filename) {
+    struct problem_inputs day1_lines = read_full_file_to_lines(filename);
 
 
     printf("Advent of Code, Day 01\n");
     printf("    ---------------------------------------------\n");
     printf("\t part 1: ");
 
-    char* answer_part1  = day1_part1(day1_lines);
+    char* answer_part1 = day1_part1(day1_lines);
     printf("\t %s\n", answer_part1);
 
     printf("\t part 2: ");
@@ -32,49 +30,51 @@ void day1(const char* filename)
     printf("\t %s\n", answer_part2);
     printf("    ---------------------------------------------\n");
 
+    if (strcmp(answer_part1, DAY1_PART1_ANSWER) != 0) {
+        fprintf(stderr, "Day 1, Part 1, answer is WRONG. Expected: %s, Received: %s\n",
+                DAY1_PART1_ANSWER, answer_part1);
+    }
+    if (strcmp(answer_part2, DAY1_PART2_ANSWER) != 0) {
+        fprintf(stderr, "Day 1, Part 2, answer is WRONG. Expected: %s, Received: %s\n",
+                DAY1_PART2_ANSWER, answer_part2);
+    }
+
+
     if (answer_part1) { free(answer_part1); };
     if (answer_part2) { free(answer_part2); };
 }
 
 
-
-char* day1_part1( struct line_input line_array )
-{
+char* day1_part1(struct problem_inputs line_array) {
     // size_t bytes_read;
     // char* input = read_full_file(filename, &bytes_read);
     // size_t line_count;
     // char** lines = lines_from_buffer(input, bytes_read, &line_count);
 
 
-    size_t line_count = line_array.count;
-    char** lines = line_array.lines;
+    size_t line_count = line_array.len;
+    char** lines = line_array.inputs;
 
     int dial = DIAL_START;
     int zero_count = 0;
 
-    for (size_t i = 0; i < line_count; i++)
-    {
+    for (size_t i = 0; i < line_count; i++) {
         char direction = lines[i][0];
         int amount = strtol(lines[i] + 1, NULL, 10);
-        if (direction == 'L')
-        {
+        if (direction == 'L') {
             dial = (dial - amount) % DIAL_SIZE;
-            while (dial < 0)
-            {
+            while (dial < 0) {
                 dial = dial + DIAL_SIZE;
             }
         }
-        else if (direction == 'R')
-        {
+        else if (direction == 'R') {
             dial = (dial + amount) % DIAL_SIZE;
         }
-        else
-        {
+        else {
             printf("\n ERROR invalid direction: %c, %d, from %s\n", direction, amount, lines[i]);
             exit(-1);
         }
-        if (dial == 0)
-        {
+        if (dial == 0) {
             zero_count++;
         }
     }
@@ -84,43 +84,33 @@ char* day1_part1( struct line_input line_array )
 }
 
 
-char* day1_part2( struct line_input line_array )
-{
-
-
-    size_t line_count = line_array.count;
-    char** lines = line_array.lines;
+char* day1_part2(struct problem_inputs line_array) {
+    size_t line_count = line_array.len;
+    char** lines = line_array.inputs;
     int dial = DIAL_START;
     int clicks = 0;
 
-    for (size_t i = 0; i < line_count; i++)
-    {
+    for (size_t i = 0; i < line_count; i++) {
         char turn_direction = lines[i][0];
         int amount = strtol(lines[i] + 1, NULL, 10);
         int d_mult = 0;
         int final_dial_shift = 0;
         bool do_clicker = false;
-        while (amount >= DIAL_SIZE)
-        {
+        while (amount >= DIAL_SIZE) {
             amount -= DIAL_SIZE;
             clicks++;
         }
-        if (turn_direction == 'L')
-        {
-            if (amount < dial)
-            {
+        if (turn_direction == 'L') {
+            if (amount < dial) {
                 dial -= amount;
             }
-            else if (amount == dial)
-            {
+            else if (amount == dial) {
                 dial = 0;
-                if (amount > 0)
-                {
+                if (amount > 0) {
                     clicks++;
                 }
             }
-            else
-            {
+            else {
                 do_clicker = true;
                 d_mult = -1;
                 final_dial_shift = DIAL_SIZE;
@@ -128,18 +118,14 @@ char* day1_part2( struct line_input line_array )
         }
         else //(turn_direction == 'R')
         {
-
-            if (dial + amount < DIAL_SIZE)
-            {
+            if (dial + amount < DIAL_SIZE) {
                 dial += amount;
             }
-            else if (dial + amount == DIAL_SIZE)
-            {
+            else if (dial + amount == DIAL_SIZE) {
                 dial = 0;
                 clicks++;
             }
-            else
-            {
+            else {
                 do_clicker = true;
                 d_mult = 1;
                 final_dial_shift = -1 * DIAL_SIZE;
@@ -147,10 +133,8 @@ char* day1_part2( struct line_input line_array )
         }
 
 
-        if (do_clicker)
-        {
-            if (dial != 0)
-            {
+        if (do_clicker) {
+            if (dial != 0) {
                 clicks++;
             }
 
