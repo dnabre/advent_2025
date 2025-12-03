@@ -1,6 +1,5 @@
 #include "parse.h"
-int test_parse()
-{
 
-    return 132;
-}
+#include <stdint.h>
+
+

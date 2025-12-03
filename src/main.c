@@ -1,15 +1,16 @@
 #include <stdio.h>
+#include <string.h>
 #include "main.h"
-#include "io.h"
-#include "parse.h"
 
+#include <stdlib.h>
+
+#include "days.h"
+
+
+const char* test_file = "inputs/2025/day_01_test_01.txt";
+const char* prob_file = "inputs/2025/day_01_input_01.txt";
 int main(int argc, char *argv[]) {
-    printf("Hello World!\n");
-    printf("src and include directories setup\n");
-    printf("Project year: %s (header file location test)\n", ADVENT_YEAR);
-    int test_number = test_io_functions();
-    printf("number from io.c/test_io/function: %d\n",test_number );
-    int parse_number = test_parse();
-    printf("number from parse.c/test_parse/function: %d\n",parse_number );
-    return 0;
+
+    // day1(prob_file);
+    day1(test_file);
 }
