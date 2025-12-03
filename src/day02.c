@@ -62,11 +62,7 @@ char* day2_part1(struct range_inputs i_ranges) {
 }
 
 
-char* day2_part2(struct range_inputs i_ranges) {
-    char* answer = malloc(ANSWER_BUFFER_SIZE);
-    sprintf(answer, "%d", 0);
-    return answer;
-}
+
 
 
 static int64_t check_for_twice(struct int_pair xy) {
@@ -106,4 +102,28 @@ bool has_even_digits(int64_t n) {
     }
     while (n > 0);
     return (count % 2 == 0);
+}
+
+char* day2_part2(struct range_inputs i_ranges) {
+
+/*
+ *  Repeated substring can be found by using patterns
+ *   01 01 01 01 01 -> string[0] + string[1] is repeated 5 times
+ *   0123 0123    -> the first four digits are repeated twice
+ * Since invalid ids have to a substring repeated twice, we should
+ *   started by looking at half len repeats (len/2), then (len/3),
+ *   (len/4), going from largest repeated substring to shortest
+ *   may not be the most efficient, but it seems the most simple
+ *
+ * Possilbe consider factoring the length of the string. Since
+ *   the length of the repeated substring has to a fraction of
+ *   the length, we can see what factors are possible for given
+ *   string length. It's be crude, but there are a relatively
+ *   limited number of number lengths.
+ */
+
+
+    char* answer = malloc(ANSWER_BUFFER_SIZE);
+    sprintf(answer, "%d", 0);
+    return answer;
 }
