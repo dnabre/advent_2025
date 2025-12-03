@@ -48,6 +48,7 @@ void day2(const char* filename) {
 static bool has_even_digits(int64_t n);
 static int64_t check_for_twice(struct int_pair xy);
 
+int64_t checked_ids =0;
 
 char* day2_part1(struct range_inputs i_ranges) {
     int64_t invalid_sun = 0;
@@ -56,12 +57,12 @@ char* day2_part1(struct range_inputs i_ranges) {
         int64_t id_sum = check_for_twice(xy);
         invalid_sun += id_sum;
     }
+
+    printf("\n checked %lld possible IDs\n", checked_ids);
     char* answer = malloc(ANSWER_BUFFER_SIZE);
     sprintf(answer, "%"PRId64, invalid_sun);
     return answer;
 }
-
-
 
 
 
@@ -73,6 +74,7 @@ static int64_t check_for_twice(struct int_pair xy) {
     int64_t sum = 0;
     char nbuffer[64];
     for (int64_t id = xy.x; id <= xy.y; id++) {
+        checked_ids++;
         if (!has_even_digits(id)) {
             continue;
         }
@@ -104,9 +106,9 @@ bool has_even_digits(int64_t n) {
     return (count % 2 == 0);
 }
 
-char* day2_part2(struct range_inputs i_ranges) {
 
-/*
+
+/* Part Notes
  *  Repeated substring can be found by using patterns
  *   01 01 01 01 01 -> string[0] + string[1] is repeated 5 times
  *   0123 0123    -> the first four digits are repeated twice
@@ -122,8 +124,16 @@ char* day2_part2(struct range_inputs i_ranges) {
  *   limited number of number lengths.
  */
 
+char* day2_part2(struct range_inputs i_ranges) {
+    int64_t invalid_sun = 0;
+    for (size_t i = 0; i < i_ranges.len; i++) {
+        struct int_pair xy = i_ranges.ranges[i];
+        int64_t id_sum = check_for_twice(xy);
+        invalid_sun += id_sum;
+    }
 
+    printf("\n checked %lld possible IDs\n", checked_ids);
     char* answer = malloc(ANSWER_BUFFER_SIZE);
-    sprintf(answer, "%d", 0);
+    sprintf(answer, "%"PRId64, invalid_sun);
     return answer;
 }
