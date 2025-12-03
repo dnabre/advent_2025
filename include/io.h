@@ -27,8 +27,20 @@ char* read_full_file(const char* filename, size_t* bytes_read);
 
 char** lines_from_buffer( char* buffer, size_t size, size_t* number_of_lines);
 
+/**
+ *  Merges `read_full_file` and `lines_from_buffer`, and bundles result
+ */
+struct line_input read_full_file_to_lines(const char* filename);
+
 static inline void println()
 {
   printf("\n");
 }
+
+
+struct line_input
+{
+    size_t count;
+    char** lines;
+};
 #endif //ADVENT_2025_IO_H
