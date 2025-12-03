@@ -18,7 +18,6 @@ Using C17+, though will likely be C99 compatible.
 | [Day 10: ](https://adventofcode.com/2025/day/10) |                   | [ ](https://github.com/dnabre/advent_2025/blob/master/src/day10.c) | [ ](https://github.com/dnabre/advent_2025/blob/master/src/day10.c) |
 | [Day 11: ](https://adventofcode.com/2025/day/11) |                   | [ ](https://github.com/dnabre/advent_2025/blob/master/src/day11.c) | [ ](https://github.com/dnabre/advent_2025/blob/master/src/day11.c) |
 | [Day 12: ](https://adventofcode.com/2025/day/12) |                   | [ ](https://github.com/dnabre/advent_2025/blob/master/src/day12.c) | [ ](https://github.com/dnabre/advent_2025/blob/master/src/main/java/aoc_2025/Day12.c) |
-|
 
 I'm using C, in part, to knock a little of the massive amount of rust on my C skills.
 Between that, and using opinionated rather than idiomatic stuff, this is code-base is not
