@@ -17,8 +17,8 @@ struct range_inputs parse_int_ranges(struct problem_inputs p_i) {
             char* right = dash + 1;
             char* left = str;
             int64_t i_r, i_l;
-            i_l = strtoll(left,NULL, 10);
-            i_r = strtoll(right,NULL, 10);
+            i_l = strtoll(left, NULL, 10);
+            i_r = strtoll(right, NULL, 10);
 
             struct int_pair xy;
             xy.x = i_l;

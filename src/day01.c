@@ -46,12 +46,6 @@ void day1(const char* filename) {
 
 
 char* day1_part1(struct problem_inputs line_array) {
-    // size_t bytes_read;
-    // char* input = read_full_file(filename, &bytes_read);
-    // size_t line_count;
-    // char** lines = lines_from_buffer(input, bytes_read, &line_count);
-
-
     size_t line_count = line_array.len;
     char** lines = line_array.inputs;
 
