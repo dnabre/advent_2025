@@ -9,7 +9,7 @@ set(CMAKE_C_FLAGS "-Wall  -O2")
 
 include_directories(${CMAKE_SOURCE_DIR}/include)
 
-file(GLOB DAY_SRC_FILES src/*.c)
+file(GLOB DAY_SRC_FILES src/day*.c)
 
 add_executable(advent_2025
         src/main.c
