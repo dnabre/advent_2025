@@ -1,8 +1,6 @@
 #ifndef ADVENT_2025_DAYS_H
 #define ADVENT_2025_DAYS_H
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
+
 #define ANSWER_BUFFER_SIZE  32
 #include "main.h"
 
@@ -19,6 +17,9 @@ void day3(const char* filename);
 char* day3_part1(struct problem_inputs);
 char* day3_part2(struct problem_inputs);
 
+void day4(const char* filename);
+char* day4_part1(struct problem_inputs);
+char* day4_part2(struct problem_inputs);
 
 
 #endif //ADVENT_2025_DAYS_H
