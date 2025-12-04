@@ -84,17 +84,11 @@ char** lines_from_buffer(char* buffer, size_t size, size_t* number_of_lines) {
     for (size_t i = 0; i < size; i++) {
         if (buffer[i] == '\n') {
             buffer[i] = '\0';
-
-            lines[idx++] = strdup(start);
-
-            size_t len = strlen(lines[idx-1]);
-            if (lines[idx-1][len] != '\0') {
-                printf("while splitting buffer into lines, final string is not null-terminated");
-            }
-
             start = buffer + i + 1;
+            lines[idx++] = strdup(start);
+            }
         }
-    }
+
     if (start < buffer + size) {
         lines[idx] = strdup(start);
         idx++;
