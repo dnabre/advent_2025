@@ -17,7 +17,7 @@ void day3(const char* filename) {
 
 
     struct problem_inputs day3_lines = read_full_file_to_lines(filename);
-    // TODO: Lines aren't always properly number terminated, workaround for today.
+    // Lines aren't always properly number terminated, workaround for today.
 
     for (size_t i=0; i < day3_lines.len; i++) {
         size_t should_be_null=0;
