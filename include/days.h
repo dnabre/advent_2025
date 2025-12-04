@@ -15,5 +15,10 @@ void day2(const char* filename);
 char* day2_part1(struct range_inputs);
 char* day2_part2(struct range_inputs);
 
+void day3(const char* filename);
+char* day3_part1(struct problem_inputs);
+char* day3_part2(struct problem_inputs);
+
+
 
 #endif //ADVENT_2025_DAYS_H

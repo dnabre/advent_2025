@@ -1,3 +1,4 @@
+#include <inttypes.h>
 #include <stdbool.h>
 #include <string.h>
 
@@ -50,7 +51,7 @@ char* day1_part1(struct problem_inputs line_array) {
     char** lines = line_array.inputs;
 
     int dial = DIAL_START;
-    int zero_count = 0;
+    int64_t zero_count = 0;
 
     for (size_t i = 0; i < line_count; i++) {
         char direction = lines[i][0];
@@ -73,7 +74,7 @@ char* day1_part1(struct problem_inputs line_array) {
         }
     }
     char* answer = malloc(ANSWER_BUFFER_SIZE);
-    sprintf(answer, "%d", zero_count);
+    sprintf(answer, "%"PRId64, zero_count);
     return answer;
 }
 
@@ -82,7 +83,7 @@ char* day1_part2(struct problem_inputs line_array) {
     size_t line_count = line_array.len;
     char** lines = line_array.inputs;
     int dial = DIAL_START;
-    int clicks = 0;
+    int64_t clicks = 0;
 
     for (size_t i = 0; i < line_count; i++) {
         char turn_direction = lines[i][0];
@@ -138,7 +139,6 @@ char* day1_part2(struct problem_inputs line_array) {
 
 
     char* answer = malloc(ANSWER_BUFFER_SIZE);
-    sprintf(answer, "%d", clicks);
-
+    sprintf(answer, "%"PRId64, clicks);
     return answer;
 }

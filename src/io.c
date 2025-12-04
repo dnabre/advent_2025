@@ -84,6 +84,7 @@ char** lines_from_buffer(char* buffer, size_t size, size_t* number_of_lines) {
     for (size_t i = 0; i < size; i++) {
         if (buffer[i] == '\n') {
             buffer[i] = '\0';
+
             lines[idx++] = strdup(start);
             start = buffer + i + 1;
         }
