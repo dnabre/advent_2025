@@ -38,12 +38,13 @@ void day4(const char* filename) {
     printf("    ---------------------------------------------\n");
 
     if (strcmp(answer_part1, DAY4_PART1_ANSWER) != 0) {
-                DAY4_PART1_ANSWER, answer_part1);
+        fprintf(stderr, "Day 4, Part 1, answer is WRONG. Expected: %s, Received: %s\n",
+            DAY4_PART1_ANSWER, answer_part1);
     }
     if (strcmp(answer_part2, DAY4_PART2_ANSWER) != 0) {
-                DAY4_PART2_ANSWER, answer_part2);
+        fprintf(stderr, "Day 4, Part 2, answer is WRONG. Expected: %s, Received: %s\n",
+            DAY4_PART2_ANSWER, answer_part2);
     }
-
 
     if (answer_part1) { free(answer_part1); };
     if (answer_part2) { free(answer_part2); };

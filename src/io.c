@@ -35,7 +35,7 @@ struct problem_inputs read_full_from_csv(const char* filename) {
         }
     }
     if (idx < count) {
-        entries[idx++] = strdup(start);
+        entries[idx] = strdup(start);
     }
     free(buffer);
     struct problem_inputs result = {0};
@@ -86,6 +86,12 @@ char** lines_from_buffer(char* buffer, size_t size, size_t* number_of_lines) {
             buffer[i] = '\0';
 
             lines[idx++] = strdup(start);
+
+            size_t len = strlen(lines[idx-1]);
+            if (lines[idx-1][len] != '\0') {
+                printf("while splitting buffer into lines, final string is not null-terminated");
+            }
+
             start = buffer + i + 1;
         }
     }
@@ -96,4 +102,20 @@ char** lines_from_buffer(char* buffer, size_t size, size_t* number_of_lines) {
     *number_of_lines = idx;
     free(buffer);
     return lines;
+}
+
+void print_size_t_array(const size_t* arr, size_t size) {
+    if (arr == NULL) {
+        printf("Array is NULL\n");
+        return;
+    }
+
+    printf("[");
+    for (size_t i = 0; i < size; i++) {
+        printf("%zu", arr[i]); // %zu is the correct specifier for size_t
+        if (i + 1 < size) {
+            printf(", ");
+        }
+    }
+    printf("]");
 }
