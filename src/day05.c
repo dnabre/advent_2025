@@ -33,7 +33,7 @@ void day5(const char* filename) {
     printf("\t %s\n", answer_part1);
 
     printf("\t part 2: ");
-    char* answer_part2 = day5_part2(day5_ranges, day5_items);
+    char* answer_part2 = day5_part2(day5_ranges);
 
     printf("\t %s\n", answer_part2);
     printf("    ---------------------------------------------\n");
@@ -80,22 +80,9 @@ char* day5_part1(struct range_inputs day5_ranges, struct problem_inputs day5_ite
 }
 
 
-char* day5_part2(struct range_inputs day5_ranges, struct problem_inputs day5_items) {
+char* day5_part2(struct range_inputs day5_ranges) {
     struct int_pair* range_array = day5_ranges.ranges;
-    printf("pre-sort:\n\t");
-    for (size_t i = 0; i < day5_ranges.count; i++) {
-        print_int_pair_range(range_array[i]);
-        printf("\n\t");
-    }
-
-
     qsort(range_array, day5_ranges.count, sizeof(struct int_pair), int_pair_compare);
-
-    printf("\n\npostsort:\n\t");
-    for (size_t i = 0; i < day5_ranges.count; i++) {
-        print_int_pair_range(range_array[i]);
-        printf("\n\t");
-    }
     int64_t in_range_items = 0;
     struct int_pair merged = range_array[0];
 
@@ -104,22 +91,11 @@ char* day5_part2(struct range_inputs day5_ranges, struct problem_inputs day5_ite
         if (current_range.x <= merged.y) {
             merged.y = max_int(merged.y, current_range.y);
         } else {
-            printf("no more to merge into ");
-            print_int_pair_range(merged);
-            printf(" talling %zu items into %zu -> ", merged.y - merged.x + 1, in_range_items);
             in_range_items += merged.y - merged.x + 1;
-
-            printf("%zu\n", in_range_items);
             merged = current_range;
         }
     }
-    printf("adding last merge: ");
-    print_int_pair_range(merged);
-    printf(" talling %zu items into %zu -> ", merged.y - merged.x + 1, in_range_items);
     in_range_items += merged.y - merged.x + 1;
-
-
-    println();
     char* answer = malloc(ANSWER_BUFFER_SIZE);
     sprintf(answer, "%"PRId64, in_range_items);
     return answer;
@@ -127,13 +103,11 @@ char* day5_part2(struct range_inputs day5_ranges, struct problem_inputs day5_ite
 
 
 static int int_pair_compare(const void* p1, const void* p2) {
-    int64_t left_x, left_y, right_x, right_y;
+    int64_t left_x = ((struct int_pair*)p1)->x;
+    int64_t left_y = ((struct int_pair*)p1)->y;
 
-    left_x = ((struct int_pair*)p1)->x;
-    left_y = ((struct int_pair*)p1)->y;
-
-    right_x = ((struct int_pair*)p2)->x;
-    right_y = ((struct int_pair*)p2)->y;
+    int64_t right_x = ((struct int_pair*)p2)->x;
+    int64_t right_y = ((struct int_pair*)p2)->y;
 
     int x_compare = ((left_x > right_x) - (left_x < right_x));
     if (x_compare == 0) {

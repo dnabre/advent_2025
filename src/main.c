@@ -27,31 +27,28 @@ const char* day_05_prob_file = "inputs/2025/day_05_input_01.txt";
 
 
 int main(int argc, char* argv[]) {
-    // clock_t start, end,
-    // double elapsed_ms;
-
     clock_t whole_start = clock();
-    // start = clock();
+    clock_t start = clock();
     day1(day_01_prob_file);
-    // end = clock();
-    // elapsed_ms = (double)(end - start) * 1000.0 / CLOCKS_PER_SEC;
-    // printf("\t\t\t time: %.3f ms\n", elapsed_ms);
-    //
-    //
-    // start = clock();
-    day2(day_02_prob_file);
-    //
-    // end = clock();
-    // elapsed_ms = (double)(end - start) * 1000.0 / CLOCKS_PER_SEC;
-    // printf("\t\t\t time: %.3f ms\n", elapsed_ms);
+    clock_t end = clock();
+    double elapsed_ms = (double)(end - start) * 1000.0 / CLOCKS_PER_SEC;
+    printf("\t\t\t time: %.3f ms\n", elapsed_ms);
 
-    // start = clock();
+
+    start = clock();
+    day2(day_02_prob_file);
+
+    end = clock();
+    elapsed_ms = (double)(end - start) * 1000.0 / CLOCKS_PER_SEC;
+    printf("\t\t\t time: %.3f ms\n", elapsed_ms);
+
+    start = clock();
     day3(day_03_prob_file);
 
-    // end = clock();
-    // elapsed_ms = (double)(end - start) * 1000.0 / CLOCKS_PER_SEC;
-    // printf("\t\t\t time: %.3f ms\n", elapsed_ms);
-    //
+    end = clock();
+    elapsed_ms = (double)(end - start) * 1000.0 / CLOCKS_PER_SEC;
+    printf("\t\t\t time: %.3f ms\n", elapsed_ms);
+
     // start = clock();
     //day4(day_04_test_file);
     //
@@ -60,17 +57,17 @@ int main(int argc, char* argv[]) {
     // printf("\t\t\t time: %.3f ms\n", elapsed_ms);
     //
 
-    // end = clock();
-    // elapsed_ms = (double)(end - start) * 1000.0 / CLOCKS_PER_SEC;
-    // printf("\t\t\t time: %.3f ms\n", elapsed_ms);
-    //
-    // start = clock();
+    end = clock();
+    elapsed_ms = (double)(end - start) * 1000.0 / CLOCKS_PER_SEC;
+    printf("\t\t\t time: %.3f ms\n", elapsed_ms);
+
+    start = clock();
     day5(day_05_prob_file);
-    //
-    // end = clock();
-    // elapsed_ms = (double)(end - start) * 1000.0 / CLOCKS_PER_SEC;
-    // printf("\t\t\t time: %.3f ms\n", elapsed_ms);
-    //
+
+    end = clock();
+    elapsed_ms = (double)(end - start) * 1000.0 / CLOCKS_PER_SEC;
+    printf("\t\t\t time: %.3f ms\n", elapsed_ms);
+
 
 
 
