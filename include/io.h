@@ -12,6 +12,19 @@
 #define ADVENT_2025_IO_H
 #include "main.h"
 /**
+ * Reads line from `fp` file stream, returns it as newly alloc string.
+*/
+char* read_line(FILE* fp);
+
+
+/**
+ * Read specified `filename` into an array of lines. Array and lines are newly allocated
+ *
+ */
+struct problem_inputs read_by_lines(const char* filename);
+
+
+/**
  * Read contents of `filename`. on error, program will exit with -1 status
  * The number of bytes read will be placed into `bytes_read`, and the
  * data read will be returned in a newly allocated. A null byte is added to the
@@ -45,5 +58,5 @@ inline void println() {
 }
 
 void print_size_t_array(const size_t* arr, size_t size);
-
+void split_on_empty_range_item(struct problem_inputs input_lines, struct range_inputs* out_ranges, struct problem_inputs*  out_items);
 #endif //ADVENT_2025_IO_H

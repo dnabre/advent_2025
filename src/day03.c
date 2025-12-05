@@ -11,19 +11,7 @@ const char* DAY3_PART2_ANSWER = "169347417057382";
 
 
 void day3(const char* filename) {
-    struct problem_inputs day3_lines = read_full_file_to_lines(filename);
-    // Lines aren't always properly number terminated, workaround for today.
-
-    for (size_t i = 0; i < day3_lines.len; i++) {
-        size_t should_be_null = 0;
-        while (isdigit(day3_lines.inputs[i][should_be_null])) {
-            should_be_null++;
-        }
-
-        // day3_lines.inputs[i][15]='\0';
-        day3_lines.inputs[i][should_be_null] = '\0';
-    }
-
+    struct problem_inputs day3_lines = read_by_lines(filename);
 
     printf("Advent of Code, Day 03\n");
     printf("    ---------------------------------------------\n");
@@ -56,8 +44,8 @@ void day3(const char* filename) {
 char* day3_part1(struct problem_inputs line_array) {
     int64_t total_jolts = 0;
 
-    for (size_t i = 0; i < line_array.len; i++) {
-        char* current = line_array.inputs[i];
+    for (size_t i = 0; i < line_array.count; i++) {
+        char* current = line_array.lines[i];
         size_t len = strlen(current);
 
 
@@ -103,8 +91,8 @@ char* day3_part2(struct problem_inputs line_array) {
     int64_t total_jolts = 0;
     // const size_t DAY_03_PART_02_NUMBER_OF_BANKS = 12;
 
-    for (size_t line_number = 0; line_number < line_array.len; line_number++) {
-        char* current = line_array.inputs[line_number];
+    for (size_t line_number = 0; line_number < line_array.count; line_number++) {
+        char* current = line_array.lines[line_number];
 
         size_t m_pos[DAY_03_PART_02_NUMBER_OF_BANKS];
 

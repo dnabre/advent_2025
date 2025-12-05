@@ -52,7 +52,7 @@ static bool is_repeated_substring(const char* str, size_t n);
 char* day2_part1(struct range_inputs i_ranges) {
     int64_t invalid_sum = 0;
     char nbuffer[64];
-    for (size_t i = 0; i < i_ranges.len; i++) {
+    for (size_t i = 0; i < i_ranges.count; i++) {
         struct int_pair xy = i_ranges.ranges[i];;
         for (int64_t id = xy.x; id <= xy.y; id++) {
             size_t len = sprintf(nbuffer, "%"PRId64, id);
@@ -70,7 +70,7 @@ char* day2_part1(struct range_inputs i_ranges) {
 char* day2_part2(struct range_inputs i_ranges) {
     int64_t invalid_sum = 0;
     char nbuffer[64];
-    for (size_t i = 0; i < i_ranges.len; i++) {
+    for (size_t i = 0; i < i_ranges.count; i++) {
         struct int_pair xy = i_ranges.ranges[i];;
         for (int64_t id = xy.x; id <= xy.y; id++) {
             size_t len = sprintf(nbuffer, "%"PRId64, id);

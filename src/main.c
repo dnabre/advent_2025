@@ -22,28 +22,31 @@ const char* day_03_prob_file = "inputs/2025/day_03_input_01.txt";
 const char* day_04_test_file = "inputs/2025/day_04_test_01.txt";
 const char* day_04_prob_file = "inputs/2025/day_04_input_01.txt";
 
+const char* day_05_test_file = "inputs/2025/day_05_test_01.txt";
+const char* day_05_prob_file = "inputs/2025/day_05_input_01.txt";
+
 
 int main(int argc, char* argv[]) {
-    // clock_t start, end, whole_start,whole_end;
+    // clock_t start, end,
     // double elapsed_ms;
 
-    // whole_start = clock();
+    clock_t whole_start = clock();
     // start = clock();
-    // day1(day_01_test_file);
+    day1(day_01_prob_file);
     // end = clock();
     // elapsed_ms = (double)(end - start) * 1000.0 / CLOCKS_PER_SEC;
     // printf("\t\t\t time: %.3f ms\n", elapsed_ms);
     //
     //
     // start = clock();
-    // day2(day_02_prob_file);
+    day2(day_02_prob_file);
     //
     // end = clock();
     // elapsed_ms = (double)(end - start) * 1000.0 / CLOCKS_PER_SEC;
     // printf("\t\t\t time: %.3f ms\n", elapsed_ms);
 
     // start = clock();
-    day3(day_03_test_file);
+    day3(day_03_prob_file);
 
     // end = clock();
     // elapsed_ms = (double)(end - start) * 1000.0 / CLOCKS_PER_SEC;
@@ -56,9 +59,37 @@ int main(int argc, char* argv[]) {
     // elapsed_ms = (double)(end - start) * 1000.0 / CLOCKS_PER_SEC;
     // printf("\t\t\t time: %.3f ms\n", elapsed_ms);
     //
-    // whole_end = clock();
-    // double whole_elapsed_ms = (double)(whole_end - whole_start) * 1000.0 / CLOCKS_PER_SEC;
-    // printf("\t total run time: %.3f ms\n", whole_elapsed_ms);
+
+    // end = clock();
+    // elapsed_ms = (double)(end - start) * 1000.0 / CLOCKS_PER_SEC;
+    // printf("\t\t\t time: %.3f ms\n", elapsed_ms);
+    //
+    // start = clock();
+    day5(day_05_test_file);
+    //
+    // end = clock();
+    // elapsed_ms = (double)(end - start) * 1000.0 / CLOCKS_PER_SEC;
+    // printf("\t\t\t time: %.3f ms\n", elapsed_ms);
+    //
+
+
+
+    clock_t whole_end = clock();
+    double whole_elapsed_ms = (double)(whole_end - whole_start) * 1000.0 / CLOCKS_PER_SEC;
+    printf("  total of days run time: %.3f ms\n", whole_elapsed_ms);
 
     return 0;
+}
+
+
+void free_problem_inputs(struct problem_inputs arr) {
+    for (size_t i=0; i < arr.count; i++) {
+        free(arr.lines[i]);
+    }
+    arr.count=0;
+    free(arr.lines);
+}
+void free_range_inputs(struct range_inputs arr) {
+    free(arr.ranges);
+    arr.count=0;
 }

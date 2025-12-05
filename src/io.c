@@ -6,11 +6,70 @@
 #include <string.h>
 
 
+char* read_line(FILE* fp) {
+    size_t cap = 128;
+    size_t len = 0;
+    char* buf = malloc(cap);
+
+    int c;
+    while ((c = fgetc(fp)) != EOF) {
+        if (c == '\r') {
+            printf("%s:%d, error: carriage return found in input\n", __func__, __LINE__);
+            exit(-1);
+        }
+        if (c == '\n') break;
+        if (len + 1 >= cap) {
+            cap *= 2;
+            char* newbuf = realloc(buf, cap);
+            if (!newbuf) {
+                free(buf);
+                exit(-1);
+            }
+            buf = newbuf;
+        }
+        buf[len++] = (char)c;
+    }
+    if ((len == 0) && (c == EOF)) {
+        free(buf);
+        return NULL;
+    }
+    buf[len] = '\0';
+    return  buf;
+}
+
+
+struct problem_inputs read_by_lines(const char* filename) {
+    struct problem_inputs result = {NULL, 0};
+
+    FILE* fp = fopen(filename, "rb");
+    if (!fp) {
+        perror("read_by_lines, fopen");
+        exit(-1);
+    }
+
+    size_t capacity = 0;
+    char* line;
+    while ((line = read_line(fp)) != NULL) {
+        if (result.count == capacity) {
+            size_t new_cap = capacity==0 ? 8 : capacity * 2;
+            char** new_lines = realloc(result.lines,new_cap * sizeof(char*));
+            if (!new_lines) {
+                exit(-1);
+            }
+            result.lines = new_lines;
+            capacity = new_cap;
+        }
+        result.lines[result.count++] = line;
+    }
+    fclose(fp);
+    return result;
+}
+
 struct problem_inputs read_full_file_to_lines(const char* filename) {
     struct problem_inputs result = {0};
     size_t file_size;
     char* buffer = read_full_file(filename, &file_size);
-    result.inputs = lines_from_buffer(buffer, file_size, &(result.len));
+    result.lines = lines_from_buffer(buffer, file_size, &(result.count));
     return result;
 }
 
@@ -39,8 +98,8 @@ struct problem_inputs read_full_from_csv(const char* filename) {
     }
     free(buffer);
     struct problem_inputs result = {0};
-    result.inputs = entries;
-    result.len = count;
+    result.lines = entries;
+    result.count = count;
     return result;
 }
 
@@ -86,8 +145,8 @@ char** lines_from_buffer(char* buffer, size_t size, size_t* number_of_lines) {
             buffer[i] = '\0';
             start = buffer + i + 1;
             lines[idx++] = strdup(start);
-            }
         }
+    }
 
     if (start < buffer + size) {
         lines[idx] = strdup(start);
@@ -112,4 +171,28 @@ void print_size_t_array(const size_t* arr, size_t size) {
         }
     }
     printf("]");
+}
+
+void split_on_empty_range_item(struct problem_inputs input_lines, struct range_inputs* out_ranges, struct problem_inputs*  out_items) {
+    size_t split_line = -1;
+    for (size_t i=0; i < input_lines.count; i++) {
+        if (strlen(input_lines.lines[i]) == 0) {
+            split_line = i;
+            break;
+        }
+    }
+    if (split_line < 0) {
+        printf("%s:%d, error: no empty line found while splitting input\n", __func__, __LINE__);
+        exit(-1);
+    }
+
+    out_ranges->count=split_line-1;
+    out_items->count = input_lines.count - out_ranges->count - 1;
+    out_ranges->ranges = malloc(out_ranges->count * sizeof(struct int_pair));
+    out_items->lines = malloc(out_items->count * sizeof(char*));
+    for (size_t r=0; r < split_line; r++) {
+
+    }
+
+
 }

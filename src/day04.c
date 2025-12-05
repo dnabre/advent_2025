@@ -11,18 +11,8 @@ const char* DAY4_PART2_ANSWER = "169347417057382";
 
 
 void day4(const char* filename) {
-    struct problem_inputs day4_lines = read_full_file_to_lines(filename);
-    // Lines aren't always properly number terminated, workaround for today.
+    struct problem_inputs day4_lines = read_by_lines(filename);
 
-    for (size_t i = 0; i < day4_lines.len; i++) {
-        size_t should_be_null = 0;
-        while (isdigit(day4_lines.inputs[i][should_be_null])) {
-            should_be_null++;
-        }
-
-        // day4_lines.inputs[i][15]='\0';
-        day4_lines.inputs[i][should_be_null] = '\0';
-    }
 
 
     printf("    ---------------------------------------------\n");

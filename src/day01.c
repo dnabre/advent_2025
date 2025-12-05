@@ -16,8 +16,8 @@ const int DIAL_SIZE = 100;
 
 
 void day1(const char* filename) {
-    struct problem_inputs day1_lines = read_full_file_to_lines(filename);
-
+    // struct problem_inputs day1_lines = read_full_file_to_lines(filename);
+    struct problem_inputs day1_lines = read_by_lines(filename);
 
     printf("Advent of Code, Day 01\n");
     printf("    ---------------------------------------------\n");
@@ -48,8 +48,8 @@ void day1(const char* filename) {
 
 
 char* day1_part1(struct problem_inputs line_array) {
-    size_t line_count = line_array.len;
-    char** lines = line_array.inputs;
+    size_t line_count = line_array.count;
+    char** lines = line_array.lines;
 
     int dial = DIAL_START;
     int64_t zero_count = 0;
@@ -81,8 +81,8 @@ char* day1_part1(struct problem_inputs line_array) {
 
 
 char* day1_part2(struct problem_inputs line_array) {
-    size_t line_count = line_array.len;
-    char** lines = line_array.inputs;
+    size_t line_count = line_array.count;
+    char** lines = line_array.lines;
     int dial = DIAL_START;
     int64_t clicks = 0;
 
