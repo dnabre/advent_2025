@@ -172,27 +172,3 @@ void print_size_t_array(const size_t* arr, size_t size) {
     }
     printf("]");
 }
-
-void split_on_empty_range_item(struct problem_inputs input_lines, struct range_inputs* out_ranges, struct problem_inputs*  out_items) {
-    size_t split_line = -1;
-    for (size_t i=0; i < input_lines.count; i++) {
-        if (strlen(input_lines.lines[i]) == 0) {
-            split_line = i;
-            break;
-        }
-    }
-    if (split_line < 0) {
-        printf("%s:%d, error: no empty line found while splitting input\n", __func__, __LINE__);
-        exit(-1);
-    }
-
-    out_ranges->count=split_line-1;
-    out_items->count = input_lines.count - out_ranges->count - 1;
-    out_ranges->ranges = malloc(out_ranges->count * sizeof(struct int_pair));
-    out_items->lines = malloc(out_items->count * sizeof(char*));
-    for (size_t r=0; r < split_line; r++) {
-
-    }
-
-
-}

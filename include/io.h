@@ -58,5 +58,5 @@ inline void println() {
 }
 
 void print_size_t_array(const size_t* arr, size_t size);
-void split_on_empty_range_item(struct problem_inputs input_lines, struct range_inputs* out_ranges, struct problem_inputs*  out_items);
+
 #endif //ADVENT_2025_IO_H
