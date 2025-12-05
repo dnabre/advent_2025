@@ -3,8 +3,9 @@
 ### Language of the Year: C
 
 Using C17+, though will likely be C99 compatible.
-<div style="width:100%;">
-<table style="width:100%;">
+<div style="display:block; width:100%;">
+<table style="width:100%; table-layout:fixed;">
+
   <tr>
     <th>Problem</th>
     <th></th>
