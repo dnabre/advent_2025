@@ -10,9 +10,7 @@ Using C17+, though will likely be C99 compatible.
   <tr>
     <th>
       Problem
-      <span style="visibility:hidden;">
-        --------------------------------------------------------------
-      </span>
+
     </th>
     <th></th>
     <th>1</th>
