@@ -3,6 +3,7 @@
 
 #include "io.h"
 
+#include <inttypes.h>
 #include <string.h>
 
 
@@ -171,4 +172,7 @@ void print_size_t_array(const size_t* arr, size_t size) {
         }
     }
     printf("]");
+}
+void print_int_pair_range(const struct int_pair r) {
+    printf("[%"PRId64 ", %"PRId64"]",r.x, r.y);
 }

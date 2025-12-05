@@ -23,7 +23,7 @@ char* day4_part2(struct problem_inputs);
 
 void day5(const char* filename);
 char* day5_part1(struct range_inputs day5_ranges, struct problem_inputs day5_items);
-char* day5_part2(struct problem_inputs);
+char* day5_part2(struct range_inputs day5_ranges, struct problem_inputs day5_items);
 
 
 #endif //ADVENT_2025_DAYS_H

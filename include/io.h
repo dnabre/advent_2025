@@ -58,5 +58,5 @@ inline void println() {
 }
 
 void print_size_t_array(const size_t* arr, size_t size);
-
+void print_int_pair_range(const struct int_pair);
 #endif //ADVENT_2025_IO_H
