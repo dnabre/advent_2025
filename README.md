@@ -4,19 +4,102 @@
 
 Using C17+, though will likely be C99 compatible.
 
-| Problem                                                            |                     | 1                                                                  | 2                                                                        |
-|--------------------------------------------------------------------|---------------------|--------------------------------------------------------------------|--------------------------------------------------------------------------|
-| [Day 1: Secret Entrance ](https://adventofcode.com/2025/day/1)     | Messy Modulo Math   | [*](https://github.com/dnabre/advent_2025/blob/master/src/day01.c) | [*](https://raw.githubusercontent.com/dnabre/advent_2025/master/Day01.c) |
-| [Day 2: Gift Shop ](https://adventofcode.com/2025/day/2)           | String Manipulation | [*](https://github.com/dnabre/advent_2025/blob/master/src/day02.c) | [*](https://github.com/dnabre/advent_2025/blob/master/src/day02.c)       |
-| [Day 3: Lobby](https://adventofcode.com/2025/day/3)                | String Manipulation | [*](https://github.com/dnabre/advent_2025/blob/master/src/day03.c) | [*](https://github.com/dnabre/advent_2025/blob/master/src/day03.c)       |
-| [Day 4: Printing Department ](https://adventofcode.com/2025/day/4) | something on a grid | [ ](https://github.com/dnabre/advent_2025/blob/master/src/day04.c) | [ ](https://github.com/dnabre/advent_2025/blob/master/src/day04.c)       |
-| [Day 5: Cafeteria ](https://adventofcode.com/2025/day/5)           | Merging Intervals   | [*](https://github.com/dnabre/advent_2025/blob/master/src/day05.c) | [*](https://github.com/dnabre/advent_2025/blob/master/src/day05.c)       |
-| [Day 6: ](https://adventofcode.com/2025/day/6)                     |                     | [ ](https://github.com/dnabre/advent_2025/blob/master/src/day06.c) | [ ](https://github.com/dnabre/advent_2025/blob/master/src/day06.c)       |
-| [Day 7: ](https://adventofcode.com/2025/day/7)                     |                     | [ ](https://github.com/dnabre/advent_2025/blob/master/src/day07.c) | [ ](https://github.com/dnabre/advent_2025/blob/master/src/day07.c)       |
-| [Day 8: ](https://adventofcode.com/2025/day/8)                     |                     | [ ](https://github.com/dnabre/advent_2025/blob/master/src/day08.c) | [ ](https://github.com/dnabre/advent_2025/blob/master/src/day08.c)       |
-| [Day 9: ](https://adventofcode.com/2025/day/9)                     |                     | [ ](https://github.com/dnabre/advent_2025/blob/master/src/day09.c) | [ ](https://github.com/dnabre/advent_2025/blob/master/src/day09.c)       |
-| [Day 10: ](https://adventofcode.com/2025/day/10)                   |                     | [ ](https://github.com/dnabre/advent_2025/blob/master/src/day10.c) | [ ](https://github.com/dnabre/advent_2025/blob/master/src/day10.c)       |
-| [Day 11: ](https://adventofcode.com/2025/day/11)                   |                     | [ ](https://github.com/dnabre/advent_2025/blob/master/src/day11.c) | [ ](https://github.com/dnabre/advent_2025/blob/master/src/day11.c)       |
+<table style="width:100%;">
+  <tr>
+    <th>Problem</th>
+    <th></th>
+    <th>1</th>
+    <th>2</th>
+  </tr>
+
+  <tr>
+    <td><a href="https://adventofcode.com/2025/day/1">Day 1: Secret Entrance</a></td>
+    <td>Messy Modulo Math</td>
+    <td><a href="https://github.com/dnabre/advent_2025/blob/master/src/day01.c">*</a></td>
+    <td><a href="https://raw.githubusercontent.com/dnabre/advent_2025/master/Day01.c">*</a></td>
+  </tr>
+
+  <tr>
+    <td><a href="https://adventofcode.com/2025/day/2">Day 2: Gift Shop</a></td>
+    <td>String Manipulation</td>
+    <td><a href="https://github.com/dnabre/advent_2025/blob/master/src/day02.c">*</a></td>
+    <td><a href="https://github.com/dnabre/advent_2025/blob/master/src/day02.c">*</a></td>
+  </tr>
+
+  <tr>
+    <td><a href="https://adventofcode.com/2025/day/3">Day 3: Lobby</a></td>
+    <td>String Manipulation</td>
+    <td><a href="https://github.com/dnabre/advent_2025/blob/master/src/day03.c">*</a></td>
+    <td><a href="https://github.com/dnabre/advent_2025/blob/master/src/day03.c">*</a></td>
+  </tr>
+
+  <tr>
+    <td><a href="https://adventofcode.com/2025/day/4">Day 4: Printing Department</a></td>
+    <td>something on a grid</td>
+    <td><a href="https://github.com/dnabre/advent_2025/blob/master/src/day04.c"> </a></td>
+    <td><a href="https://github.com/dnabre/advent_2025/blob/master/src/day04.c"> </a></td>
+  </tr>
+
+  <tr>
+    <td><a href="https://adventofcode.com/2025/day/5">Day 5: Cafeteria</a></td>
+    <td>Merging Intervals</td>
+    <td><a href="https://github.com/dnabre/advent_2025/blob/master/src/day05.c">*</a></td>
+    <td><a href="https://github.com/dnabre/advent_2025/blob/master/src/day05.c">*</a></td>
+  </tr>
+
+  <tr>
+    <td><a href="https://adventofcode.com/2025/day/6">Day 6</a></td>
+    <td></td>
+    <td><a href="https://github.com/dnabre/advent_2025/blob/master/src/day06.c"> </a></td>
+    <td><a href="https://github.com/dnabre/advent_2025/blob/master/src/day06.c"> </a></td>
+  </tr>
+
+  <tr>
+    <td><a href="https://adventofcode.com/2025/day/7">Day 7</a></td>
+    <td></td>
+    <td><a href="https://github.com/dnabre/advent_2025/blob/master/src/day07.c"> </a></td>
+    <td><a href="https://github.com/dnabre/advent_2025/blob/master/src/day07.c"> </a></td>
+  </tr>
+
+  <tr>
+    <td><a href="https://adventofcode.com/2025/day/8">Day 8</a></td>
+    <td></td>
+    <td><a href="https://github.com/dnabre/advent_2025/blob/master/src/day08.c"> </a></td>
+    <td><a href="https://github.com/dnabre/advent_2025/blob/master/src/day08.c"> </a></td>
+  </tr>
+
+  <tr>
+    <td><a href="https://adventofcode.com/2025/day/9">Day 9</a></td>
+    <td></td>
+    <td><a href="https://github.com/dnabre/advent_2025/blob/master/src/day09.c"> </a></td>
+    <td><a href="https://github.com/dnabre/advent_2025/blob/master/src/day09.c"> </a></td>
+  </tr>
+
+  <tr>
+    <td><a href="https://adventofcode.com/2025/day/10">Day 10</a></td>
+    <td></td>
+    <td><a href="https://github.com/dnabre/advent_2025/blob/master/src/day10.c"> </a></td>
+    <td><a href="https://github.com/dnabre/advent_2025/blob/master/src/day10.c"> </a></td>
+  </tr>
+
+  <tr>
+    <td><a href="https://adventofcode.com/2025/day/11">Day 11</a></td>
+    <td></td>
+    <td><a href="https://github.com/dnabre/advent_2025/blob/master/src/day11.c"> </a></td>
+    <td><a href="https://github.com/dnabre/advent_2025/blob/master/src/day11.c"> </a></td>
+  </tr> 
+  <tr>
+    <td><a href="https://adventofcode.com/2025/day/12">Day 12</a></td>
+    <td></td>
+    <td><a href="https://github.com/dnabre/advent_2025/blob/master/src/day12.c"> </a></td>
+    <td><a href="https://github.com/dnabre/advent_2025/blob/master/src/day12.c"> </a></td>
+  </tr>
+
+  
+</table>
+
+
+
 
 | Day by Day Notes                                                      |
 |:----------------------------------------------------------------------|
