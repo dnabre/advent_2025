@@ -3,12 +3,17 @@
 ### Language of the Year: C
 
 Using C17+, though will likely be C99 compatible.
-
 <div style="display:block; width:100%;">
 
 <table style="width:100%; table-layout:fixed;">
+
   <tr>
-    <th>Problem</th>
+    <th>
+      Problem
+      <span style="visibility:hidden;">
+        --------------------------------------------------------------
+      </span>
+    </th>
     <th></th>
     <th>1</th>
     <th>2</th>
@@ -94,7 +99,6 @@ Using C17+, though will likely be C99 compatible.
 </table>
 
 </div>
-
 
 | Day by Day Notes                                                      |
 |:----------------------------------------------------------------------|
