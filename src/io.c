@@ -176,3 +176,18 @@ void print_size_t_array(const size_t* arr, size_t size) {
 void print_int_pair_range(const struct int_pair r) {
     printf("[%"PRId64 ", %"PRId64"]",r.x, r.y);
 }
+
+;
+
+// void print_c_grid(const struct c_grid q) {
+//     printf("print_c_grid\n");
+//     printf("c_grid h:%zu, w: %zu\n", q.height, q.width);
+//     if (q.g != NULL) {}
+//     for (size_t h=0; h < q.height; h++) {
+//     for (size_t w=0; w< q.width; w++) {
+//             char ch = q.g[h][w];
+//
+//     }
+//     println();
+//     }
+// }
