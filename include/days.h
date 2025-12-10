@@ -26,4 +26,36 @@ char* day5_part1(struct range_inputs day5_ranges, struct problem_inputs day5_ite
 char* day5_part2(struct range_inputs day5_ranges);
 
 
+void day6(const char* filename);
+char* day6_part1(struct problem_inputs);
+char* day6_part2(struct problem_inputs);
+
+void day7(const char* filename);
+char* day7_part1(struct problem_inputs);
+char* day7_part2(struct problem_inputs);
+
+void day8(const char* filename);
+char* day8_part1(struct problem_inputs);
+char* day8_part2(struct problem_inputs);
+
+void day9(const char* filename);
+char* day9_part1(struct problem_inputs);
+char* day9_part2(struct problem_inputs);
+
+void day10(const char* filename);
+char* day10_part1(struct problem_inputs);
+char* day10_part2(struct problem_inputs);
+
+void day11(const char* filename);
+char* day11_part1(struct problem_inputs);
+char* day11_part2(struct problem_inputs);
+
+void day12(const char* filename);
+char* day12_part1(struct problem_inputs);
+char* day12_part2(struct problem_inputs);
+
+
+
+
+
 #endif //ADVENT_2025_DAYS_H
