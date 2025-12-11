@@ -3,7 +3,7 @@
 #include <time.h>
 #include "main.h"
 
-#include <stdbool.h>
+
 
 
 #include "days.h"
@@ -70,7 +70,7 @@ void run_all() {
 
     clock_t whole_end = clock();
     double whole_elapsed_ms = (double)(whole_end - whole_start) * 1000.0 / CLOCKS_PER_SEC;
-    printf("  total of days run time: %.3f ms\n", whole_elapsed_ms);
+    printf("\n  Total runtime of all days: %.3f ms\n", whole_elapsed_ms);
 }
 
 // #define  RUN_ALL true
@@ -83,8 +83,8 @@ int main(int argc, char* argv[]) {
 #else
 
     clock_t start = clock();
-        // day4(day_04_test_file);
-    day4(day_04_input_file);
+        day6(day_06_test_file);
+    // day6(day_06_input_file);
 
         clock_t end = clock();
         double elapsed_ms = (double)(end - start) * 1000.0 / CLOCKS_PER_SEC;

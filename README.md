@@ -35,9 +35,9 @@ Using C17+, though will likely be C99 compatible.
 
   <tr>
     <td><a href="https://adventofcode.com/2025/day/4">Day 4: Printing Department</a></td>
-    <td>something on a grid</td>
-    <td><a href="https://github.com/dnabre/advent_2025/blob/master/src/day04.c"> </a></td>
-    <td><a href="https://github.com/dnabre/advent_2025/blob/master/src/day04.c"> </a></td>
+    <td>2D Search and Reverse Flood Fuild</td>
+    <td><a href="https://github.com/dnabre/advent_2025/blob/master/src/day04.c">*</a></td>
+    <td><a href="https://github.com/dnabre/advent_2025/blob/master/src/day04.c">*</a></td>
   </tr>
 
   <tr>
@@ -48,42 +48,42 @@ Using C17+, though will likely be C99 compatible.
   </tr>
 
   <tr>
-    <td><a href="https://adventofcode.com/2025/day/6">Day 6</a></td>
+    <td><a href="https://adventofcode.com/2025/day/6">Day 6: Trash Compactor</a></td>
     <td></td>
     <td><a href="https://github.com/dnabre/advent_2025/blob/master/src/day06.c"> </a></td>
     <td><a href="https://github.com/dnabre/advent_2025/blob/master/src/day06.c"> </a></td>
   </tr>
 
   <tr>
-    <td><a href="https://adventofcode.com/2025/day/7">Day 7</a></td>
+    <td><a href="https://adventofcode.com/2025/day/7">Day 7: Laboratories</a></td>
     <td></td>
     <td><a href="https://github.com/dnabre/advent_2025/blob/master/src/day07.c"> </a></td>
     <td><a href="https://github.com/dnabre/advent_2025/blob/master/src/day07.c"> </a></td>
   </tr>
 
   <tr>
-    <td><a href="https://adventofcode.com/2025/day/8">Day 8</a></td>
+    <td><a href="https://adventofcode.com/2025/day/8">Day 8: Playground</a></td>
     <td></td>
     <td><a href="https://github.com/dnabre/advent_2025/blob/master/src/day08.c"> </a></td>
     <td><a href="https://github.com/dnabre/advent_2025/blob/master/src/day08.c"> </a></td>
   </tr>
 
   <tr>
-    <td><a href="https://adventofcode.com/2025/day/9">Day 9</a></td>
+    <td><a href="https://adventofcode.com/2025/day/9">Day 9: Movie Theater</a></td>
     <td></td>
     <td><a href="https://github.com/dnabre/advent_2025/blob/master/src/day09.c"> </a></td>
     <td><a href="https://github.com/dnabre/advent_2025/blob/master/src/day09.c"> </a></td>
   </tr>
 
   <tr>
-    <td><a href="https://adventofcode.com/2025/day/10">Day 10</a></td>
+    <td><a href="https://adventofcode.com/2025/day/10">Day 10: Factory</a></td>
     <td></td>
     <td><a href="https://github.com/dnabre/advent_2025/blob/master/src/day10.c"> </a></td>
     <td><a href="https://github.com/dnabre/advent_2025/blob/master/src/day10.c"> </a></td>
   </tr>
 
   <tr>
-    <td><a href="https://adventofcode.com/2025/day/11">Day 11</a></td>
+    <td><a href="https://adventofcode.com/2025/day/11">Day 11: Reactor</a></td>
     <td></td>
     <td><a href="https://github.com/dnabre/advent_2025/blob/master/src/day11.c"> </a></td>
     <td><a href="https://github.com/dnabre/advent_2025/blob/master/src/day11.c"> </a></td>
@@ -104,10 +104,9 @@ Using C17+, though will likely be C99 compatible.
 | Day by Day Notes                                                      |
 |:----------------------------------------------------------------------|
 | Day 2: Just did the simple brute-force for part 2 - takes over 200ms. |
-| Day 4: come back to after fixing bug in file reading      - Bug Fixed |
 | Day 5: Sort & Merge for ranges in part 2. Part 1 still brute force    |
 |                                                                       |
-|
+
 
 I'm using C, in part, to knock a little of the massive amount of rust on my C skills.
 Between that, and using opinionated rather than idiomatic stuff, this is code-base is not

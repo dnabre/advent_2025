@@ -20,20 +20,18 @@ struct c_grid build_grid(struct problem_inputs);
 
 void day4(const char* filename) {
     struct problem_inputs day4_lines = read_by_lines(filename);
-    struct c_grid grid1 = build_grid(day4_lines);
-
-    // print_c_grid(grid1);
-
+    struct c_grid grid = build_grid(day4_lines);
+    printf("Advent of Code, Day 04\n");
     printf("    ---------------------------------------------\n");
     printf("\t part 1: ");
-    char* answer_part1 = day4_part1(grid1);
+
+    char* answer_part1 = day4_part1(grid);
 
     printf("\t %s\n", answer_part1);
 
     printf("\t part 2: ");
 
-    struct c_grid grid2 = build_grid(day4_lines);
-    char* answer_part2 = day4_part2(grid2);
+    char* answer_part2 = day4_part2(grid);
 
     printf("\t %s\n", answer_part2);
     printf("    ---------------------------------------------\n");
@@ -47,8 +45,7 @@ void day4(const char* filename) {
                 DAY4_PART2_ANSWER, answer_part2);
     }
 
-    free_c_grid(grid1);
-    free_c_grid(grid2);
+    free_c_grid(grid);
     if (answer_part1) { free(answer_part1); };
     if (answer_part2) { free(answer_part2); };
 }
@@ -68,34 +65,19 @@ char* day4_part1(const struct c_grid g) {
         }
     }
 
-
     char* answer = malloc(ANSWER_BUFFER_SIZE);
     sprintf(answer, "%"PRId64, accessible_count);
-
-    free(g.g);
     return answer;
 }
 
 
 char* day4_part2(const struct c_grid g) {
-    printf("day4_part2\n");
-    print_c_grid(g);
-    printf("----");
     int64_t removed_count = 0;
-    int64_t last_count =0;
     bool changed = true;
-
     struct c_grid current_grid = dup_c_grid(g);
 
-    printf("current_grid from dup_c_grid of g\n");
-
-    print_c_grid(current_grid);
-
-    printf("pre while loop\n");
     while (changed) {
-        printf("removed %lld rolls\n", removed_count - last_count);
-        last_count = removed_count;
-        struct c_grid new_grid = dup_c_grid(current_grid);
+        const struct c_grid new_grid = dup_c_grid(current_grid);
         changed = false;
         for (ptrdiff_t r = 0; r < current_grid.num_rows; r++) {
             for (ptrdiff_t c = 0; c < current_grid.num_cols; c++) {
@@ -123,7 +105,6 @@ char* day4_part2(const struct c_grid g) {
 
 int64_t count_adjacent_rolls(const struct c_grid* g, ptrdiff_t row, ptrdiff_t col) {
     int64_t adj_count = 0;
-
     for (ptrdiff_t dr = -1; dr <= 1; dr++) {
         for (ptrdiff_t dc = -1; dc <= 1; dc++) {
             if ((dr == 0) && (dc == 0)) {
@@ -157,14 +138,11 @@ struct c_grid build_grid(struct problem_inputs line_array) {
         }
         g.g[h][g.num_cols] = '\0';
     }
-    printf("build_grid r: %lld, c: %lld, grid: %p \n", g.num_rows, g.num_cols, g.g);
     return g;
 }
 
 
 struct c_grid dup_c_grid(const struct c_grid g) {
-    printf("dup_c_grid entry\n");
-    printf("dup_c_grid r: %lld, c: %lld, grid: %p \n", g.num_rows, g.num_cols, g.g);
     struct c_grid ng;
     ng.num_rows = g.num_rows;
     ng.num_cols = g.num_cols;
@@ -172,28 +150,23 @@ struct c_grid dup_c_grid(const struct c_grid g) {
     if (!ng.g) {
         printf("unable to allocate n_grid in dup_c_grid\n");
         exit(-1);
-    } else {
-        printf("ng.g allocated\n");
     }
     for (size_t r = 0; r < g.num_rows; r++) {
         ng.g[r] = malloc(sizeof(char) * g.num_cols + 1);
         if (!ng.g[r]) {
             printf("unable to allocate row %zu in dup_c_grid\n", r);
             exit(-1);
-        } else {
-            printf("allocated row %zu\n", r);
         }
         for (size_t c = 0; c < g.num_cols; c++) {
 
             char ch = g.g[r][c];
-            printf("copying char %c from {%lld,%lld}\n",ch, r,c );
             ng.g[r][c] = ch;
         }
-        printf("termination row %zu\n", r);
+
         ng.g[r][g.num_cols] = '\0';
-        printf("row #%zu: |%s|\n", r, ng.g[r]);
+
     }
-    printf("dup_c_grid finished");
+
     return ng;
 }
 
