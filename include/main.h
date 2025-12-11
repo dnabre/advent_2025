@@ -24,13 +24,17 @@ struct problem_inputs{
 };
 
 
-// Decide how I'm going to do 2D arrays
-// struct c_grid{
-//     size_t height;
-//     size_t width;
-//
-// };
+struct c_grid{
+    char** g;
+    ptrdiff_t num_rows;
+    ptrdiff_t num_cols;
+};
 
+struct g_pt{
+    ptrdiff_t row;
+    ptrdiff_t col;
+};
+void free_c_grid(struct c_grid);
 void free_problem_inputs(struct problem_inputs);
 void free_range_inputs(struct range_inputs);
 // void free_c_grid(struct c_grid*);

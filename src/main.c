@@ -13,59 +13,59 @@
 
 
 const char* day_01_test_file = "inputs/2025/day_01_test_01.txt";
-const char* day_01_prob_file = "inputs/2025/day_01_input_01.txt";
+const char* day_01_input_file = "inputs/2025/day_01_input_01.txt";
 
 const char* day_02_test_file = "inputs/2025/day_02_test_01.txt";
-const char* day_02_prob_file = "inputs/2025/day_02_input_01.txt";
+const char* day_02_input_file = "inputs/2025/day_02_input_01.txt";
 
 const char* day_03_test_file = "inputs/2025/day_03_test_01.txt";
-const char* day_03_prob_file = "inputs/2025/day_03_input_01.txt";
+const char* day_03_input_file = "inputs/2025/day_03_input_01.txt";
 
 const char* day_04_test_file = "inputs/2025/day_04_test_01.txt";
 const char* day_04_test2_file = "inputs/2025/day_04_test_02.txt";
-const char* day_04_prob_file = "inputs/2025/day_04_input_01.txt";
+const char* day_04_input_file = "inputs/2025/day_04_input_01.txt";
 
 const char* day_05_test_file = "inputs/2025/day_05_test_01.txt";
-const char* day_05_prob_file = "inputs/2025/day_05_input_01.txt";
+const char* day_05_input_file = "inputs/2025/day_05_input_01.txt";
 
 const char* day_06_test_file = "inputs/2025/day_06_test_01.txt";
-const char* day_06_prob_file = "inputs/2025/day_06_input_01.txt";
+const char* day_06_input_file = "inputs/2025/day_06_input_01.txt";
 
 const char* day_07_test_file = "inputs/2025/day_07_test_01.txt";
-const char* day_07_prob_file = "inputs/2025/day_07_input_01.txt";
+const char* day_07_input_file = "inputs/2025/day_07_input_01.txt";
 
 const char* day_08_test_file = "inputs/2025/day_08_test_01.txt";
-const char* day_08_prob_file = "inputs/2025/day_08_input_01.txt";
+const char* day_08_input_file = "inputs/2025/day_08_input_01.txt";
 
 const char* day_09_test_file = "inputs/2025/day_09_test_01.txt";
-const char* day_09_prob_file = "inputs/2025/day_09_input_01.txt";
+const char* day_09_input_file = "inputs/2025/day_09_input_01.txt";
 
 const char* day_10_test_file = "inputs/2025/day_10_test_01.txt";
-const char* day_10_prob_file = "inputs/2025/day_10_input_01.txt";
+const char* day_10_input_file = "inputs/2025/day_10_input_01.txt";
 
 const char* day_11_test_file = "inputs/2025/day_11_test_01.txt";
-const char* day_11_prob_file = "inputs/2025/day_11_input_01.txt";
+const char* day_11_input_file = "inputs/2025/day_11_input_01.txt";
 
 const char* day_12_test_file = "inputs/2025/day_12_test_01.txt";
-const char* day_12_prob_file = "inputs/2025/day_12_input_01.txt";
+const char* day_12_input_file = "inputs/2025/day_12_input_01.txt";
 
 
 void run_all() {
     clock_t whole_start = clock();
 
-    day1(day_01_prob_file);
-    day2(day_02_prob_file);
-    day3(day_03_prob_file);
-    day4(day_04_prob_file);
-    day5(day_05_prob_file);
-    day6(day_06_prob_file);
-    day7(day_07_prob_file);
-    day8(day_08_prob_file);
-    day9(day_09_prob_file);
-    day10(day_10_prob_file);
+    day1(day_01_input_file);
+    day2(day_02_input_file);
+    day3(day_03_input_file);
+    day4(day_04_input_file);
+    day5(day_05_input_file);
+    day6(day_06_input_file);
+    day7(day_07_input_file);
+    day8(day_08_input_file);
+    day9(day_09_input_file);
+    day10(day_10_input_file);
 
-    // day11(day_11_prob_file);
-    // day12(day_12_prob_file);
+    // day11(day_11_input_file);
+    // day12(day_12_input_file);
 
 
     clock_t whole_end = clock();
@@ -73,7 +73,7 @@ void run_all() {
     printf("  total of days run time: %.3f ms\n", whole_elapsed_ms);
 }
 
-#define  RUN_ALL true
+// #define  RUN_ALL true
 
 int main(int argc, char* argv[]) {
 
@@ -83,7 +83,8 @@ int main(int argc, char* argv[]) {
 #else
 
     clock_t start = clock();
-        day4(day_04_test2_file);
+        // day4(day_04_test_file);
+    day4(day_04_input_file);
 
         clock_t end = clock();
         double elapsed_ms = (double)(end - start) * 1000.0 / CLOCKS_PER_SEC;
