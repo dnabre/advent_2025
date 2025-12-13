@@ -89,7 +89,7 @@ Using C17+, though will likely be C99 compatible.
     <td><a href="https://github.com/dnabre/advent_2025/blob/master/src/day11.c"> </a></td>
   </tr> 
   <tr>
-    <td><a href="https://adventofcode.com/2025/day/12">Day 12</a></td>
+    <td><a href="https://adventofcode.com/2025/day/12">Day 12: Christmas Tree Farm </a></td>
     <td></td>
     <td><a href="https://github.com/dnabre/advent_2025/blob/master/src/day12.c"> </a></td>
     <td><a href="https://github.com/dnabre/advent_2025/blob/master/src/day12.c"> </a></td>
