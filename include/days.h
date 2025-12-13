@@ -5,9 +5,6 @@
 #include "main.h"
 
 
-
-
-
 void day1(const char* filename);
 char* day1_part1(struct problem_inputs);
 char* day1_part2(struct problem_inputs);
@@ -21,8 +18,8 @@ char* day3_part1(struct problem_inputs);
 char* day3_part2(struct problem_inputs);
 
 void day4(const char* filename);
-char* day4_part1( struct c_grid);
-char* day4_part2( struct c_grid);
+char* day4_part1(struct c_grid);
+char* day4_part2(struct c_grid);
 
 void day5(const char* filename);
 char* day5_part1(struct range_inputs day5_ranges, struct problem_inputs day5_items);
@@ -58,8 +55,6 @@ char* day12_part1(struct problem_inputs);
 char* day12_part2(struct problem_inputs);
 
 struct c_grid dup_c_grid(struct c_grid g);
-
-
 
 
 #endif //ADVENT_2025_DAYS_H

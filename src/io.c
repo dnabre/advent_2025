@@ -35,7 +35,7 @@ char* read_line(FILE* fp) {
         return NULL;
     }
     buf[len] = '\0';
-    return  buf;
+    return buf;
 }
 
 
@@ -52,8 +52,8 @@ struct problem_inputs read_by_lines(const char* filename) {
     char* line;
     while ((line = read_line(fp)) != NULL) {
         if (result.count == capacity) {
-            size_t new_cap = capacity==0 ? 8 : capacity * 2;
-            char** new_lines = realloc(result.lines,new_cap * sizeof(char*));
+            size_t new_cap = capacity == 0 ? 8 : capacity * 2;
+            char** new_lines = realloc(result.lines, new_cap * sizeof(char*));
             if (!new_lines) {
                 exit(-1);
             }
@@ -103,9 +103,6 @@ struct problem_inputs read_full_from_csv(const char* filename) {
     result.count = count;
     return result;
 }
-
-
-
 
 
 char* read_full_file(const char* filename, size_t* bytes_read) {
@@ -176,28 +173,28 @@ void print_size_t_array(const size_t* arr, size_t size) {
     }
     printf("]");
 }
+
 void print_int_pair_range(const struct int_pair r) {
-    printf("[%"PRId64 ", %"PRId64"]",r.x, r.y);
+    printf("[%"PRId64 ", %"PRId64"]", r.x, r.y);
 }
 
 void print_c_grid(const struct c_grid q) {
     printf("c_grid height: %lld, width: %lld\n", q.num_rows, q.num_cols);
     if (q.g != NULL) {
-        for (size_t r=0; r < q.num_rows; r++) {
-            if (q.g[r]!= NULL) {
-                for (size_t c=0; c < q.num_cols; c++) {
+        for (size_t r = 0; r < q.num_rows; r++) {
+            if (q.g[r] != NULL) {
+                for (size_t c = 0; c < q.num_cols; c++) {
                     char ch = q.g[r][c];
                     printf("%c", ch);
                 }
                 println();
-            } else {
+            }
+            else {
                 printf("\t line %zu is NULL\n", r);
             }
-
         }
-
-
-    } else {
+    }
+    else {
         printf("\t pointer to grid contents NULL");
     }
 }

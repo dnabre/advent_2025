@@ -158,13 +158,11 @@ struct c_grid dup_c_grid(const struct c_grid g) {
             exit(-1);
         }
         for (size_t c = 0; c < g.num_cols; c++) {
-
             char ch = g.g[r][c];
             ng.g[r][c] = ch;
         }
 
         ng.g[r][g.num_cols] = '\0';
-
     }
 
     return ng;
@@ -172,7 +170,7 @@ struct c_grid dup_c_grid(const struct c_grid g) {
 
 
 void free_c_grid(struct c_grid g) {
-    for (size_t l=0; l < g.num_rows; l++) {
+    for (size_t l = 0; l < g.num_rows; l++) {
         free(g.g[l]);
     }
     free(g.g);

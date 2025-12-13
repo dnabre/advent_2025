@@ -53,8 +53,6 @@ struct problem_inputs read_full_file_to_lines(const char* filename);
 struct problem_inputs read_full_from_csv(const char* filename);
 
 
-
-
 inline void println() {
     printf("\n");
 }

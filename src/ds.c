@@ -72,10 +72,10 @@ void print_int64_vec_rev(struct int64_vec v) {
     }
 
     printf("[");
-    for (size_t i = v.len -1; i > 0 ; i--) {
+    for (size_t i = v.len - 1; i > 0; i--) {
         printf("%"PRId64, v.arr[i]);
 
-            printf(", ");
+        printf(", ");
     }
     printf("%"PRId64, v.arr[0]);
     printf("]");
@@ -158,8 +158,6 @@ void print_dstr_vec(struct dstr_vec v) {
         }
     }
     printf("]");
-
-
 }
 
 void init_dstr_vec(struct dstr_vec* v) {

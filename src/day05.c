@@ -58,7 +58,7 @@ void day5(const char* filename) {
 char* day5_part1(struct range_inputs day5_ranges, struct problem_inputs day5_items) {
     size_t fresh_count = 0;
     for (size_t i = 0; i < day5_items.count; i++) {
-        int64_t id = strtoll(day5_items.lines[i],NULL, 10);
+        int64_t id = strtoll(day5_items.lines[i], NULL, 10);
         bool food_fresh = false;
         for (size_t j = 0; j < day5_ranges.count; j++) {
             int64_t left = day5_ranges.ranges[j].x;
@@ -90,7 +90,8 @@ char* day5_part2(struct range_inputs day5_ranges) {
         struct int_pair current_range = range_array[r_idx];;
         if (current_range.x <= merged.y) {
             merged.y = max_int(merged.y, current_range.y);
-        } else {
+        }
+        else {
             in_range_items += merged.y - merged.x + 1;
             merged = current_range;
         }

@@ -73,10 +73,7 @@ void split_on_empty_range_item(struct problem_inputs input_lines, struct range_i
 }
 
 
-
-
 struct int64_vec parse_line_ints(const char* s, size_t len) {
-
     struct int64_vec v = {NULL, 0, 0};
 
 
@@ -91,16 +88,18 @@ struct int64_vec parse_line_ints(const char* s, size_t len) {
         while (('9' >= s[right]) && (s[right] >= '0')) {
             right++;
         }
-        errno =0;
-        char *endptr;
-        int64_t value = strtoll(&s[left],&endptr, 10);
+        errno = 0;
+        char* endptr;
+        int64_t value = strtoll(&s[left], &endptr, 10);
         if (errno == ERANGE) {
             if (value == LONG_MAX) {
                 fprintf(stderr, "Overflow occurred\n");
-            } else if (value == LONG_MIN) {
+            }
+            else if (value == LONG_MIN) {
                 fprintf(stderr, "Underflow occurred\n");
             }
-        } else if (endptr == &s[left]) {
+        }
+        else if (endptr == &s[left]) {
             fprintf(stderr, "No digits were found\n");
         }
 
