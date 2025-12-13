@@ -53,11 +53,14 @@ struct problem_inputs read_full_file_to_lines(const char* filename);
 struct problem_inputs read_full_from_csv(const char* filename);
 
 
+
+
 inline void println() {
     printf("\n");
 }
 
 void print_size_t_array(const size_t* arr, size_t size);
+
 void print_int_pair_range(struct int_pair);
 void print_c_grid(struct c_grid);
 

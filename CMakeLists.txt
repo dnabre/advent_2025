@@ -17,4 +17,6 @@ add_executable(advent_2025
         src/io.c
         src/parse.c
         ${DAY_SRC_FILES}
+        src/ds.c
+        include/ds.h
 )

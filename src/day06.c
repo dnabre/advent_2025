@@ -2,9 +2,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
+#include "main.h"
 #include "days.h"
+#include "ds.h"
 #include "io.h"
+#include "parse.h"
 const char* DAY6_PART1_ANSWER = "0";
 const char* DAY6_PART2_ANSWER = "0";
 
@@ -39,13 +41,78 @@ void day6(const char* filename) {
     if (answer_part2) { free(answer_part2); };
 }
 
+
 char* day6_part1(struct problem_inputs p_i) {
+    println();
+    for (size_t i = 0; i < p_i.count; i++) {
+        printf("%3zu: %s\n", i, p_i.lines[i]);
+    }
+
+    struct int64_vec first = {NULL, 0};
+    struct int64_vec second = {NULL, 0};
+    struct int64_vec third = {NULL, 0};
+    first = parse_line_ints(p_i.lines[0], strlen(p_i.lines[0]));
+    second = parse_line_ints(p_i.lines[1], strlen(p_i.lines[1]));
+    third = parse_line_ints(p_i.lines[2], strlen(p_i.lines[2]));
+
+    print_int64_vec(first);
+    println();
+    print_int64_vec(second);
+    println();
+    print_int64_vec(third);
+    println();
+    size_t number_of_operations = first.len;
+    char* ops = malloc(number_of_operations * sizeof(char) + 1);
+    ops[number_of_operations] = '\0';
+
+    char* op_line = p_i.lines[3];
+
+    size_t idx = 0;
+
+    for (size_t i = 0; i < number_of_operations; i++) {
+        char ch_o = op_line[idx];
+        while ((ch_o != '*') && (ch_o != '+')) {
+            idx++;
+            ch_o = op_line[idx];
+        }
+        ops[i] = ch_o;
+        idx++;
+    }
+    printf("ops: %s\n", ops);
+    int64_t total =0;
+    for (size_t p =0; p < number_of_operations; p++) {
+        int64_t a = first.arr[p];
+        int64_t b = second.arr[p];
+        int64_t c = third.arr[p];
+        int64_t value;
+        char c_op = ops[p];
+        printf("\t %lld %c %lld %c %lld =", a,b,c,c_op);
+        if (c_op == '+') {
+            value = a + b + c;
+        }else if (c_op == '*') {
+            value = a * b * c;
+        } else {
+            printf("unknown operator: %c\n", c_op);
+            exit(-1);
+        }
+        total += value;
+        printf(" %lld  \t total= %lld\n", value, total);
+
+    }
+
+
+
+    free(ops);
+    free_int64_vec(&first);
+    free_int64_vec(&second);
+    free_int64_vec(&third);
     char* answer = malloc(ANSWER_BUFFER_SIZE);
-    sprintf(answer, "%"PRId64, p_i.count);
+    sprintf(answer, "%"PRId64, total);
     return answer;
 }
 
-char* day6_part2(struct problem_inputs p_i) {
+char
+* day6_part2(struct problem_inputs p_i) {
     char* answer = malloc(ANSWER_BUFFER_SIZE);
     sprintf(answer, "%"PRId64, p_i.count);
     return answer;

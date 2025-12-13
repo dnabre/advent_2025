@@ -34,6 +34,8 @@ struct g_pt{
     ptrdiff_t row;
     ptrdiff_t col;
 };
+
+
 void free_c_grid(struct c_grid);
 void free_problem_inputs(struct problem_inputs);
 void free_range_inputs(struct range_inputs);

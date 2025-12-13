@@ -5,9 +5,10 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "ds.h"
+
 
 struct int_pair parse_int_range(char* str) {
-
     char* dash = strchr(str, '-');
     if (dash) {
         *dash = '\0';
@@ -16,11 +17,12 @@ struct int_pair parse_int_range(char* str) {
         int64_t i_l = strtoll(left, NULL, 10);
         int64_t i_r = strtoll(right, NULL, 10);
 
-        struct int_pair result = {0,0};
+        struct int_pair result = {0, 0};
         result.x = i_l;
         result.y = i_r;
         return result;
-    }  else {
+    }
+    else {
         printf("%s:%d, error: splitting range on dash failure on \"%s\", \n", __func__, __LINE__, str);
         exit(-1);
     }
@@ -40,9 +42,10 @@ struct range_inputs parse_int_ranges(struct problem_inputs p_i) {
 }
 
 
-void split_on_empty_range_item(struct problem_inputs input_lines, struct range_inputs* out_ranges, struct problem_inputs*  out_items) {
+void split_on_empty_range_item(struct problem_inputs input_lines, struct range_inputs* out_ranges,
+                               struct problem_inputs* out_items) {
     size_t split_line = SIZE_MAX;
-    for (size_t i=0; i < input_lines.count; i++) {
+    for (size_t i = 0; i < input_lines.count; i++) {
         if (strlen(input_lines.lines[i]) == 0) {
             split_line = i;
             break;
@@ -54,16 +57,46 @@ void split_on_empty_range_item(struct problem_inputs input_lines, struct range_i
         exit(-1);
     }
 
-    out_ranges->count=split_line;
+    out_ranges->count = split_line;
     out_items->count = input_lines.count - out_ranges->count - 1;
     out_ranges->ranges = malloc(out_ranges->count * sizeof(struct int_pair));
     out_items->lines = malloc(out_items->count * sizeof(char*));
-    for (size_t r=0; r < split_line; r++) {
+    for (size_t r = 0; r < split_line; r++) {
         out_ranges->ranges[r] = parse_int_range(input_lines.lines[r]);
     }
     size_t new_lines_idx = 0;
-    for (size_t l=split_line+1; l < input_lines.count; l++ ) {
+    for (size_t l = split_line + 1; l < input_lines.count; l++) {
         out_items->lines[new_lines_idx] = strdup(input_lines.lines[l]);
         new_lines_idx++;
     }
+}
+
+
+
+
+struct int64_vec parse_line_ints(const char* s, size_t len) {
+    printf("parse_line_ints\n");
+    struct int64_vec v = {NULL, 0, 0};
+
+
+    size_t left = 0;
+    size_t right = 1;
+
+    while (right < len) {
+        while (s[left] == ' ') {
+            left++;
+            right++;
+        }
+        while (('9' >= s[right]) && (s[right] >= '0')) {
+            right++;
+        }
+        int64_t value = strtoll(&s[left],NULL, 10);
+        printf("\t value=%lld, left=%zu, right=%zu\n", value, left, right);
+        push_int64_vec(&v, value);
+        left = right;
+        right++;
+    }
+
+
+    return v;
 }

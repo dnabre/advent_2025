@@ -105,6 +105,9 @@ struct problem_inputs read_full_from_csv(const char* filename) {
 }
 
 
+
+
+
 char* read_full_file(const char* filename, size_t* bytes_read) {
     char* buffer = NULL;
     FILE* file = fopen(filename, "rb");
@@ -198,5 +201,4 @@ void print_c_grid(const struct c_grid q) {
         printf("\t pointer to grid contents NULL");
     }
 }
-
 
