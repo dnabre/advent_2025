@@ -49,9 +49,9 @@ Using C17+, though will likely be C99 compatible.
 
   <tr>
     <td><a href="https://adventofcode.com/2025/day/6">Day 6: Trash Compactor</a></td>
-    <td></td>
-    <td><a href="https://github.com/dnabre/advent_2025/blob/master/src/day06.c"> </a></td>
-    <td><a href="https://github.com/dnabre/advent_2025/blob/master/src/day06.c"> </a></td>
+    <td>String Manipulation</td>
+    <td><a href="https://github.com/dnabre/advent_2025/blob/master/src/day06.c">*</a></td>
+    <td><a href="https://github.com/dnabre/advent_2025/blob/master/src/day06.c">* </a></td>
   </tr>
 
   <tr>
@@ -101,11 +101,11 @@ Using C17+, though will likely be C99 compatible.
 
 
 
-| Day by Day Notes                                                      |
-|:----------------------------------------------------------------------|
-| Day 2: Just did the simple brute-force for part 2 - takes over 200ms. |
-| Day 5: Sort & Merge for ranges in part 2. Part 1 still brute force    |
-|                                                                       |
+| Day by Day Notes                                                                 |
+|:---------------------------------------------------------------------------------|
+| Day 2: Just did the simple brute-force for part 2 - takes over 200ms.            |
+| Day 5: Sort & Merge for ranges in part 2. Part 1 still brute force               |
+| Day 6: When you realize why the test and input are different, it all makes sense |
 
 
 I'm using C, in part, to knock a little of the massive amount of rust on my C skills.
