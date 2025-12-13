@@ -1,11 +1,12 @@
-#include "main.h"
-#include "parse.h"
 
 #include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
+#include <errno.h>
 
 #include "ds.h"
+#include "main.h"
+#include "parse.h"
 
 
 struct int_pair parse_int_range(char* str) {
@@ -75,7 +76,7 @@ void split_on_empty_range_item(struct problem_inputs input_lines, struct range_i
 
 
 struct int64_vec parse_line_ints(const char* s, size_t len) {
-    printf("parse_line_ints\n");
+
     struct int64_vec v = {NULL, 0, 0};
 
 
@@ -90,8 +91,20 @@ struct int64_vec parse_line_ints(const char* s, size_t len) {
         while (('9' >= s[right]) && (s[right] >= '0')) {
             right++;
         }
-        int64_t value = strtoll(&s[left],NULL, 10);
-        printf("\t value=%lld, left=%zu, right=%zu\n", value, left, right);
+        errno =0;
+        char *endptr;
+        int64_t value = strtoll(&s[left],&endptr, 10);
+        if (errno == ERANGE) {
+            if (value == LONG_MAX) {
+                fprintf(stderr, "Overflow occurred\n");
+            } else if (value == LONG_MIN) {
+                fprintf(stderr, "Underflow occurred\n");
+            }
+        } else if (endptr == &s[left]) {
+            fprintf(stderr, "No digits were found\n");
+        }
+
+        // printf("\t value=%lld, left=%zu, right=%zu\n", value, left, right);
         push_int64_vec(&v, value);
         left = right;
         right++;

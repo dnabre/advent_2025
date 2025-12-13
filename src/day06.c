@@ -7,10 +7,10 @@
 #include "ds.h"
 #include "io.h"
 #include "parse.h"
-const char* DAY6_PART1_ANSWER = "0";
+const char* DAY6_PART1_ANSWER = "4405895212738";
 const char* DAY6_PART2_ANSWER = "0";
 
-
+// part 1 -> 15_004_115_315 to loow
 void day6(const char* filename) {
     struct problem_inputs day6_lines = read_by_lines(filename);
 
@@ -44,28 +44,31 @@ void day6(const char* filename) {
 
 char* day6_part1(struct problem_inputs p_i) {
     println();
-    for (size_t i = 0; i < p_i.count; i++) {
-        printf("%3zu: %s\n", i, p_i.lines[i]);
-    }
 
-    struct int64_vec first = {NULL, 0};
-    struct int64_vec second = {NULL, 0};
-    struct int64_vec third = {NULL, 0};
-    first = parse_line_ints(p_i.lines[0], strlen(p_i.lines[0]));
-    second = parse_line_ints(p_i.lines[1], strlen(p_i.lines[1]));
-    third = parse_line_ints(p_i.lines[2], strlen(p_i.lines[2]));
 
-    print_int64_vec(first);
-    println();
-    print_int64_vec(second);
-    println();
-    print_int64_vec(third);
-    println();
+
+    struct int64_vec first = parse_line_ints(p_i.lines[0], strlen(p_i.lines[0]));
+    struct int64_vec second = parse_line_ints(p_i.lines[1], strlen(p_i.lines[1]));
+    struct int64_vec third= parse_line_ints(p_i.lines[2], strlen(p_i.lines[2]));
+     struct int64_vec fourth  = parse_line_ints(p_i.lines[3], strlen(p_i.lines[3]));
+
+    // print_int64_vec(first);
+    // println();
+    // print_int64_vec(second);
+    // println();
+    // print_int64_vec(third);
+    // println();
+
+    printf("first: %lld -> %lld , len=%zu \n", first.arr[0], first.arr[first.len -1], first.len);
+    printf("second: %lld -> %lld , len=%zu \n", second.arr[0], second.arr[first.len -1], second.len);
+    printf("third: %lld -> %lld , len=%zu \n", third.arr[0], third.arr[third.len -1], third.len);
+    printf("fourth: %lld -> %lld , len=%zu \n", fourth.arr[0], fourth.arr[fourth.len -1], fourth.len);
+
     size_t number_of_operations = first.len;
     char* ops = malloc(number_of_operations * sizeof(char) + 1);
     ops[number_of_operations] = '\0';
 
-    char* op_line = p_i.lines[3];
+    char* op_line = p_i.lines[4];
 
     size_t idx = 0;
 
@@ -84,13 +87,14 @@ char* day6_part1(struct problem_inputs p_i) {
         int64_t a = first.arr[p];
         int64_t b = second.arr[p];
         int64_t c = third.arr[p];
+        int64_t d = fourth.arr[p];
         int64_t value;
         char c_op = ops[p];
-        printf("\t %lld %c %lld %c %lld =", a,b,c,c_op);
+        printf("\t %lld %c %lld %c %lld %c %lld =", a,c_op,b,c_op,c,c_op,d);
         if (c_op == '+') {
-            value = a + b + c;
+            value = a + b + c + d;
         }else if (c_op == '*') {
-            value = a * b * c;
+            value = a * b * c * d;
         } else {
             printf("unknown operator: %c\n", c_op);
             exit(-1);
