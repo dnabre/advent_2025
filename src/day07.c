@@ -6,7 +6,7 @@
 #include "days.h"
 #include "io.h"
 const char* DAY7_PART1_ANSWER = "1656";
-const char* DAY7_PART2_ANSWER = "0";
+const char* DAY7_PART2_ANSWER = "76624086587804";
 
 
 void day7(const char* filename) {
@@ -40,72 +40,32 @@ void day7(const char* filename) {
 }
 
 
-static void toggle(char* beams, size_t pos, size_t width) {
-    if (pos >= width) {
-        printf("invalid pos: %zu, doesn't fit in width %zu for beams: %s\n", pos, width, beams);
-        exit(-1);
-    }
-    if (beams[pos] == '0') {
-        beams[pos] = '1';
-    } else {
-        beams[pos] = '0';
-    }
-}
-
-static void set(char* beams, size_t pos, char on_off, size_t width) {
-    if (pos >= width) {
-        printf("invalid pos: %zu, doesn't fit in width %zu for beams: %s\n", pos, width, beams);
-        exit(-1);
-    }
-    beams[pos] = on_off;
-}
 
 char* day7_part1(struct problem_inputs p_i) {
-    println();
-    size_t width = strlen(p_i.lines[0]);
-    size_t height = p_i.count;
-    printf("width: %zu\n", width);
-
+    const size_t width = strlen(p_i.lines[0]);
+    const size_t height = p_i.count;
     char** grid = p_i.lines;
-
-
-
-    char beams[width+1];
-    beams[width] = '\0';
-
+    int64_t beams[width];
     for (size_t i=0; i < width; i++) {
-        beams[i] ='0';
+        beams[i] = 0;
     }
-
-
     int64_t split_count=0;
     for (size_t h=0; h < height; h++) {
-        // printf("%3zu: \t %s\n", h,grid[h]);
-        for (size_t w=0; w < width; w++) {
+       for (size_t w=0; w < width; w++) {
             char ch = grid[h][w];
             if (ch == 'S') {
-                set(beams, w, '1', width);
+                beams[w] = 1;
             }
             if (ch == '^') {
-                if ((w == 0) || (w == (width-1))) {
-                    printf("splitter on edge h: %zu, w: %zu\n", h,w);
-                    exit(-1);
-                }
-                if (beams[w] == '1') {
+                if (beams[w] == 1) {
                     split_count++;
-                    set(beams, w, '0', width);
-                    set(beams, w-1, '1', width);
-                    set(beams, w+1, '1',width);
-
+                    beams[w] = 0;
+                    beams[w-1] = 1;
+                    beams[w+1] = 1;
                 }
             }
         }
-        // printf("beams:   %s \t splits: %lld \n", beams, split_count);
-
     }
-
-
-
 
     char* answer = malloc(ANSWER_BUFFER_SIZE);
     sprintf(answer, "%"PRId64, split_count);
@@ -113,7 +73,37 @@ char* day7_part1(struct problem_inputs p_i) {
 }
 
 char* day7_part2(struct problem_inputs p_i) {
+    const size_t width = strlen(p_i.lines[0]);
+    const size_t height = p_i.count;
+    char** grid = p_i.lines;
+    int64_t beams[width];
+    for (size_t i=0; i < width; i++) {
+        beams[i] = 0;
+    }
+
+    for (size_t h=0; h < height; h++) {
+        for (size_t w=0; w < width; w++) {
+            char ch = grid[h][w];
+            if (ch == 'S') {
+                beams[w]=1;
+            }
+            if (ch == '^') {
+                if (beams[w] > 0) {
+                    const int64_t last = beams[w];
+                    beams[w] = 0;
+                    beams[w-1]  += last;
+                    beams[w+1] += last;
+
+                }
+            }
+        }
+    }
+    int64_t tach_count =0;
+    for (size_t w=0; w < width; w++) {
+        tach_count += beams[w];
+    }
+
     char* answer = malloc(ANSWER_BUFFER_SIZE);
-    sprintf(answer, "%"PRId64, p_i.count);
+    sprintf(answer, "%"PRId64, tach_count);
     return answer;
 }

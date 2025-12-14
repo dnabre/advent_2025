@@ -49,6 +49,7 @@ const char* day_12_input_file = "inputs/2025/day_12_input_01.txt";
 
 
 void run_all() {
+
     clock_t whole_start = clock();
 
     day1(day_01_input_file);
@@ -78,8 +79,8 @@ int main(int argc, char* argv[]) {
 #else
 
     clock_t start = clock();
-    // day7(day_07_test_file);
-    day7(day_07_input_file);
+    day8(day_08_test_file);
+    // day8(day_08_input_file);
     clock_t end = clock();
     double elapsed_ms = (double)(end - start) * 1000.0 / CLOCKS_PER_SEC;
     printf("\t\t\t time: %.3f ms\n", elapsed_ms);
