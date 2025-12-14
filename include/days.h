@@ -35,7 +35,7 @@ char* day7_part1(struct problem_inputs);
 char* day7_part2(struct problem_inputs);
 
 void day8(const char* filename);
-char* day8_part1(struct problem_inputs);
+char* day8_part1(struct problem_inputs,size_t target_junctions);
 char* day8_part2(struct problem_inputs);
 
 void day9(const char* filename);

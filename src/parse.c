@@ -1,15 +1,15 @@
-
 #include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
-#include <errno.h>
+
 
 #include "ds.h"
 #include "main.h"
 #include "parse.h"
 
 
-struct int_pair parse_int_range(char* str) {
+struct int_pair parse_int_range(char* str)
+{
     char* dash = strchr(str, '-');
     if (dash) {
         *dash = '\0';
@@ -22,14 +22,14 @@ struct int_pair parse_int_range(char* str) {
         result.x = i_l;
         result.y = i_r;
         return result;
-    }
-    else {
+    } else {
         printf("%s:%d, error: splitting range on dash failure on \"%s\", \n", __func__, __LINE__, str);
         exit(-1);
     }
 }
 
-struct range_inputs parse_int_ranges(struct problem_inputs p_i) {
+struct range_inputs parse_int_ranges(struct problem_inputs p_i)
+{
     struct range_inputs result = {0};
     result.count = p_i.count;
     struct int_pair* pair_array = malloc(p_i.count * sizeof(struct int_pair));
@@ -44,7 +44,8 @@ struct range_inputs parse_int_ranges(struct problem_inputs p_i) {
 
 
 void split_on_empty_range_item(struct problem_inputs input_lines, struct range_inputs* out_ranges,
-                               struct problem_inputs* out_items) {
+                               struct problem_inputs* out_items)
+{
     size_t split_line = SIZE_MAX;
     for (size_t i = 0; i < input_lines.count; i++) {
         if (strlen(input_lines.lines[i]) == 0) {
@@ -73,7 +74,8 @@ void split_on_empty_range_item(struct problem_inputs input_lines, struct range_i
 }
 
 
-struct int64_vec parse_line_ints(const char* s, size_t len) {
+struct int64_vec parse_line_ints(const char* s, size_t len)
+{
     struct int64_vec v = {NULL, 0, 0};
 
 
@@ -90,20 +92,7 @@ struct int64_vec parse_line_ints(const char* s, size_t len) {
         }
         errno = 0;
         char* endptr;
-        int64_t value = strtoll(&s[left], &endptr, 10);
-        if (errno == ERANGE) {
-            if (value == LONG_MAX) {
-                fprintf(stderr, "Overflow occurred\n");
-            }
-            else if (value == LONG_MIN) {
-                fprintf(stderr, "Underflow occurred\n");
-            }
-        }
-        else if (endptr == &s[left]) {
-            fprintf(stderr, "No digits were found\n");
-        }
-
-        // printf("\t value=%lld, left=%zu, right=%zu\n", value, left, right);
+        const int64_t value = strtoll(&s[left], &endptr, 10);
         push_int64_vec(&v, value);
         left = right;
         right++;
@@ -111,4 +100,31 @@ struct int64_vec parse_line_ints(const char* s, size_t len) {
 
 
     return v;
+}
+
+
+const size_t NUM_BUFFER_SIZE = 16;
+
+
+struct point3 parse_3d_point_from_line(const char* c_line)
+{
+    char buffer[NUM_BUFFER_SIZE];
+    int64_t coords[3];
+
+    for (size_t i = 0; i < 3; i++) {
+        if (i != 2) {
+            char* f = strchr(c_line, ',');
+            size_t len = (f - c_line);
+            for (size_t c = 0; c < len; c++) {
+                buffer[c] = c_line[c];
+            }
+            buffer[len] = '\0';
+            coords[i] = strtoll(buffer,NULL, 10);
+            c_line = f + 1;
+        } else {
+            coords[i] = strtoll(c_line, NULL, 10);
+        }
+    }
+    const struct point3 result = {coords[0], coords[1], coords[2]};
+    return result;
 }

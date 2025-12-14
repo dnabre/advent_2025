@@ -199,3 +199,9 @@ void print_c_grid(const struct c_grid q) {
     }
 }
 
+void print_point3(struct point3 p) {
+    printf("[%"PRId64, p.x);
+    printf(",%"PRId64, p.y);
+    printf(",%"PRId64, p.z);
+    printf("]");
+}

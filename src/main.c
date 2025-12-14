@@ -60,10 +60,10 @@ void run_all() {
     day6(day_06_input_file);
     day7(day_07_input_file);
     day8(day_08_input_file);
-    day9(day_09_input_file);
-    day10(day_10_input_file);
-    day11(day_11_input_file);
-    day12(day_12_input_file);
+    // day9(day_09_input_file);
+    // day10(day_10_input_file);
+    // day11(day_11_input_file);
+    // day12(day_12_input_file);
 
 
     clock_t whole_end = clock();

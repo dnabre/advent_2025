@@ -32,7 +32,11 @@ struct g_pt{
     ptrdiff_t row;
     ptrdiff_t col;
 };
-
+struct point3{
+    int64_t x;
+    int64_t y;
+    int64_t z;
+};
 
 void free_c_grid(struct c_grid);
 void free_problem_inputs(struct problem_inputs);
