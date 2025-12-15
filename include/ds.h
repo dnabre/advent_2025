@@ -27,6 +27,20 @@ void free_size_vec(struct size_vec*);
 void print_size_vec(struct size_vec);
 void print_size_vec_rev(struct size_vec);
 void init_size_vec(struct size_vec*);
+static inline int  size_t_compare(const void *p1, const void *p2)
+{
+    size_t left = *(const int *)p1;
+    size_t right = *(const int *)p2;
 
+    return ((left > right) - (left < right));
+}
+
+static inline int  size_t_compare_r(const void *p1, const void *p2)
+{
+    size_t left = *(const int *)p2;
+    size_t right = *(const int *)p1;
+
+    return ((left > right) - (left < right));
+}
 
 #endif //ADVENT_2025_DS_H
