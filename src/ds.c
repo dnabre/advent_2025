@@ -1,7 +1,6 @@
 #include "ds.h"
 
 #include <inttypes.h>
-#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -98,6 +97,7 @@ void init_int64_vec(struct int64_vec* v)
 //---------------- size_vec functions start------------------
 size_t push_size_vec(struct size_vec* v, const size_t d)
 {
+
     if (v->arr == NULL) {
         v->arr = malloc(2 * sizeof(size_t));
         v->len = 1;
@@ -182,5 +182,17 @@ void init_size_vec(struct size_vec* v)
     v->len = 0;
     v->cap = 0;
 }
+void init_size_vec_with_size(struct size_vec* v, const size_t init_size)
+{
+    v->arr = malloc(sizeof(size_t) * init_size);
+    v->len = 0;
+    v->cap = init_size;
+}
 
+// static bool grow_size_vec(struct size_vec* v, const size_t ptrsize, size_t* curcount)
+// {
+//
+//
+//     return false;
+// }
 //---------------- size_vec functions end------------------

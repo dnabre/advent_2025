@@ -3,6 +3,8 @@
 
 #include <stdint.h>
 #include <stdio.h>
+#include <stddef.h>
+
 #define ADVENT_YEAR "2025"
 
 
@@ -22,20 +24,22 @@ struct problem_inputs{
 };
 
 
+
+struct point3{
+    int64_t x;
+    int64_t y;
+    int64_t z;
+};
+
 struct c_grid{
     char** g;
-    ptrdiff_t num_rows;
-    ptrdiff_t num_cols;
+    size_t num_rows;
+    size_t num_cols;
 };
 
 struct g_pt{
     ptrdiff_t row;
     ptrdiff_t col;
-};
-struct point3{
-    int64_t x;
-    int64_t y;
-    int64_t z;
 };
 
 void free_c_grid(struct c_grid);

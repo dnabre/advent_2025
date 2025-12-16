@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+
 #include "main.h"
 #include "days.h"
 #include "io.h"
@@ -14,8 +15,9 @@ static const char EMPTY = '.';
 static const char FULL = '@';
 
 
-int64_t count_adjacent_rolls(const struct c_grid* g, ptrdiff_t row, ptrdiff_t col);
+int64_t count_adjacent_rolls(const struct c_grid* g, size_t row, size_t col);
 struct c_grid build_grid(struct problem_inputs);
+static struct c_grid dup_c_grid(const struct c_grid g);
 
 
 void day4(const char* filename) {
@@ -53,8 +55,8 @@ void day4(const char* filename) {
 
 char* day4_part1(const struct c_grid g) {
     int64_t accessible_count = 0;
-    for (ptrdiff_t r = 0; r < g.num_rows; r++) {
-        for (ptrdiff_t c = 0; c < g.num_cols; c++) {
+    for (size_t r = 0; r < g.num_rows; r++) {
+        for (size_t c = 0; c < g.num_cols; c++) {
             char ch = g.g[r][c];
             if (ch != EMPTY) {
                 int64_t adj_roll_count = count_adjacent_rolls(&g, r, c);
@@ -79,8 +81,8 @@ char* day4_part2(const struct c_grid g) {
     while (changed) {
         const struct c_grid new_grid = dup_c_grid(current_grid);
         changed = false;
-        for (ptrdiff_t r = 0; r < current_grid.num_rows; r++) {
-            for (ptrdiff_t c = 0; c < current_grid.num_cols; c++) {
+        for (size_t r = 0; r < current_grid.num_rows; r++) {
+            for (size_t c = 0; c < current_grid.num_cols; c++) {
                 char ch = current_grid.g[r][c];
                 if (ch != EMPTY) {
                     int64_t adj_roll_count = count_adjacent_rolls(&current_grid, r, c);
@@ -103,16 +105,17 @@ char* day4_part2(const struct c_grid g) {
 }
 
 
-int64_t count_adjacent_rolls(const struct c_grid* g, ptrdiff_t row, ptrdiff_t col) {
+int64_t count_adjacent_rolls(const struct c_grid* g, size_t row, size_t col) {
     int64_t adj_count = 0;
     for (ptrdiff_t dr = -1; dr <= 1; dr++) {
         for (ptrdiff_t dc = -1; dc <= 1; dc++) {
             if ((dr == 0) && (dc == 0)) {
                 continue;
             }
-            ptrdiff_t n_row = row + dr;
-            ptrdiff_t n_col = col + dc;
-            if ((0 <= n_col) && (n_col < g->num_cols) && (0 <= n_row) && (n_row < g->num_rows)) {
+            size_t n_row = row + (size_t)dr;
+            size_t n_col = col + (size_t)dc;
+
+            if ((n_col < g->num_cols)  && (n_row < g->num_rows)) {
                 char ch = g->g[n_row][n_col];
                 if (ch == FULL) {
                     adj_count++;
@@ -125,8 +128,8 @@ int64_t count_adjacent_rolls(const struct c_grid* g, ptrdiff_t row, ptrdiff_t co
 
 struct c_grid build_grid(struct problem_inputs line_array) {
     struct c_grid g;
-    g.num_rows = (ptrdiff_t)line_array.count;
-    g.num_cols = (ptrdiff_t)strlen(line_array.lines[0]);
+    g.num_rows = (size_t)line_array.count;
+    g.num_cols = (size_t)strlen(line_array.lines[0]);
     g.g = malloc(sizeof(char*) * g.num_rows);
     for (size_t h = 0; h < g.num_rows; h++) {
         g.g[h] = malloc(sizeof(char) * g.num_cols + 1);
@@ -142,7 +145,7 @@ struct c_grid build_grid(struct problem_inputs line_array) {
 }
 
 
-struct c_grid dup_c_grid(const struct c_grid g) {
+static struct c_grid dup_c_grid(const struct c_grid g) {
     struct c_grid ng;
     ng.num_rows = g.num_rows;
     ng.num_cols = g.num_cols;

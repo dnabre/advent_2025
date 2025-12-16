@@ -1,17 +1,16 @@
-cmake_minimum_required(VERSION 4.0)
+cmake_minimum_required(VERSION 3.31)
 project(advent_2025 C)
 
+# ----- Global project settings -----
 set(CMAKE_C_STANDARD 17)
 set(CMAKE_C_STANDARD_REQUIRED ON)
-
-set(CMAKE_C_FLAGS "-Wall  -O2 ")
-
+set(CMAKE_C_EXTENSIONS OFF)
 
 
-include_directories(${CMAKE_SOURCE_DIR}/include)
-
+# ----- Source Files -----
 file(GLOB DAY_SRC_FILES src/day*.c)
 
+# ---- Target definition -----
 add_executable(advent_2025
         src/main.c
         src/io.c
@@ -20,3 +19,17 @@ add_executable(advent_2025
         src/ds.c
         include/ds.h
 )
+
+
+
+
+
+# ----- Target-specific settings -----
+target_include_directories(advent_2025 PRIVATE ${CMAKE_SOURCE_DIR}/include)
+
+# --- Compiler flags by configuration ---
+target_compile_options(advent_2025 PRIVATE
+$<$<CONFIG:Debug>:-Wall -O0 -g>
+$<$<CONFIG:Release>:-Wall -O3>
+)
+

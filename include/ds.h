@@ -1,5 +1,6 @@
 #ifndef ADVENT_2025_DS_H
 #define ADVENT_2025_DS_H
+#include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
 
@@ -27,6 +28,10 @@ void free_size_vec(struct size_vec*);
 void print_size_vec(struct size_vec);
 void print_size_vec_rev(struct size_vec);
 void init_size_vec(struct size_vec*);
+void init_size_vec_with_size(struct size_vec*, size_t init_size);
+
+// static bool grow_size_vec(struct size_vec* v, const size_t ptrsize, size_t* curcount);
+
 static inline int  size_t_compare(const void *p1, const void *p2)
 {
     size_t left = *(const int *)p1;

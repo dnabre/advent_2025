@@ -90,7 +90,6 @@ struct int64_vec parse_line_ints(const char* s, size_t len)
         while (('9' >= s[right]) && (s[right] >= '0')) {
             right++;
         }
-        errno = 0;
         char* endptr;
         const int64_t value = strtoll(&s[left], &endptr, 10);
         push_int64_vec(&v, value);

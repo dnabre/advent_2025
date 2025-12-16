@@ -35,7 +35,7 @@ char* day7_part1(struct problem_inputs);
 char* day7_part2(struct problem_inputs);
 
 void day8(const char* filename);
-char* day8_part1(struct problem_inputs,size_t target_junctions);
+char* day8_part1(struct problem_inputs);
 char* day8_part2(struct problem_inputs);
 
 void day9(const char* filename);
@@ -54,7 +54,7 @@ void day12(const char* filename);
 char* day12_part1(struct problem_inputs);
 char* day12_part2(struct problem_inputs);
 
-struct c_grid dup_c_grid(struct c_grid g);
+
 
 
 #endif //ADVENT_2025_DAYS_H

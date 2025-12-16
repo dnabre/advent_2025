@@ -178,8 +178,10 @@ void print_int_pair_range(const struct int_pair r) {
     printf("[%"PRId64 ", %"PRId64"]", r.x, r.y);
 }
 
+
 void print_c_grid(const struct c_grid q) {
-    printf("c_grid height: %lld, width: %lld\n", q.num_rows, q.num_cols);
+    printf("c_grid height: %td, width: %td\n",
+        q.num_rows, q.num_cols);
     if (q.g != NULL) {
         for (size_t r = 0; r < q.num_rows; r++) {
             if (q.g[r] != NULL) {

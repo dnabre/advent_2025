@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CMakeSharedSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Release" ENABLED="true" GENERATION_DIR="build/cmake-build-release" CONFIG_NAME="Release" TOOLCHAIN_NAME="Clang-based MSYS2 ARM64 (C only)" GENERATION_OPTIONS="-DCMAKE_C_FLAGS=&quot;-Wall -Wextra&quot;" BUILD_OPTIONS="-v" />
+      <configuration PROFILE_NAME="Debug" ENABLED="true" GENERATION_DIR="build/cmake-build-debug" CONFIG_NAME="Debug" TOOLCHAIN_NAME="Clang-based MSYS2 ARM64 (C only)" GENERATION_OPTIONS="-DCMAKE_C_FLAGS=&quot;-Wall -Wextra&quot;" BUILD_OPTIONS="-v" />
+    </configurations>
+  </component>
+</project>
