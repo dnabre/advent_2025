@@ -63,7 +63,7 @@ Using C17+, though will likely be C99 compatible.
 
   <tr>
     <td><a href="https://adventofcode.com/2025/day/8">Day 8: Playground</a></td>
-    <td></td>
+    <td>Graph Fun</td>
     <td><a href="https://github.com/dnabre/advent_2025/blob/master/src/day08.c"> </a></td>
     <td><a href="https://github.com/dnabre/advent_2025/blob/master/src/day08.c"> </a></td>
   </tr>
@@ -106,6 +106,7 @@ Using C17+, though will likely be C99 compatible.
 | Day 2: Just did the simple brute-force for part 2 - takes over 200ms.            |
 | Day 5: Sort & Merge for ranges in part 2. Part 1 still brute force               |
 | Day 6: When you realize why the test and input are different, it all makes sense |
+ | Day 8: This took me a lot time, and it could still be improve (size of main sort reduced.|
 
 
 I'm using C, in part, to knock a little of the massive amount of rust on my C skills.

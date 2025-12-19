@@ -10,6 +10,7 @@ set(CMAKE_C_EXTENSIONS OFF)
 # ----- Source Files -----
 file(GLOB DAY_SRC_FILES src/day*.c)
 
+
 # ---- Target definition -----
 add_executable(advent_2025
         src/main.c
@@ -17,7 +18,8 @@ add_executable(advent_2025
         src/parse.c
         ${DAY_SRC_FILES}
         src/ds.c
-        include/ds.h
+        src/util.c
+
 )
 
 
@@ -32,4 +34,3 @@ target_compile_options(advent_2025 PRIVATE
 $<$<CONFIG:Debug>:-Wall -O0 -g>
 $<$<CONFIG:Release>:-Wall -O3>
 )
-

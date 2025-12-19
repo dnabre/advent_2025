@@ -132,6 +132,9 @@ size_t push_size_vec(struct size_vec* v, const size_t d)
     return SIZE_MAX;
 }
 
+
+
+
 void free_size_vec(struct size_vec* v)
 {
     free(v->arr);

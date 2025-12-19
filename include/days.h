@@ -34,9 +34,13 @@ void day7(const char* filename);
 char* day7_part1(struct problem_inputs);
 char* day7_part2(struct problem_inputs);
 
+
+
+
+struct pair;
 void day8(const char* filename);
-char* day8_part1(struct problem_inputs);
-char* day8_part2(struct problem_inputs);
+char* day8_part1(const struct pair*);
+char* day8_part2(const struct pair*, const struct point3*);
 
 void day9(const char* filename);
 char* day9_part1(struct problem_inputs);
