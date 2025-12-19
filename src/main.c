@@ -71,7 +71,7 @@ void run_all() {
     printf("\n  Total runtime of all days: %.3f ms\n", whole_elapsed_ms);
 }
 
-#define  RUN_ALL true
+//#define  RUN_ALL true
 
 int main() {
 #ifdef RUN_ALL
