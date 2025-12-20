@@ -22,14 +22,17 @@ struct problem_inputs{
     char** lines;
     size_t count;
 };
-
-
-
 struct point3{
     int64_t x;
     int64_t y;
     int64_t z;
 };
+struct point2{
+    int64_t x;
+    int64_t y;
+};
+
+
 
 struct c_grid{
     char** g;

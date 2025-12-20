@@ -105,6 +105,28 @@ struct int64_vec parse_line_ints(const char* s, size_t len)
 const size_t NUM_BUFFER_SIZE = 16;
 
 
+struct point2 parse_2d_point_from_line(const char* c_line)
+{
+    char buffer[NUM_BUFFER_SIZE];
+    int64_t coords[3];
+
+    for (size_t i = 0; i < 2; i++) {
+        if (i != 1) {
+            char* f = strchr(c_line, ',');
+            size_t len = (f - c_line);
+            for (size_t c = 0; c < len; c++) {
+                buffer[c] = c_line[c];
+            }
+            buffer[len] = '\0';
+            coords[i] = strtoll(buffer,NULL, 10);
+            c_line = f + 1;
+        } else {
+            coords[i] = strtoll(c_line, NULL, 10);
+        }
+    }
+    const struct point2 result = {coords[0], coords[1]};
+    return result;
+}
 struct point3 parse_3d_point_from_line(const char* c_line)
 {
     char buffer[NUM_BUFFER_SIZE];
