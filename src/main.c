@@ -6,7 +6,6 @@
 
 #include "days.h"
 
-
 // total reorganize this stuff and main function
 
 
