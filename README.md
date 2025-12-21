@@ -70,9 +70,9 @@ Using C17+, though will likely be C99 compatible.
 
   <tr>
     <td><a href="https://adventofcode.com/2025/day/9">Day 9: Movie Theater</a></td>
-    <td>Integer Coord Geometry</td>
+    <td>Geometry + Assumptions about Input</td>
     <td><a href="https://github.com/dnabre/advent_2025/blob/master/src/day09.c">*</a></td>
-    <td><a href="https://github.com/dnabre/advent_2025/blob/master/src/day09.c"> </a></td>
+    <td><a href="https://github.com/dnabre/advent_2025/blob/master/src/day09.c">*</a></td>
   </tr>
 
   <tr>
@@ -95,19 +95,18 @@ Using C17+, though will likely be C99 compatible.
     <td><a href="https://github.com/dnabre/advent_2025/blob/master/src/day12.c"> </a></td>
   </tr>
 
-  
+
 </table>
 </div>
 
-
-
-| Day by Day Notes                                                                 |
-|:---------------------------------------------------------------------------------|
-| Day 2: Just did the simple brute-force for part 2 - takes over 200ms.            |
-| Day 5: Sort & Merge for ranges in part 2. Part 1 still brute force               |
-| Day 6: When you realize why the test and input are different, it all makes sense |
- | Day 8: This took me a lot time, and it could still be improve (size of main sort reduced.|
-
+|         | Day by Day Notes                                                                                                                                             |
+|---------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Day 2:  | Just did the simple brute-force for part 2 - takes over 200ms.                                                                                               |
+| Day 5:  | Sort & Merge for ranges in part 2. Part 1 still brute force                                                                                                  |
+| Day 6:  | When you realize why the test and input are different, it all makes sense                                                                                    |
+| Day 8:  | This took me a lot time, size of main sort could be reduced                                                                                                  |
+| Day 9:  | Took a lot to figure out, had to visualize to get anywhere. Tailored  algorithm <br>to properites of the input (pretty much required, not uncommon with AoC) |
+| Day 10: | _                                                                                                                                                            |
 
 I'm using C, in part, to knock a little of the massive amount of rust on my C skills.
 Between that, and using opinionated rather than idiomatic stuff, this is code-base is not
