@@ -26,5 +26,18 @@ int64_t calc_distance(const struct point3  a, const struct point3 b)
 }
 
 
+ int64_t min_i64(const int64_t a, const int64_t b){
+    if (a < b) {
+        return a;
+    }
+    return b;
+}
+
+ int64_t max_i64(const int64_t a, const int64_t b){
+    if (a > b) {
+        return a;
+    }
+    return b;
+}
 
 
