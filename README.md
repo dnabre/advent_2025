@@ -64,14 +64,14 @@ Using C17+, though will likely be C99 compatible.
   <tr>
     <td><a href="https://adventofcode.com/2025/day/8">Day 8: Playground</a></td>
     <td>Graph Fun</td>
-    <td><a href="https://github.com/dnabre/advent_2025/blob/master/src/day08.c"> </a></td>
-    <td><a href="https://github.com/dnabre/advent_2025/blob/master/src/day08.c"> </a></td>
+    <td><a href="https://github.com/dnabre/advent_2025/blob/master/src/day08.c">*</a></td>
+    <td><a href="https://github.com/dnabre/advent_2025/blob/master/src/day08.c">*</a></td>
   </tr>
 
   <tr>
     <td><a href="https://adventofcode.com/2025/day/9">Day 9: Movie Theater</a></td>
-    <td></td>
-    <td><a href="https://github.com/dnabre/advent_2025/blob/master/src/day09.c"> </a></td>
+    <td>Integer Coord Geometry</td>
+    <td><a href="https://github.com/dnabre/advent_2025/blob/master/src/day09.c">*</a></td>
     <td><a href="https://github.com/dnabre/advent_2025/blob/master/src/day09.c"> </a></td>
   </tr>
 
