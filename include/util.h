@@ -7,4 +7,8 @@ int64_t min_i64(const int64_t a, const int64_t b);
 int64_t max_i64(const int64_t a, const int64_t b);
 
 
+size_t min_st(const size_t a, const size_t b);
+size_t max_st(const size_t a, const size_t b);
+
+
 #endif //ADVENT_2025_UTIL_H
