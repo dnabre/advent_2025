@@ -11,4 +11,19 @@ size_t min_st(const size_t a, const size_t b);
 size_t max_st(const size_t a, const size_t b);
 
 
+static inline int  size_t_compare(const void *p1, const void *p2)
+{
+    size_t left = *(const int *)p1;
+    size_t right = *(const int *)p2;
+
+    return ((left > right) - (left < right));
+}
+
+static inline int  size_t_compare_r(const void *p1, const void *p2)
+{
+    size_t left = *(const int *)p2;
+    size_t right = *(const int *)p1;
+
+    return ((left > right) - (left < right));
+}
 #endif //ADVENT_2025_UTIL_H

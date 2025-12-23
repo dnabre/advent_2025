@@ -3,11 +3,11 @@
 #include <inttypes.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 
 //---------------- int64_vec functions start------------------
-void push_int64_vec(struct int64_vec* v, int64_t d)
-{
+void push_int64_vec(struct int64_vec* v, const int64_t d){
     if (v->arr == NULL) {
         v->arr = malloc(2 * sizeof(int64_t));
         v->len = 1;
@@ -40,16 +40,14 @@ void push_int64_vec(struct int64_vec* v, int64_t d)
     }
 }
 
-void free_int64_vec(struct int64_vec* v)
-{
+void free_int64_vec(struct int64_vec* v){
     free(v->arr);
     v->arr = NULL;
     v->len = 0;
     v->cap = 0;
 }
 
-void print_int64_vec(struct int64_vec v)
-{
+void print_int64_vec(const struct int64_vec v){
     if (v.arr == NULL) {
         printf("Array is NULL\n");
         return;
@@ -66,8 +64,7 @@ void print_int64_vec(struct int64_vec v)
 }
 
 
-void print_int64_vec_rev(struct int64_vec v)
-{
+void print_int64_vec_rev(const struct int64_vec v){
     if (v.arr == NULL) {
         printf("Array is NULL\n");
         return;
@@ -84,8 +81,7 @@ void print_int64_vec_rev(struct int64_vec v)
 }
 
 
-void init_int64_vec(struct int64_vec* v)
-{
+void init_int64_vec(struct int64_vec* v){
     v->arr = NULL;
     v->len = 0;
     v->cap = 0;
@@ -95,9 +91,7 @@ void init_int64_vec(struct int64_vec* v)
 
 
 //---------------- size_vec functions start------------------
-size_t push_size_vec(struct size_vec* v, const size_t d)
-{
-
+size_t push_size_vec(struct size_vec* v, const size_t d){
     if (v->arr == NULL) {
         v->arr = malloc(2 * sizeof(size_t));
         v->len = 1;
@@ -127,24 +121,19 @@ size_t push_size_vec(struct size_vec* v, const size_t d)
         v->cap = new_cap;
         v->arr[v->len] = d;
         v->len++;
-        return (v->len - 1);
     }
     return SIZE_MAX;
 }
 
 
-
-
-void free_size_vec(struct size_vec* v)
-{
+void free_size_vec(struct size_vec* v){
     free(v->arr);
     v->arr = NULL;
     v->len = 0;
     v->cap = 0;
 }
 
-void print_size_vec(struct size_vec v)
-{
+void print_size_vec(const struct size_vec v){
     if (v.arr == NULL) {
         printf("Array is NULL\n");
         return;
@@ -161,8 +150,7 @@ void print_size_vec(struct size_vec v)
 }
 
 
-void print_size_vec_rev(struct size_vec v)
-{
+void print_size_vec_rev(const struct size_vec v){
     if (v.arr == NULL) {
         printf("Array is NULL\n");
         return;
@@ -179,23 +167,203 @@ void print_size_vec_rev(struct size_vec v)
 }
 
 
-void init_size_vec(struct size_vec* v)
-{
+void init_size_vec(struct size_vec* v){
     v->arr = NULL;
     v->len = 0;
     v->cap = 0;
 }
-void init_size_vec_with_size(struct size_vec* v, const size_t init_size)
-{
+
+void init_size_vec_with_size(struct size_vec* v, const size_t init_size){
     v->arr = malloc(sizeof(size_t) * init_size);
     v->len = 0;
     v->cap = init_size;
 }
 
-// static bool grow_size_vec(struct size_vec* v, const size_t ptrsize, size_t* curcount)
-// {
-//
-//
-//     return false;
-// }
+
 //---------------- size_vec functions end------------------
+
+//----------------  f_string and queue_fs ops -----------------
+
+
+// allocated returned and returned->str
+struct f_string* new_fstring(const char* s){
+    struct f_string* fs = malloc(sizeof(struct f_string));
+    fs->len = strlen(s);
+    fs->str = strdup(s);
+    return fs;
+}
+
+// allocated returned and returned->str
+struct f_string* new_fstringn(const char* s, const size_t n){
+    struct f_string* fs = malloc(sizeof(struct f_string));
+    fs->len = n;
+    fs->str = malloc(sizeof(char) * (n + 1));
+    for (size_t i = 0; i < n; i++) {
+        fs->str[i] = s[i];
+    }
+    fs->str[n] = '\0';
+    return fs;
+}
+
+
+struct queue_fs* create_queue_fs(){
+    struct queue_fs* new_q = malloc(sizeof(struct queue_fs));
+    new_q->head = NULL;
+    new_q->tail = NULL;
+    new_q->len = 0;
+    return new_q;
+}
+
+void free_queue_fs(struct queue_fs* q){
+    while (q->len > 0) {
+        struct node_fs* n = pop_front_queue_fs(q);
+        free(n);
+    }
+}
+
+// fill allocate struct node_fs on heap
+void front_push_queue_fs(struct queue_fs* q, struct f_string* s){
+    struct node_fs* node = malloc(sizeof(struct node_fs));
+    node->data = s;
+    node->next = q->head;
+    if (q->len == 0) {
+        q->head = node;
+        q->tail = node;
+        q->len = 1;
+    } else {
+        q->len++;
+        q->head = node;
+    }
+}
+
+// fill allocate struct node_fs on heap
+void front_back_queue_fs(struct queue_fs* q, struct f_string* s){
+    struct node_fs* node = malloc(sizeof(struct node_fs));
+    node->data = s;
+    node->next = NULL;
+    if (q->len == 0) {
+        q->head = node;
+        q->tail = node;
+        q->len = 1;
+    } else {
+        q->tail->next = node;
+        q->tail = node;
+        q->len++;
+    }
+}
+
+// no deallocation done
+struct node_fs* pop_front_queue_fs(struct queue_fs* q){
+    if (q->len == 0) {
+        printf("pop_from_queue_fs on empty queue\n");
+        exit(-1);
+    }
+
+    struct node_fs* node = q->head;
+    if (q->len == 1) {
+        q->head = NULL;
+        q->tail = NULL;
+        q->len = 0;
+        return node;
+    }
+
+    q->head = node->next;
+    q->len--;
+    if (q->len == 1) {
+        q->tail = node;
+    }
+    return node;
+}
+
+void print_queue_fs(const struct queue_fs* q){
+    if (q->len == 0) {
+        printf("[]");
+        return;
+    }
+    if (q->len == 1) {
+        printf("[\"%s\"]", q->head->data->str);
+        return;
+    }
+    printf("[");
+    struct node_fs* current = q->head;
+    while (current != q->tail) {
+        printf("\"%s\", ", current->data->str);
+        current = q->head->next;
+    }
+    printf("\"%s\"", current->data->str);
+    printf("]");
+}
+
+//----------------  str_vec -----------------
+void init_str_vec(struct str_vec* v){
+    v->len = 0;
+    v->cap = 0;
+    v->arr = NULL;
+}
+
+void push_str_vec(struct str_vec* v, const char* s){
+    if (v->arr == NULL) {
+        v->arr = malloc(2 * sizeof(char*));
+        v->len = 1;
+        v->cap = 2;
+        v->arr[0] = strdup(s);
+        return;
+    }
+
+    if (v->len < v->cap) {
+        v->arr[v->len] = strdup(s);
+        v->len++;
+        return;
+    }
+
+    if (v->len == v->cap) {
+        size_t old_cap = v->cap;
+        size_t new_cap = old_cap * 2;
+        void* tmp = realloc(v->arr, new_cap * sizeof(char*));
+        if (tmp == NULL) {
+            printf("error, %s:%d:realloc failed (old %zu -> new %zu\n", __func__, __LINE__, old_cap, new_cap);
+            free(tmp);
+            v->arr = NULL;
+            exit(-1);
+        } else {
+            v->arr = tmp;
+        }
+        v->cap = new_cap;
+        v->arr[v->len] = strdup(s);
+        v->len++;
+    }
+}
+
+void free_str_vec(struct str_vec* v){
+    for (size_t i = 0; i < v->len; i++) {
+        free(v->arr[i]);
+    }
+    v->len = 0;
+    free(v->arr);
+    v->arr = NULL;
+    v->cap = 0;
+}
+
+void print_str_vec(struct str_vec v){
+    if (v.arr == NULL) {
+        printf("Array is NULL\n");
+        return;
+    }
+
+    printf("[");
+    for (size_t i = 0; i < v.len; i++) {
+        printf("\"%s\"", v.arr[i]);
+        if (i + 1 < v.len) {
+            printf(", ");
+        }
+    }
+    printf("]");
+}
+bool contains_str_vec(const struct str_vec* v, const char* s){
+    for (size_t i=0; i < v->len; i++) {
+        if (strcmp(v->arr[i], s) == 0) {
+            return true;
+        }
+    }
+    return false;
+}
