@@ -46,6 +46,17 @@ void day10(const char* filename){
  *  number of button sets: 13
  *  number of machines : 167
  */
+
+
+struct machine {
+    uint16_t b_start;
+    size_t b_len;
+    uint16_t* wirings;
+    size_t w_len;
+};
+
+
+
 char* day10_part1(struct problem_inputs p_i){
     println();
     size_t b_max = 0;
