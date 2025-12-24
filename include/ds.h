@@ -36,13 +36,13 @@ void init_size_vec_with_size(struct size_vec*, size_t init_size);
  * len doesn't include null character, str is heap allocated.
  * intention is for these to be editable
 */
-struct f_string {
+typedef struct fstring {
     char* str;
     size_t len;
-};
+} fstring;
 
 struct node_fs {
-    struct f_string* data;
+    fstring* data;
     struct node_fs* next;
 };
 
@@ -53,22 +53,44 @@ struct queue_fs {
 };
 
 
-/* -------------------------------  struct f_string stuff --------------------------------  */
-// unless stated, no struct f_string objects are allocated. that's left to user to keep track of.
+/* -------------------------------  fstring stuff --------------------------------  */
+// unless stated, no fstring objects are allocated. that's left to user to keep track of.
 
 
-/* returns newly allocated f_string of the given null-terminted string.
- * new f_string will contain a newly allocated duplicate of provided string
+/* returns newly allocated fstring of the given null-terminted string.
+ * new fstring will contain a newly allocated duplicate of provided string
  */
-struct f_string* new_fstring(const char*);
+fstring* new_fstring(const char*);
 
 /* same as new_fstring, but the provided string is not assumed to be null-terminated, and only the first
  * `n` characters are used
  */
-struct f_string* new_fstringn(const char*,size_t n);
+fstring* new_fstringn(const char*,size_t n);
+
+// fstring struct always owns its memory.
+void free_fstring(fstring* s);
+
+fstring* fstr_dup(const fstring* s);
 
 
+struct fstr_vec {
+    fstring** arr;
+    size_t len;
+    size_t cap;
+};
 
+void init_fstr_vec(struct fstr_vec*);
+void init_fstr_vec_n(struct fstr_vec*, size_t);
+
+// copies string being inserted
+void push_fstr_vec(struct fstr_vec* v, const fstring* s);
+void push_fstr_vec_c(struct fstr_vec* v, const char* cstr);
+void push_fstr_vec_cn(struct fstr_vec* v, const char* cstr, size_t len);
+void free_fstr_vec(struct fstr_vec*);
+void print_fstr_vec(const struct fstr_vec*);
+bool contains_fstr_vec(const struct fstr_vec*, const fstring*);
+
+//----------------------
 // gives clean, newly heap allocated
 struct queue_fs* create_queue_fs();
 
@@ -77,9 +99,9 @@ void free_queue_fs(struct queue_fs*);
 
 
 // fill allocate struct node_fs on heap
-void front_push_queue_fs(struct queue_fs*, struct f_string*);
+void front_push_queue_fs(struct queue_fs*, fstring*);
 // fill allocate struct node_fs on heap
-void front_back_queue_fs(struct queue_fs*, struct f_string*);
+void front_back_queue_fs(struct queue_fs*, fstring*);
 
 // no deallocation done
 struct node_fs*  pop_front_queue_fs(struct queue_fs *);
@@ -98,7 +120,7 @@ void init_str_vec(struct str_vec*);
 // copies string being inserted
 void push_str_vec(struct str_vec* v, const char* s);
 void free_str_vec(struct str_vec*);
-void print_str_vec(struct str_vec);
+void print_str_vec(const struct str_vec*);
 bool contains_str_vec(const struct str_vec*, const char*);
 
 

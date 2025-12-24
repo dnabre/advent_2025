@@ -78,8 +78,8 @@ int main() {
 #else
 
     clock_t start = clock();
-    // day10(day_10_test_file);
-    day10(day_10_input_file);
+    day10(day_10_test_file);
+    // day10(day_10_input_file);
     clock_t end = clock();
     double elapsed_ms = (double)(end - start) * 1000.0 / CLOCKS_PER_SEC;
     printf("\t\t\t time: %.3f ms", elapsed_ms);
