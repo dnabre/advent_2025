@@ -32,6 +32,9 @@ void init_size_vec(struct size_vec*);
 void init_size_vec_with_size(struct size_vec*, size_t init_size);
 
 
+
+
+
 /* fixed length string. null-terminated,
  * len doesn't include null character, str is heap allocated.
  * intention is for these to be editable
@@ -126,6 +129,27 @@ bool contains_str_vec(const struct str_vec*, const char*);
 
 
 // static bool grow_size_vec(struct size_vec* v, const size_t ptrsize, size_t* curcount);
+
+
+//-------------------------
+
+
+
+
+struct void_vec {
+    void** arr;
+
+    size_t len;
+    size_t cap;
+};
+void push_void_vec(struct void_vec* v, void* d);
+void init_void_vec(struct void_vec*);
+void init_void_vec_with_size(struct void_vec*, size_t init_size);
+void free_void_vec(struct void_vec*);
+
+
+
+
 
 
 #endif //ADVENT_2025_DS_H

@@ -181,6 +181,15 @@ void init_size_vec_with_size(struct size_vec* v, const size_t init_size){
     v->cap = init_size;
 }
 
+//newly allocated array is return
+size_t* size_vec_to_array(const struct size_vec* v){
+    size_t* r = malloc(sizeof(size_t) * v->len);
+    for (size_t i=0; i < v->len; i++) {
+        r[i] = v->arr[i];
+    }
+    return r;
+}
+
 
 //---------------- size_vec functions end------------------
 
@@ -523,4 +532,54 @@ bool contains_str_vec(const struct str_vec* v, const char* s){
         }
     }
     return false;
+}
+
+
+void push_void_vec(struct void_vec* v, void* d){
+    if (v->arr == NULL) {
+        v->arr = malloc(2 * sizeof(void*));
+        v->len = 1;
+        v->cap = 2;
+        v->arr[0] = d;
+        return;
+    }
+
+    if (v->len < v->cap) {
+        v->arr[v->len] = d;
+        v->len++;
+        return;
+    }
+
+    if (v->len == v->cap) {
+        const size_t old_cap = v->cap;
+        const size_t new_cap = old_cap * 2;
+        void* tmp = realloc(v->arr, new_cap * sizeof(void*));
+        if (tmp == NULL) {
+            printf("error, %s:%d:realloc failed (old %zu -> new %zu\n", __func__, __LINE__, old_cap, new_cap);
+            free(tmp);
+            v->arr = NULL;
+            exit(-1);
+        } else {
+            v->arr = tmp;
+        }
+        v->cap = new_cap;
+        v->arr[v->len] = d;
+        v->len++;
+    }
+
+}
+void init_void_vec(struct void_vec* v){
+    v->arr = NULL;
+    v->len=0;
+    v->cap=0;
+}
+void init_void_vec_with_size(struct void_vec* v, size_t init_size){
+    v->arr = malloc(sizeof(void*) * init_size);
+    v->len=0;
+    v->cap = init_size;
+}
+void free_void_vec(struct void_vec* v ){
+    free(v->arr);
+    v->len =0;
+    v->cap =0;
 }
