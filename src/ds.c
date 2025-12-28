@@ -583,3 +583,86 @@ void free_void_vec(struct void_vec* v ){
     v->len =0;
     v->cap =0;
 }
+
+//----------------------------------------------------------------------------
+
+
+void push_stst_vec(struct stst_vec* v, const struct size_vec* d){
+    if (v->arr == NULL) {
+        v->arr = malloc(2 * sizeof(struct size_vec));
+        v->len = 1;
+        v->cap = 2;
+        init_size_vec_with_size(&v->arr[0], d->len);
+        memcpy(v->arr[0].arr, d->arr, sizeof(struct size_vec) * d->len);
+        v->arr[0].len = d->len;
+        return;
+    }
+
+    if (v->len < v->cap) {
+        init_size_vec_with_size(&v->arr[v->len ], d->len);
+        memcpy(v->arr[v->len ].arr, d->arr, sizeof(struct size_vec) * d->len);
+        v->arr[v->len ].len = d->len;
+        v->len++;
+        return;
+    }
+
+    if (v->len == v->cap) {
+        const size_t old_cap = v->cap;
+        const size_t new_cap = old_cap * 2;
+        void* tmp = realloc(v->arr, new_cap * sizeof(struct size_vec));
+        if (tmp == NULL) {
+            printf("error, %s:%d:realloc failed (old %zu -> new %zu\n", __func__, __LINE__, old_cap, new_cap);
+            free(tmp);
+            v->arr = NULL;
+            exit(-1);
+        } else {
+            v->arr = tmp;
+        }
+        v->cap = new_cap;
+        init_size_vec_with_size(&v->arr[v->len ], d->len);
+        memcpy(v->arr[v->len ].arr, d->arr, sizeof(struct size_vec) * d->len);
+        v->arr[v->len ].len = d->len;
+        v->len++;
+    }
+}
+
+
+
+
+
+void init_stst_vec(struct stst_vec* v){
+    v->arr = NULL;
+    v->len=0;
+    v->cap=0;
+}
+void init_stst_vec_with_size(struct stst_vec* v, size_t init_size){
+    v->arr = malloc(init_size * sizeof(struct size_vec));
+    v->len =0;
+    v->cap = init_size;
+}
+
+void free_stst_vec(struct stst_vec* v){
+    for (size_t i=0; i < v->len; i++) {
+        free_size_vec(&v->arr[i]);
+    }
+    free(v->arr);
+    v->arr = NULL;
+    v->len =0;
+    v->cap =0;
+}
+
+// return index if found, SIZE_MAX if not found
+size_t find_stst_vec(const struct stst_vec* v, const struct size_vec *d){
+    for (size_t i=0; i < v->len;i++) {
+        if (v->arr[i].len != d->len) {
+            continue;
+        }
+        for (size_t j=0; j < d->len; j++) {
+            if (v->arr[i].arr[j] != d->arr[j]) {
+                break;
+            }
+        }
+        return i;
+    }
+    return SIZE_MAX;
+}

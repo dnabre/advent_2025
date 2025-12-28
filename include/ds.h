@@ -149,6 +149,21 @@ void free_void_vec(struct void_vec*);
 
 
 
+// dynamic array of struct size_vec. size_vec structs are copy'd into the stst_vec
+struct stst_vec {
+    struct size_vec* arr;
+    size_t len;
+    size_t cap;
+};
+void push_stst_vec(struct stst_vec* v, const struct size_vec* d);
+void init_stst_vec(struct stst_vec*);
+void init_stst_vec_with_size(struct stst_vec*, size_t init_size);
+// return index if found, SIZE_MAX if not found
+size_t find_stst_vec(const struct stst_vec* v, const struct size_vec *d);
+void free_stst_vec(struct stst_vec*);
+
+
+
 
 
 

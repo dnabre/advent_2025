@@ -47,8 +47,9 @@ char* day9_part1(struct problem_inputs, const struct point2*);
 char* day9_part2(struct problem_inputs, const struct point2*);
 
 void day10(const char* filename);
-char* day10_part1(struct problem_inputs);
-char* day10_part2(struct problem_inputs);
+struct machine;
+char* day10_part1(const struct machine* , size_t );
+char* day10_part2(const struct machine* , size_t );
 
 void day11(const char* filename);
 char* day11_part1(struct problem_inputs);
