@@ -30,6 +30,7 @@ void print_size_vec(struct size_vec);
 void print_size_vec_rev(struct size_vec);
 void init_size_vec(struct size_vec*);
 void init_size_vec_with_size(struct size_vec*, size_t init_size);
+struct size_vec* size_vec_dup(struct size_vec*);
 
 
 
@@ -44,14 +45,14 @@ typedef struct fstring {
     size_t len;
 } fstring;
 
-struct node_fs {
-    fstring* data;
-    struct node_fs* next;
+struct node_sv {
+    struct size_vec* data;
+    struct node_sv* next;
 };
 
-struct queue_fs {
-    struct node_fs* head;
-    struct node_fs* tail;
+struct queue_sv {
+    struct node_sv* head;
+    struct node_sv* tail;
     size_t len;
 };
 
@@ -95,21 +96,21 @@ bool contains_fstr_vec(const struct fstr_vec*, const fstring*);
 
 //----------------------
 // gives clean, newly heap allocated
-struct queue_fs* create_queue_fs();
+struct queue_sv* create_queue_sv();
 
 // frees the struct queue_fs and any struct node_fs  that in the queue
-void free_queue_fs(struct queue_fs*);
+void free_queue_sv(struct queue_sv*);
 
 
 // fill allocate struct node_fs on heap
-void front_push_queue_fs(struct queue_fs*, fstring*);
+void front_push_queue_sv(struct queue_sv*,   struct size_vec*);
 // fill allocate struct node_fs on heap
-void front_back_queue_fs(struct queue_fs*, fstring*);
+void front_back_queue_sv(struct queue_sv*, struct size_vec*);
 
 // no deallocation done
-struct node_fs*  pop_front_queue_fs(struct queue_fs *);
+struct node_sv*  pop_front_queue_sv(struct queue_sv *);
 
-void print_queue_fs(const struct queue_fs*);
+void print_queue_sv(const struct queue_sv*);
 
 
 struct str_vec {

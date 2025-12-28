@@ -181,6 +181,15 @@ void init_size_vec_with_size(struct size_vec* v, const size_t init_size){
     v->cap = init_size;
 }
 
+struct size_vec* size_vec_dup(struct size_vec* v){
+    struct size_vec* n_vec = malloc(sizeof(struct size_vec));
+    init_size_vec_with_size(n_vec, v->len);
+    n_vec->len = v->len;
+    memcpy(n_vec->arr, v->arr, sizeof(size_t) * v->len);
+    return n_vec;
+}
+
+
 //newly allocated array is return
 size_t* size_vec_to_array(const struct size_vec* v){
     size_t* r = malloc(sizeof(size_t) * v->len);
@@ -242,24 +251,24 @@ int fstrcmp(const fstring* s1, const fstring* s2){
 
 
 
-struct queue_fs* create_queue_fs(){
-    struct queue_fs* new_q = malloc(sizeof(struct queue_fs));
+struct queue_sv* create_queue_sv(){
+    struct queue_sv* new_q = malloc(sizeof(struct queue_sv));
     new_q->head = NULL;
     new_q->tail = NULL;
     new_q->len = 0;
     return new_q;
 }
 
-void free_queue_fs(struct queue_fs* q){
+void free_queue_sv(struct queue_sv* q){
     while (q->len > 0) {
-        struct node_fs* n = pop_front_queue_fs(q);
+        struct node_sv* n = pop_front_queue_sv(q);
         free(n);
     }
 }
 
 // fill allocate struct node_fs on heap
-void front_push_queue_fs(struct queue_fs* q, struct fstring* s){
-    struct node_fs* node = malloc(sizeof(struct node_fs));
+void front_push_queue_sv(struct queue_sv* q, struct size_vec* s){
+    struct node_sv* node = malloc(sizeof(struct node_sv));
     node->data = s;
     node->next = q->head;
     if (q->len == 0) {
@@ -273,8 +282,8 @@ void front_push_queue_fs(struct queue_fs* q, struct fstring* s){
 }
 
 // fill allocate struct node_fs on heap
-void front_back_queue_fs(struct queue_fs* q, struct fstring* s){
-    struct node_fs* node = malloc(sizeof(struct node_fs));
+void front_back_queue_sv(struct queue_sv* q, struct size_vec* s){
+    struct node_sv* node = malloc(sizeof(struct node_sv));
     node->data = s;
     node->next = NULL;
     if (q->len == 0) {
@@ -289,13 +298,13 @@ void front_back_queue_fs(struct queue_fs* q, struct fstring* s){
 }
 
 // no deallocation done
-struct node_fs* pop_front_queue_fs(struct queue_fs* q){
+struct node_sv* pop_front_queue_sv(struct queue_sv* q){
     if (q->len == 0) {
         printf("pop_from_queue_fs on empty queue\n");
         exit(-1);
     }
 
-    struct node_fs* node = q->head;
+    struct node_sv* node = q->head;
     if (q->len == 1) {
         q->head = NULL;
         q->tail = NULL;
@@ -311,22 +320,24 @@ struct node_fs* pop_front_queue_fs(struct queue_fs* q){
     return node;
 }
 
-void print_queue_fs(const struct queue_fs* q){
+void print_queue_sv(const struct queue_sv* q){
     if (q->len == 0) {
         printf("[]");
         return;
     }
     if (q->len == 1) {
-        printf("[\"%s\"]", q->head->data->str);
+        print_size_vec(*q->head->data);
+        // printf("[\"%s\"]", q->head->data->str);
         return;
     }
     printf("[");
-    const struct node_fs* current = q->head;
+    const struct node_sv* current = q->head;
     while (current != q->tail) {
-        printf("\"%s\", ", current->data->str);
+        print_size_vec(*current->data);
+
         current = q->head->next;
     }
-    printf("\"%s\"", current->data->str);
+    print_size_vec(*current->data);
     printf("]");
 }
 //----------------  fstr_vec -----------------
