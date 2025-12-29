@@ -26,4 +26,7 @@ static inline int  size_t_compare_r(const void *p1, const void *p2)
 
     return ((left > right) - (left < right));
 }
+
+// return fstr_vec and the fstring within are newly allocated
+struct fstr_vec* fsplit_on_char(const char* str, const size_t len, const char ch);
 #endif //ADVENT_2025_UTIL_H

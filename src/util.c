@@ -6,6 +6,10 @@
 #include "main.h"
 #include "util.h"
 
+#include <stdlib.h>
+
+#include "ds.h"
+
 int cmp_sizet(const void* p, const void* q)
 {
     const size_t* a = p;
@@ -53,4 +57,48 @@ size_t max_st(const size_t a, const size_t b){
         return a;
     }
     return b;
+}
+
+struct fstr_vec* fsplit_on_char(const char* str, const size_t len, const char ch){
+    size_t count = 0;
+    // count number of pieces
+    size_t i = 0;
+    while (i < len) {
+        while (i < len && str[i] == ch) {
+            i++;
+        }
+        if (i == len) {
+            break;
+        }
+        count++;
+        while (i < len && str[i] != ch) {
+            i++;
+        }
+    }
+    // allocte and init struct fstr_vec
+    struct fstr_vec* out = malloc(sizeof(struct fstr_vec));
+    init_fstr_vec_n(out, count);
+    if (count == 0) {
+        return out;
+    }
+    // find pieces and insert into out
+    size_t current = 0;
+    size_t k = 0;
+    while (current < len && k < count) {
+        while (current < len && str[current] == ch) {
+            current++;
+        }
+        if (current == len) {
+            break;
+        }
+        // at piece start
+        const size_t start = current;
+        while (current < len && str[current] != ch) {
+            current++;
+        }
+        const size_t piece_len = current - start;
+        push_fstr_vec_cn(out, &str[start], piece_len);
+        k++;
+    }
+    return out;
 }
