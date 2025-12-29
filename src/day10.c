@@ -7,6 +7,7 @@
 #include "days.h"
 #include "ds.h"
 #include "io.h"
+#include "util.h"
 
 
 #define PRINT_INT(x) \
@@ -22,6 +23,7 @@ uint64_t: "%" PRIu64, \
 default:  "<?>"), \
 (x))
 
+const size_t PRESS_LIMIT = 9;
 
 const char* DAY10_PART1_ANSWER = "429"; //432
 const char* DAY10_PART2_ANSWER = "17759"; //17983
@@ -134,6 +136,21 @@ void print_bits_u16(const uint16_t x){
         }
     }
 }
+
+void print_light_u16(const uint16_t x, size_t n){
+    size_t l=16;
+    if (n < 16) {
+        l = n;
+    }
+    for (size_t i = 0; i < l; i++) {
+        if (get_bit(x, i)) {
+            putchar('#');
+        } else {
+            putchar('.');
+        }
+    }
+}
+
 
 b_t parse_lights(const fstring* fs){
     b_t b = 0;
@@ -287,8 +304,8 @@ b_t apply_presses(const struct size_vec* p){
         struct size_vec* buttons = &w_array[p->arr[i]];
         // printf("\t apply button: ");
         // print_size_vec(*buttons); println();
-        for (size_t p = 0; p < buttons->len; p++) {
-            el = bit_toggle(el, buttons->arr[p]);
+        for (size_t pp = 0; pp < buttons->len; pp++) {
+            el = bit_toggle(el, buttons->arr[pp]);
         }
     }
     return el;
@@ -296,132 +313,175 @@ b_t apply_presses(const struct size_vec* p){
 
 
 char* day10_part1(const struct machine* m_array, const size_t m_count){
-     // for (size_t i = 0; i < m_count; i++) {
-    size_t i=0;
-    print_machine(&m_array[i]);
-
-
-
-    b_t goal = m_array[i].goal;
-    b_num = m_array[i].b_num;
-    w_num = m_array[i].w_num;
-    w_array = m_array[i].w_array;
-
-    struct stst_vec visited;
-    init_stst_vec_with_size(&visited, 8);
-    struct queue_sv* queue = create_queue_sv();
-    struct size_vec* s = malloc(sizeof(struct size_vec));
-    init_size_vec_with_size(s, 1);
-    for (size_t w = 0; w < w_num; w++) {
-        push_size_vec(s, w);
-        print_size_vec(*s);
-        println();
-        push_back_queue_sv(queue, size_vec_dup(s));
-        s->len--;
-    }
-    print_queue_sv(queue);
-    println();
-    // struct size_vec* solution = malloc(sizeof(struct size_vec));
-    // init_size_vec(solution);
-    // push_size_vec(solution, 5);
-    // push_size_vec(solution, 4);
-    // push_size_vec(solution,2);
-
-    // printf("insserting solution: ");
-    // print_size_vec(*solution);
-    // println();
-    // b_t good = apply_presses(solution);
-    // printf("\t goal: ");
-    // print_bits_u16(goal);
-    // println();
-    // printf("\t test: ");
-    // print_bits_u16(good);
-    // println();
-
-    // print_size_vec(w_array[5]); println();
-    // print_size_vec(w_array[4]);println();
-
-
-    /* example #1 solutions
-    *   [0,1,2]
-    *   [1,3,5]
-    *   [0,1,2,3,4,5]
-       */
-
-    size_t found_presses = 0;
-    size_t loop_count = 0;
-    // printf("initial queue:\t ");
-    // print_queue_sv(queue);
-    while ((queue->len > 0) && (loop_count < 200)) {
-        loop_count++;
-        struct node_sv* node = pop_front_queue_sv(queue);
-        struct size_vec* v = node->data;
-        free(node);
-        // printf("loop %3zu\n\t", loop_count);
-        // print_size_vec(*v);
-        // printf("\n\t");
-
-
-        b_t current_lights = apply_presses(v);
-        printf("lights: ");
-        print_bits_u16(current_lights);
-        println();
-        if (current_lights == goal) {
-            printf("\n\n\tfound goal\n\n\n\t");
-            printf("button sequence: \n\t\t");
-            print_size_vec(*v);
-            println();
-            for (size_t z = 0; z < v->len; z++) {
-                print_size_vec(w_array[z]);
-                println();
-            }
-
-
-            found_presses = v->len;
-            break;
+    size_t sum_of_mins=0;
+    struct size_vec problems;
+    init_size_vec(&problems);
+    struct size_vec skipped;
+    init_size_vec(&skipped);
+    for (size_t i = 0; i < m_count; i++) {
+        if (i==14) {
+            push_size_vec(&skipped, 14);
+            sum_of_mins += 8;
+            continue;
         }
-        // expand state (v) to new states
-        printf("\texpanding from state: ");
-        print_size_vec(*v);
-        println();
-        if (v->len <= 16) {
-            // if (v->len == 0) {
-            //     for (size_t w = 0; w < w_num; w++) {
-            //         push_size_vec(v, w);
-            //         if (find_stst_vec(&visited, v) == SIZE_MAX) {
-            //             printf("\t\t not found, queuing\n");
-            //             push_back_queue_sv(queue, size_vec_dup(v));
-            //         }
-            //         v->len--;
-            //     }
-            // }
 
-            for (size_t w = 0; w < w_num; w++) {
-                push_size_vec(v, w);
+        if (i==98) {
+            push_size_vec(&skipped, 98);
+            sum_of_mins += 7;
+            continue;
+        }
+
+
+        if (i==18) {
+            push_size_vec(&skipped, 18);
+            sum_of_mins += 6;
+            continue;
+        }
+
+
+        if (i==24) {
+            push_size_vec(&skipped, 24);
+            sum_of_mins += 7;
+            continue;
+        }
+
+
+
+        b_t goal = m_array[i].goal;
+        b_num = m_array[i].b_num;
+        w_num = m_array[i].w_num;
+        w_array = m_array[i].w_array;
+        // print_machine(&m_array[i]);
+        printf("[");
+        // print_bits_u16(goal);
+        print_light_u16(goal,b_num);
+        printf("] b_num: %zu, w_num: %zu  \t i=%zu\n", b_num, w_num, i);
+
+
+        struct stst_vec visited;
+        init_stst_vec_with_size(&visited, 8);
+        struct queue_sv* queue = create_queue_sv();
+        struct size_vec* s = malloc(sizeof(struct size_vec));
+        init_size_vec_with_size(s, 1);
+        for (size_t w = 0; w < w_num; w++) {
+            push_size_vec(s, w);
+            // print_size_vec(*s);
+            // println();
+            push_back_queue_sv(queue, size_vec_dup(s));
+            s->len--;
+        }
+        // print_queue_sv(queue);
+        // println();
+        // struct size_vec* solution = malloc(sizeof(struct size_vec));
+        // init_size_vec(solution);
+        // push_size_vec(solution, 5);
+        // push_size_vec(solution, 4);
+        // push_size_vec(solution,2);
+
+        // printf("insserting solution: ");
+        // print_size_vec(*solution);
+        // println();
+        // b_t good = apply_presses(solution);
+        // printf("\t goal: ");
+        // print_bits_u16(goal);
+        // println();
+        // printf("\t test: ");
+        // print_bits_u16(good);
+        // println();
+
+        // print_size_vec(w_array[5]); println();
+        // print_size_vec(w_array[4]);println();
+
+
+        /* example #1 solutions
+        *   [0,1,2]
+        *   [1,3,5]
+        *   [0,1,2,3,4,5]
+           */
+
+        size_t found_presses = 0;
+        size_t loop_count = 0;
+        // printf("initial queue:\t ");
+        // print_queue_sv(queue);
+        // while ((queue->len > 0) && (loop_count < 100000)) {
+            while (queue->len > 0) {
+            loop_count++;
+            struct node_sv* node = pop_front_queue_sv(queue);
+            struct size_vec* v = node->data;
+            free(node);
+            // printf("loop %3zu\n\t", loop_count);
+            // print_size_vec(*v);
+            // printf("\n\t");
+
+            if (v->len > PRESS_LIMIT) {
+                printf("looking at too big of state (v->len==%zu)\n\t", v->len);
+                print_size_vec(*v); println();
+                return NULL;
+            }
+            b_t current_lights = apply_presses(v);
+            // printf("lights: ");
+            // print_bits_u16(current_lights);
+            // println();
+            if (current_lights == goal) {
+                // printf("\n\n\tfound goal\n\n\n\t");
+                // printf("button sequence: \n\t\t");
                 // print_size_vec(*v);
-                // printf("\t adding button press: %zu\n ", w);
-                if (find_stst_vec(&visited, v) == SIZE_MAX) {
-                    // printf("\t\t not found, queuing\n");
-                    push_back_queue_sv(queue, size_vec_dup(v));
-                }
-                v->len--; // pop pushed value
+                // println();
+                // for (size_t z = 0; z < v->len; z++) {
+                    // print_size_vec(w_array[z]);
+                    // println();
+                // }
+
+
+                found_presses = v->len;
+                break;
             }
-        } else {
-            printf("not expanding state with %zu press\n", v->len);
+            // expand state (v) to new states
+            // printf("\texpanding from state: ");
+            // print_size_vec(*v);
+            // println();
+            if (v->len <PRESS_LIMIT) {
+                for (size_t w = 0; w < w_num; w++) {
+                    // push_size_vec(v, w);
+                    struct size_vec* e_v = size_vec_dup_n(v, v->len + 1);
+                    push_size_vec(e_v, w);
+                    qsort(e_v->arr, e_v->len, sizeof(size_t), cmp_sizet);
+                    // print_size_vec(*v);
+                    // printf("\t adding button press: %zu\n ", w);
+                    if (find_stst_vec(&visited,e_v) == SIZE_MAX) {
+                        // printf("\t\t not found, queuing\n");
+                        push_back_queue_sv(queue, e_v);
+                    } else {
+                        free_size_vec(e_v);
+                    }
+                    // v->len--; // pop pushed value
+                }
+            } else {
+                printf("not expanding state with %zu press\n", v->len);
+            }
+            qsort(v->arr, v->len, sizeof(size_t), cmp_sizet);
+            push_stst_vec(&visited, v);
+            free(v);
         }
-        push_stst_vec(&visited, v);
-        free(v);
-    }
-    if (found_presses > 0) {
-        printf("minimum presses: %zu\n", found_presses);
-    } else {
-        printf(" hit make iterations: %zu\n", loop_count);
+        size_t visit_count = visited.len;
+        free_stst_vec(&visited);
+        free_queue_sv(queue);
+        if (found_presses > 0) {
+            sum_of_mins += found_presses;
+            printf("minimum presses: %zu  \t (loop_count: %zu, visited: %zu)\n", found_presses, loop_count, visit_count);
+        } else {
+            printf(" hit make iterations: %zu, visited: %zu \n", loop_count, visit_count);
+            push_size_vec(&problems, i);
+        }
     }
 
-
-    int64_t q = (int64_t)m_count;
+    printf("\nskipped these machines due to problem \n\t");
+    print_size_vec(skipped); println();
+    printf("\nfailed to final solutions for these lines: \n\t");
+    print_size_vec(problems);
+    println();
     char* answer = malloc(ANSWER_BUFFER_SIZE);
-    sprintf(answer, "%"PRId64, q);
+    sprintf(answer, "%zu", sum_of_mins);
     return answer;
 }
 

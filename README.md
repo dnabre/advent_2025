@@ -77,8 +77,8 @@ Using C17+, though will likely be C99 compatible.
 
   <tr>
     <td><a href="https://adventofcode.com/2025/day/10">Day 10: Factory</a></td>
-    <td></td>
-    <td><a href="https://github.com/dnabre/advent_2025/blob/master/src/day10.c"> </a></td>
+    <td>BFS/Linear Algebra</td>
+    <td><a href="https://github.com/dnabre/advent_2025/blob/master/src/day10.c">*</a></td>
     <td><a href="https://github.com/dnabre/advent_2025/blob/master/src/day10.c"> </a></td>
   </tr>
 

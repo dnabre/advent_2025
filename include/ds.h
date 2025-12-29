@@ -31,7 +31,7 @@ void print_size_vec_rev(struct size_vec);
 void init_size_vec(struct size_vec*);
 void init_size_vec_with_size(struct size_vec*, size_t init_size);
 struct size_vec* size_vec_dup(const struct size_vec*);
-
+struct size_vec* size_vec_dup_n(const struct size_vec* v, size_t n);
 
 
 

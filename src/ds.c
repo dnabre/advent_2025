@@ -189,7 +189,16 @@ struct size_vec* size_vec_dup(const struct size_vec* v){
     return n_vec;
 }
 
-
+struct size_vec* size_vec_dup_n(const struct size_vec* v, size_t n){
+    struct size_vec* n_vec = malloc(sizeof(struct size_vec));
+    if (v->len > n) {
+        n = v->len;
+    }
+    init_size_vec_with_size(n_vec, n);
+    n_vec->len = v->len;
+    memcpy(n_vec->arr, v->arr, sizeof(size_t) * v->len);
+    return n_vec;
+}
 //newly allocated array is return
 size_t* size_vec_to_array(const struct size_vec* v){
     size_t* r = malloc(sizeof(size_t) * v->len);
