@@ -181,7 +181,7 @@ void init_size_vec_with_size(struct size_vec* v, const size_t init_size){
     v->cap = init_size;
 }
 
-struct size_vec* size_vec_dup(struct size_vec* v){
+struct size_vec* size_vec_dup(const struct size_vec* v){
     struct size_vec* n_vec = malloc(sizeof(struct size_vec));
     init_size_vec_with_size(n_vec, v->len);
     n_vec->len = v->len;
@@ -267,7 +267,7 @@ void free_queue_sv(struct queue_sv* q){
 }
 
 // fill allocate struct node_fs on heap
-void front_push_queue_sv(struct queue_sv* q, struct size_vec* s){
+void push_front_queue_sv(struct queue_sv* q, struct size_vec* s){
     struct node_sv* node = malloc(sizeof(struct node_sv));
     node->data = s;
     node->next = q->head;
@@ -282,7 +282,7 @@ void front_push_queue_sv(struct queue_sv* q, struct size_vec* s){
 }
 
 // fill allocate struct node_fs on heap
-void front_back_queue_sv(struct queue_sv* q, struct size_vec* s){
+void push_back_queue_sv(struct queue_sv* q, struct size_vec* s){
     struct node_sv* node = malloc(sizeof(struct node_sv));
     node->data = s;
     node->next = NULL;
@@ -314,9 +314,6 @@ struct node_sv* pop_front_queue_sv(struct queue_sv* q){
 
     q->head = node->next;
     q->len--;
-    if (q->len == 1) {
-        q->tail = node;
-    }
     return node;
 }
 
@@ -335,7 +332,7 @@ void print_queue_sv(const struct queue_sv* q){
     while (current != q->tail) {
         print_size_vec(*current->data);
 
-        current = q->head->next;
+        current = current->next;
     }
     print_size_vec(*current->data);
     printf("]");
@@ -603,16 +600,18 @@ void push_stst_vec(struct stst_vec* v, const struct size_vec* d){
         v->arr = malloc(2 * sizeof(struct size_vec));
         v->len = 1;
         v->cap = 2;
-        init_size_vec_with_size(&v->arr[0], d->len);
-        memcpy(v->arr[0].arr, d->arr, sizeof(struct size_vec) * d->len);
-        v->arr[0].len = d->len;
+        // init_size_vec_with_size(&v->arr[0], d->len);
+        // memcpy(v->arr[0].arr, d->arr, sizeof(struct size_vec) * d->len);
+        // v->arr[0].len = d->len;
+        v->arr[0] = *d;
         return;
     }
 
     if (v->len < v->cap) {
-        init_size_vec_with_size(&v->arr[v->len ], d->len);
-        memcpy(v->arr[v->len ].arr, d->arr, sizeof(struct size_vec) * d->len);
-        v->arr[v->len ].len = d->len;
+        // init_size_vec_with_size(&v->arr[v->len ], d->len);
+        // memcpy(v->arr[v->len ].arr, d->arr, sizeof(struct size_vec) * d->len);
+        // v->arr[v->len ].len = d->len;
+        v->arr[v->len] = *d;
         v->len++;
         return;
     }
@@ -630,9 +629,10 @@ void push_stst_vec(struct stst_vec* v, const struct size_vec* d){
             v->arr = tmp;
         }
         v->cap = new_cap;
-        init_size_vec_with_size(&v->arr[v->len ], d->len);
-        memcpy(v->arr[v->len ].arr, d->arr, sizeof(struct size_vec) * d->len);
-        v->arr[v->len ].len = d->len;
+        // init_size_vec_with_size(&v->arr[v->len ], d->len);
+        // memcpy(v->arr[v->len ].arr, d->arr, sizeof(struct size_vec) * d->len);
+        // v->arr[v->len ].len = d->len;
+        v->arr[v->len] = *d;
         v->len++;
     }
 }

@@ -30,7 +30,7 @@ void print_size_vec(struct size_vec);
 void print_size_vec_rev(struct size_vec);
 void init_size_vec(struct size_vec*);
 void init_size_vec_with_size(struct size_vec*, size_t init_size);
-struct size_vec* size_vec_dup(struct size_vec*);
+struct size_vec* size_vec_dup(const struct size_vec*);
 
 
 
@@ -102,10 +102,10 @@ struct queue_sv* create_queue_sv();
 void free_queue_sv(struct queue_sv*);
 
 
-// fill allocate struct node_fs on heap
-void front_push_queue_sv(struct queue_sv*,   struct size_vec*);
-// fill allocate struct node_fs on heap
-void front_back_queue_sv(struct queue_sv*, struct size_vec*);
+// will allocate struct node_fs on heap
+void push_front_queue_sv(struct queue_sv*,   struct size_vec*);
+// will allocate struct node_fs on heap
+void push_back_queue_sv(struct queue_sv*, struct size_vec*);
 
 // no deallocation done
 struct node_sv*  pop_front_queue_sv(struct queue_sv *);

@@ -48,12 +48,14 @@ struct machine {
     b_t goal;
     size_t b_num;
     size_t w_num;
-    size_t** w_array;
+    struct size_vec* w_array;
     size_t* j_array;
 };
 
 struct machine* c_machine = NULL;
-
+size_t b_num;
+size_t w_num;
+struct size_vec* w_array;
 // allocate struct fstr_vec
 struct fstr_vec* fsplit_on_char(const char* str, const size_t len, const char ch){
     size_t count = 0;
@@ -101,9 +103,6 @@ struct fstr_vec* fsplit_on_char(const char* str, const size_t len, const char ch
 
 const char LIGHT_ON = '#';
 const char LIGHT_OFF = '.';
-
-
-
 
 
 inline b_t bit_toggle(const b_t b, const size_t i){
@@ -170,8 +169,8 @@ void print_machine(const struct machine* m){
     printf("\t w_num : %zu\n", m->w_num);
     printf("\t wirings:\n");
     for (size_t i = 0; i < m->w_num; i++) {
-        printf("\t\t");
-        print_size_t_array(m->w_array[i], m->b_num);
+        printf("\t\tw_array[%3zu] = ", i);
+        print_size_vec(m->w_array[i]);
         println();
     }
     printf("\t jolts : ");
@@ -188,35 +187,38 @@ void day_parse(struct machine* m_array, const struct problem_inputs* p_i){
         m_array[i].goal = 0;
 
         struct fstr_vec* pieces = fsplit_on_char(ln, len, ' ');
-        size_t b_num = strlen(pieces->arr[0]->str) - 2;
+        size_t button_num = strlen(pieces->arr[0]->str) - 2;
         b_t bstart = parse_lights(pieces->arr[0]);
-        size_t w_num = pieces->len - 2;
+        size_t wiring_number = pieces->len - 2;
 
         m_array[i].goal = bstart;
-        m_array[i].b_num = b_num;
-        m_array[i].w_num = w_num;
+        m_array[i].b_num = button_num;
+        m_array[i].w_num = wiring_number;
 
-        size_t** wiring_array = malloc(sizeof(size_t*) * w_num);
-        for (size_t w_idx = 0; w_idx < w_num; w_idx++) {
+        struct size_vec* wiring_array = malloc(sizeof(struct size_vec) * wiring_number);
+        for (size_t w_idx = 0; w_idx < wiring_number; w_idx++) {
             fstring* piece = fstr_dup(pieces->arr[w_idx + 1]);
             // printf("w_idx: %3zu, \t |%s| (len=%zu)\n", w_idx, piece->str, piece->len);
             struct fstr_vec* buttons = fsplit_on_char(piece->str + 1, piece->len - 2, ',');
             // print_fstr_vec(buttons);
-            size_t* w_v = malloc(sizeof(size_t) * b_num);
-            wiring_array[w_idx] = w_v;
+            init_size_vec(&wiring_array[w_idx]);
+
+            // size_t* w_v = malloc(sizeof(size_t) * button_num);
+            // wiring_array[w_idx] = w_v;
             for (size_t w = 0; w < buttons->len; w++) {
                 size_t r = strtoll(buttons->arr[w]->str, NULL, 10);
-                w_v[w] = r;
+                push_size_vec(&wiring_array[w_idx], r);
+                // w_v[w] = r;
             }
-            for (size_t w = buttons->len; w < b_num; w++) {
-                w_v[w] = 0;
-            }
+            // for (size_t w = buttons->len; w < button_num; w++) {
+            //     w_v[w] = 0;
+            // }
             free_fstr_vec(buttons);
         }
         fstring* j_string = pieces->arr[pieces->len - 1];
         struct fstr_vec* jolts = fsplit_on_char(j_string->str + 1, j_string->len - 2, ',');
 
-        m_array[i].j_array = malloc(sizeof(size_t) * b_num);
+        m_array[i].j_array = malloc(sizeof(size_t) * button_num);
         for (size_t j = 0; j < jolts->len; j++) {
             size_t jj = strtoll(jolts->arr[j]->str, NULL, 10);
             m_array[i].j_array[j] = jj;
@@ -229,7 +231,7 @@ void day_parse(struct machine* m_array, const struct problem_inputs* p_i){
 
 void free_machine(const struct machine* m){
     for (size_t i = 0; i < m->w_num; i++) {
-        free(m->w_array[i]);
+        free_size_vec(&m->w_array[i]);
     }
     free(m->w_array);
     free(m->j_array);
@@ -271,10 +273,151 @@ void day10(const char* filename){
     if (answer_part2) { free(answer_part2); };
 }
 
-char* day10_part1(const struct machine* m_array, const size_t m_count){
-    for (size_t i = 0; i < m_count; i++) {
-        print_machine(&m_array[i]);
+b_t apply_presses(const struct size_vec* p){
+    // printf("apply button sequence: ");
+    // print_size_vec(*p); println();
+    // printf("\n these are the full w_array:");
+    // for (size_t w=0; w < w_num; w++) {
+    //     printf(" %3zu: ", w);
+    //     print_size_vec(w_array[w]); println();
+    // }
+
+    b_t el = 0;
+    for (size_t i = 0; i < p->len; i++) {
+        struct size_vec* buttons = &w_array[p->arr[i]];
+        // printf("\t apply button: ");
+        // print_size_vec(*buttons); println();
+        for (size_t p = 0; p < buttons->len; p++) {
+            el = bit_toggle(el, buttons->arr[p]);
+        }
     }
+    return el;
+}
+
+
+char* day10_part1(const struct machine* m_array, const size_t m_count){
+     // for (size_t i = 0; i < m_count; i++) {
+    size_t i=0;
+    print_machine(&m_array[i]);
+
+
+
+    b_t goal = m_array[i].goal;
+    b_num = m_array[i].b_num;
+    w_num = m_array[i].w_num;
+    w_array = m_array[i].w_array;
+
+    struct stst_vec visited;
+    init_stst_vec_with_size(&visited, 8);
+    struct queue_sv* queue = create_queue_sv();
+    struct size_vec* s = malloc(sizeof(struct size_vec));
+    init_size_vec_with_size(s, 1);
+    for (size_t w = 0; w < w_num; w++) {
+        push_size_vec(s, w);
+        print_size_vec(*s);
+        println();
+        push_back_queue_sv(queue, size_vec_dup(s));
+        s->len--;
+    }
+    print_queue_sv(queue);
+    println();
+    // struct size_vec* solution = malloc(sizeof(struct size_vec));
+    // init_size_vec(solution);
+    // push_size_vec(solution, 5);
+    // push_size_vec(solution, 4);
+    // push_size_vec(solution,2);
+
+    // printf("insserting solution: ");
+    // print_size_vec(*solution);
+    // println();
+    // b_t good = apply_presses(solution);
+    // printf("\t goal: ");
+    // print_bits_u16(goal);
+    // println();
+    // printf("\t test: ");
+    // print_bits_u16(good);
+    // println();
+
+    // print_size_vec(w_array[5]); println();
+    // print_size_vec(w_array[4]);println();
+
+
+    /* example #1 solutions
+    *   [0,1,2]
+    *   [1,3,5]
+    *   [0,1,2,3,4,5]
+       */
+
+    size_t found_presses = 0;
+    size_t loop_count = 0;
+    // printf("initial queue:\t ");
+    // print_queue_sv(queue);
+    while ((queue->len > 0) && (loop_count < 200)) {
+        loop_count++;
+        struct node_sv* node = pop_front_queue_sv(queue);
+        struct size_vec* v = node->data;
+        free(node);
+        // printf("loop %3zu\n\t", loop_count);
+        // print_size_vec(*v);
+        // printf("\n\t");
+
+
+        b_t current_lights = apply_presses(v);
+        printf("lights: ");
+        print_bits_u16(current_lights);
+        println();
+        if (current_lights == goal) {
+            printf("\n\n\tfound goal\n\n\n\t");
+            printf("button sequence: \n\t\t");
+            print_size_vec(*v);
+            println();
+            for (size_t z = 0; z < v->len; z++) {
+                print_size_vec(w_array[z]);
+                println();
+            }
+
+
+            found_presses = v->len;
+            break;
+        }
+        // expand state (v) to new states
+        printf("\texpanding from state: ");
+        print_size_vec(*v);
+        println();
+        if (v->len <= 16) {
+            // if (v->len == 0) {
+            //     for (size_t w = 0; w < w_num; w++) {
+            //         push_size_vec(v, w);
+            //         if (find_stst_vec(&visited, v) == SIZE_MAX) {
+            //             printf("\t\t not found, queuing\n");
+            //             push_back_queue_sv(queue, size_vec_dup(v));
+            //         }
+            //         v->len--;
+            //     }
+            // }
+
+            for (size_t w = 0; w < w_num; w++) {
+                push_size_vec(v, w);
+                // print_size_vec(*v);
+                // printf("\t adding button press: %zu\n ", w);
+                if (find_stst_vec(&visited, v) == SIZE_MAX) {
+                    // printf("\t\t not found, queuing\n");
+                    push_back_queue_sv(queue, size_vec_dup(v));
+                }
+                v->len--; // pop pushed value
+            }
+        } else {
+            printf("not expanding state with %zu press\n", v->len);
+        }
+        push_stst_vec(&visited, v);
+        free(v);
+    }
+    if (found_presses > 0) {
+        printf("minimum presses: %zu\n", found_presses);
+    } else {
+        printf(" hit make iterations: %zu\n", loop_count);
+    }
+
 
     int64_t q = (int64_t)m_count;
     char* answer = malloc(ANSWER_BUFFER_SIZE);
