@@ -38,6 +38,7 @@ const char* day_09_test_file = "inputs/2025/day_09_test_01.txt";
 const char* day_09_input_file = "inputs/2025/day_09_input_01.txt";
 
 const char* day_10_test_file = "inputs/2025/day_10_test_01.txt";
+const char* day_10_test2_file = "inputs/2025/day_10_test_02.txt";
 const char* day_10_input_file = "inputs/2025/day_10_input_01.txt";
 
 const char* day_11_test_file = "inputs/2025/day_11_test_01.txt";
@@ -47,8 +48,7 @@ const char* day_12_test_file = "inputs/2025/day_12_test_01.txt";
 const char* day_12_input_file = "inputs/2025/day_12_input_01.txt";
 
 
-void run_all() {
-
+void run_all(){
     const clock_t whole_start = clock();
 
     day1(day_01_input_file);
@@ -71,15 +71,20 @@ void run_all() {
 }
 
 // #define  RUN_ALL true
+#define test true
 
-int main() {
+int main(){
 #ifdef RUN_ALL
     run_all();
 #else
 
     const clock_t start = clock();
-    // day10(day_10_test_file);
+#ifdef test
+    day10(day_10_test2_file);
+#else
     day10(day_10_input_file);
+#endif
+
     const clock_t end = clock();
     const double elapsed_ms = (double)(end - start) * 1000.0 / CLOCKS_PER_SEC;
     printf("\t\t\t time: %.3f ms", elapsed_ms);
@@ -89,7 +94,7 @@ int main() {
 }
 
 
-void free_problem_inputs(struct problem_inputs arr) {
+void free_problem_inputs(struct problem_inputs arr){
     for (size_t i = 0; i < arr.count; i++) {
         free(arr.lines[i]);
     }
@@ -97,7 +102,7 @@ void free_problem_inputs(struct problem_inputs arr) {
     free(arr.lines);
 }
 
-void free_range_inputs(struct range_inputs arr) {
+void free_range_inputs(struct range_inputs arr){
     free(arr.ranges);
     arr.count = 0;
 }
