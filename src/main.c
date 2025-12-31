@@ -71,7 +71,7 @@ void run_all(){
 }
 
 // #define  RUN_ALL true
-#define test true
+// #define test true
 
 int main(){
 #ifdef RUN_ALL
@@ -80,7 +80,7 @@ int main(){
 
     const clock_t start = clock();
 #ifdef test
-    day10(day_10_test2_file);
+    day10(day_10_test_file);
 #else
     day10(day_10_input_file);
 #endif
