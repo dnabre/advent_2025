@@ -1,0 +1,36 @@
+void print_buckets(struct bucket* buckets, size_t n_parity, size_t num_variables){
+    for (size_t p = 0; p < n_parity; p++) {
+        struct bucket* b = &buckets[p];
+        printf("Bucket %zu (count=%zu):\n", p, b->count);
+        for (size_t i = 0; i < b->count; i++) {
+            struct entry* e = &b->entries[i];
+            printf("  pattern: ");
+            for (size_t j = 0; j < num_variables; j++) {
+                printf("%zu ", e->pattern[j]);
+            }
+            printf("  cost=%zu\n", e->min_buttons);
+        }
+    }
+}
+
+
+
+void print_machine(const struct machine* m){
+    printf("machine:\n");
+    printf("\t goal  : ");
+    print_bits_u16(m->goal);
+    println();
+    printf("\t v_num : %zu\n", m->num_variables);
+    printf("\t b_num : %zu\n", m->num_buttons);
+    printf("\t buttons:\n");
+    for (size_t i = 0; i < m->num_buttons; i++) {
+        printf("\t\tb_array[%3zu] = ", i);
+        print_size_vec(m->b_array[i]);
+        println();
+    }
+    printf("\t jolts : ");
+    print_size_t_array(m->j_array, m->num_variables);
+    println();
+    printf("%s\n", m->input_line);
+    printf("\n-----------------------------------------\n");
+}
