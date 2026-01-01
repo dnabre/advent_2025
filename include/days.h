@@ -35,8 +35,6 @@ char* day7_part1(struct problem_inputs);
 char* day7_part2(struct problem_inputs);
 
 
-
-
 struct pair;
 void day8(const char* filename);
 char* day8_part1(const struct pair*);
@@ -48,8 +46,8 @@ char* day9_part2(struct problem_inputs, const struct point2*);
 
 void day10(const char* filename);
 struct machine;
-char* day10_part1(const struct machine* , size_t );
-char* day10_part2(const struct machine* , size_t );
+char* day10_part1(const struct machine*, size_t);
+char* day10_part2(const struct machine*, size_t);
 
 void day11(const char* filename);
 char* day11_part1(struct problem_inputs);
@@ -58,8 +56,6 @@ char* day11_part2(struct problem_inputs);
 void day12(const char* filename);
 char* day12_part1(struct problem_inputs);
 char* day12_part2(struct problem_inputs);
-
-
 
 
 #endif //ADVENT_2025_DAYS_H

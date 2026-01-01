@@ -16,11 +16,11 @@ const char* DAY5_PART2_ANSWER = "369761800782619";
 
 static int int_pair_compare(const void* p1, const void* p2);
 
-static inline int64_t max_int(int64_t a, int64_t b) {
+static inline int64_t max_int(int64_t a, int64_t b){
     return a > b ? a : b;
 }
 
-void day5(const char* filename) {
+void day5(const char* filename){
     struct problem_inputs day5_lines = read_by_lines(filename);
     struct range_inputs day5_ranges = {NULL, 0};
     struct problem_inputs day5_items = {NULL, 0};
@@ -57,7 +57,7 @@ void day5(const char* filename) {
     free_problem_inputs(day5_items);
 }
 
-char* day5_part1(struct range_inputs day5_ranges, struct problem_inputs day5_items) {
+char* day5_part1(struct range_inputs day5_ranges, struct problem_inputs day5_items){
     size_t fresh_count = 0;
     for (size_t i = 0; i < day5_items.count; i++) {
         int64_t id = strtoll(day5_items.lines[i], NULL, 10);
@@ -82,7 +82,7 @@ char* day5_part1(struct range_inputs day5_ranges, struct problem_inputs day5_ite
 }
 
 
-char* day5_part2(struct range_inputs day5_ranges) {
+char* day5_part2(struct range_inputs day5_ranges){
     struct int_pair* range_array = day5_ranges.ranges;
     qsort(range_array, day5_ranges.count, sizeof(struct int_pair), int_pair_compare);
     int64_t in_range_items = 0;
@@ -92,8 +92,7 @@ char* day5_part2(struct range_inputs day5_ranges) {
         struct int_pair current_range = range_array[r_idx];;
         if (current_range.x <= merged.y) {
             merged.y = max_int(merged.y, current_range.y);
-        }
-        else {
+        } else {
             in_range_items += merged.y - merged.x + 1;
             merged = current_range;
         }
@@ -105,7 +104,7 @@ char* day5_part2(struct range_inputs day5_ranges) {
 }
 
 
-static int int_pair_compare(const void* p1, const void* p2) {
+static int int_pair_compare(const void* p1, const void* p2){
     int64_t left_x = ((struct int_pair*)p1)->x;
     int64_t left_y = ((struct int_pair*)p1)->y;
 
@@ -116,8 +115,7 @@ static int int_pair_compare(const void* p1, const void* p2) {
     if (x_compare == 0) {
         int y_compare = ((left_y > right_y) - (left_y < right_y));
         return y_compare;
-    }
-    else {
+    } else {
         return x_compare;
     }
 }

@@ -16,7 +16,7 @@ const char* DAY6_PART2_ANSWER = "7450962489289";
 
 static const size_t PART2_COL_BUFFER_SIZE = 16;
 
-void day6(const char* filename) {
+void day6(const char* filename){
     struct problem_inputs day6_lines = read_by_lines(filename);
 
     printf("Advent of Code, Day 06\n");
@@ -46,7 +46,7 @@ void day6(const char* filename) {
     if (answer_part2) { free(answer_part2); };
 }
 
-char* day6_part1(struct problem_inputs p_i) {
+char* day6_part1(struct problem_inputs p_i){
     struct int64_vec first = parse_line_ints(p_i.lines[0], strlen(p_i.lines[0]));
     struct int64_vec second = parse_line_ints(p_i.lines[1], strlen(p_i.lines[1]));
     struct int64_vec third = parse_line_ints(p_i.lines[2], strlen(p_i.lines[2]));
@@ -77,8 +77,8 @@ char* day6_part1(struct problem_inputs p_i) {
         const char c_op = ops[p];
         if (c_op == '+') {
             value = a + b + c + d;
-        }
-        else  { // c_op == '*'
+        } else {
+            // c_op == '*'
             value = a * b * c * d;
         }
         total += value;
@@ -94,7 +94,7 @@ char* day6_part1(struct problem_inputs p_i) {
     return answer;
 }
 
-char* day6_part2(struct problem_inputs p_i) {
+char* day6_part2(struct problem_inputs p_i){
     int64_t total = 0;
     const size_t num_rows = p_i.count;
     size_t max_cols = 0;
@@ -147,9 +147,8 @@ char* day6_part2(struct problem_inputs p_i) {
                 total = total + sum;
             }
             free_int64_vec(&q_numbers);
-        }
-        else {
-            const int64_t value = strtoll(COL_BUFFER,NULL, 10);
+        } else {
+            const int64_t value = strtoll(COL_BUFFER, NULL, 10);
             if (value != 0) {
                 push_int64_vec(&q_numbers, value);
             }

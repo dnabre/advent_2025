@@ -78,8 +78,7 @@ void run_all(void){
 // #define test true
 
 int main(void){
-    char *p = strdup("x");
-
+    char* p = strdup("x");
 
 
 #ifdef RUN_ALL

@@ -118,10 +118,12 @@ static void print_vertex(const struct vertex* v){
     }
     printf("]\n");
 }
+
 static void free_vertex(struct vertex* v){
     free(v->edges);
     v->n_edges = 0;
 }
+
 #define MAX_ID   (C_SPAN * C_SPAN * C_SPAN + 1)
 /*
  *  id(0) is invalid mapping , though id(0) -> |mqp|
@@ -140,7 +142,7 @@ static struct vertex* graph;
 
 static size_t count_paths(size_t l_id, size_t r_id){
     if (l_id == r_id) { return 1; }
-    size_t sum =0;
+    size_t sum = 0;
     size_t l_idx = id_to_index[l_id];
     for (size_t i = 0; i < graph[l_idx].n_edges; i++) {
         sum += count_paths(graph[l_idx].edges[i], r_id);
@@ -149,8 +151,7 @@ static size_t count_paths(size_t l_id, size_t r_id){
 }
 
 char* day11_part1(const struct problem_inputs p_i){
-
-     v_count = p_i.count;
+    v_count = p_i.count;
     struct vertex v[v_count];
 
 
@@ -186,20 +187,24 @@ char* day11_part1(const struct problem_inputs p_i){
 
 
     graph = v;
-    size_t path_count1=0;
+    size_t path_count1 = 0;
     // size_t you_id = pack_str("you");
     // size_t out_id1 = pack_str("out");
     // path_count= count_paths(you_id, out_id1);
 
     println();
-    size_t srv_id = pack_str("srv"); printf("srv_id: %zu\n", srv_id);
-    size_t out_id = pack_str("out"); printf("out_id: %zu\n", out_id);
-    size_t dac_id = pack_str("dac");printf("dac_id: %zu\n", dac_id);
-    size_t fft_id = pack_str("fft");printf("fft_id: %zu\n", fft_id);
+    size_t srv_id = pack_str("srv");
+    printf("srv_id: %zu\n", srv_id);
+    size_t out_id = pack_str("out");
+    printf("out_id: %zu\n", out_id);
+    size_t dac_id = pack_str("dac");
+    printf("dac_id: %zu\n", dac_id);
+    size_t fft_id = pack_str("fft");
+    printf("fft_id: %zu\n", fft_id);
     size_t path_count = 0;
 
     // size_t s_d = count_paths(srv_id, out_id);printf("srv => dac: %zu\n", s_d);
-// printf("s_d: %zu\n", s_d);
+    // printf("s_d: %zu\n", s_d);
 
 
     // size_t s_d = count_paths(srv_id, dac_id);printf("srv => dac: %zu\n", s_d);
@@ -209,11 +214,6 @@ char* day11_part1(const struct problem_inputs p_i){
     // size_t d_f = count_paths(dac_id, fft_id);printf("dac => fft: %zu\n", d_f);
     // size_t f_d = count_paths(fft_id, dac_id);printf("fft => dac: %zu\n", f_d);
     println();
-
-
-
-
-
 
 
     // for (size_t v_i=0; v_i < v_count; v_i++) {
@@ -268,9 +268,7 @@ char* day11_part2(const struct problem_inputs p_i){
     // graph = v;
 
 
-
-
-size_t path_count =0;
+    size_t path_count = 0;
 
     // for (size_t v_i=0; v_i < v_count; v_i++) {
     //     free_vertex(&v[v_i]);

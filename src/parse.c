@@ -9,8 +9,7 @@
 #include "parse.h"
 
 
-struct int_pair parse_int_range(char* str)
-{
+struct int_pair parse_int_range(char* str){
     char* dash = strchr(str, '-');
     if (dash) {
         *dash = '\0';
@@ -29,8 +28,7 @@ struct int_pair parse_int_range(char* str)
     }
 }
 
-struct range_inputs parse_int_ranges(struct problem_inputs p_i)
-{
+struct range_inputs parse_int_ranges(struct problem_inputs p_i){
     struct range_inputs result = {0};
     result.count = p_i.count;
     struct int_pair* pair_array = malloc(p_i.count * sizeof(struct int_pair));
@@ -45,8 +43,7 @@ struct range_inputs parse_int_ranges(struct problem_inputs p_i)
 
 
 void split_on_empty_range_item(struct problem_inputs input_lines, struct range_inputs* out_ranges,
-                               struct problem_inputs* out_items)
-{
+                               struct problem_inputs* out_items){
     size_t split_line = SIZE_MAX;
     for (size_t i = 0; i < input_lines.count; i++) {
         if (strlen(input_lines.lines[i]) == 0) {
@@ -75,8 +72,7 @@ void split_on_empty_range_item(struct problem_inputs input_lines, struct range_i
 }
 
 
-struct int64_vec parse_line_ints(const char* s, size_t len)
-{
+struct int64_vec parse_line_ints(const char* s, size_t len){
     struct int64_vec v = {NULL, 0, 0};
 
 
@@ -106,8 +102,7 @@ struct int64_vec parse_line_ints(const char* s, size_t len)
 const size_t NUM_BUFFER_SIZE = 16;
 
 
-struct point2 parse_2d_point_from_line(const char* c_line)
-{
+struct point2 parse_2d_point_from_line(const char* c_line){
     char buffer[NUM_BUFFER_SIZE];
     int64_t coords[3];
 
@@ -119,7 +114,7 @@ struct point2 parse_2d_point_from_line(const char* c_line)
                 buffer[c] = c_line[c];
             }
             buffer[len] = '\0';
-            coords[i] = strtoll(buffer,NULL, 10);
+            coords[i] = strtoll(buffer, NULL, 10);
             c_line = f + 1;
         } else {
             coords[i] = strtoll(c_line, NULL, 10);
@@ -128,8 +123,8 @@ struct point2 parse_2d_point_from_line(const char* c_line)
     const struct point2 result = {coords[0], coords[1]};
     return result;
 }
-struct point3 parse_3d_point_from_line(const char* c_line)
-{
+
+struct point3 parse_3d_point_from_line(const char* c_line){
     char buffer[NUM_BUFFER_SIZE];
     int64_t coords[3];
 
@@ -141,7 +136,7 @@ struct point3 parse_3d_point_from_line(const char* c_line)
                 buffer[c] = c_line[c];
             }
             buffer[len] = '\0';
-            coords[i] = strtoll(buffer,NULL, 10);
+            coords[i] = strtoll(buffer, NULL, 10);
             c_line = f + 1;
         } else {
             coords[i] = strtoll(c_line, NULL, 10);

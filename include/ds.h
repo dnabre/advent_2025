@@ -34,8 +34,6 @@ struct size_vec* size_vec_dup(const struct size_vec*);
 struct size_vec* size_vec_dup_n(const struct size_vec* v, size_t n);
 
 
-
-
 /* fixed length string. null-terminated,
  * len doesn't include null character, str is heap allocated.
  * intention is for these to be editable
@@ -69,7 +67,7 @@ fstring* new_fstring(const char*);
 /* same as new_fstring, but the provided string is not assumed to be null-terminated, and only the first
  * `n` characters are used
  */
-fstring* new_fstringn(const char*,size_t n);
+fstring* new_fstringn(const char*, size_t n);
 
 // fstring struct always owns its memory.
 void free_fstring(fstring* s);
@@ -103,12 +101,12 @@ void free_queue_sv(struct queue_sv*);
 
 
 // will allocate struct node_fs on heap
-void push_front_queue_sv(struct queue_sv*,   struct size_vec*);
+void push_front_queue_sv(struct queue_sv*, struct size_vec*);
 // will allocate struct node_fs on heap
 void push_back_queue_sv(struct queue_sv*, struct size_vec*);
 
 // no deallocation done
-struct node_sv*  pop_front_queue_sv(struct queue_sv *);
+struct node_sv* pop_front_queue_sv(struct queue_sv*);
 
 void print_queue_sv(const struct queue_sv*);
 
@@ -128,13 +126,10 @@ void print_str_vec(const struct str_vec*);
 bool contains_str_vec(const struct str_vec*, const char*);
 
 
-
 // static bool grow_size_vec(struct size_vec* v, const size_t ptrsize, size_t* curcount);
 
 
 //-------------------------
-
-
 
 
 struct void_vec {
@@ -143,11 +138,11 @@ struct void_vec {
     size_t len;
     size_t cap;
 };
+
 void push_void_vec(struct void_vec* v, void* d);
 void init_void_vec(struct void_vec*);
 void init_void_vec_with_size(struct void_vec*, size_t init_size);
 void free_void_vec(struct void_vec*);
-
 
 
 // dynamic array of struct size_vec. size_vec structs are copy'd into the stst_vec
@@ -156,16 +151,13 @@ struct stst_vec {
     size_t len;
     size_t cap;
 };
+
 void push_stst_vec(struct stst_vec* v, const struct size_vec* d);
 void init_stst_vec(struct stst_vec*);
 void init_stst_vec_with_size(struct stst_vec*, size_t init_size);
 // return index if found, SIZE_MAX if not found
-size_t find_stst_vec(const struct stst_vec* v, const struct size_vec *d);
+size_t find_stst_vec(const struct stst_vec* v, const struct size_vec* d);
 void free_stst_vec(struct stst_vec*);
-
-
-
-
 
 
 #endif //ADVENT_2025_DS_H

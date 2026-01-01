@@ -10,7 +10,7 @@ const char* DAY12_PART1_ANSWER = "0";
 const char* DAY12_PART2_ANSWER = "0";
 
 
-void day12(const char* filename) {
+void day12(const char* filename){
     struct problem_inputs day12_lines = read_by_lines(filename);
 
     printf("Advent of Code, Day 12\n");
@@ -40,13 +40,13 @@ void day12(const char* filename) {
     if (answer_part2) { free(answer_part2); };
 }
 
-char* day12_part1(struct problem_inputs p_i) {
+char* day12_part1(struct problem_inputs p_i){
     char* answer = malloc(ANSWER_BUFFER_SIZE);
     sprintf(answer, "%"PRId64, p_i.count);
     return answer;
 }
 
-char* day12_part2(struct problem_inputs p_i) {
+char* day12_part2(struct problem_inputs p_i){
     char* answer = malloc(ANSWER_BUFFER_SIZE);
     sprintf(answer, "%"PRId64, p_i.count);
     return answer;

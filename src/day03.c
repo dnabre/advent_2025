@@ -12,7 +12,7 @@ const char* DAY3_PART1_ANSWER = "17109";
 const char* DAY3_PART2_ANSWER = "169347417057382";
 
 
-void day3(const char* filename) {
+void day3(const char* filename){
     struct problem_inputs day3_lines = read_by_lines(filename);
 
     printf("Advent of Code, Day 03\n");
@@ -43,7 +43,7 @@ void day3(const char* filename) {
 }
 
 
-char* day3_part1(struct problem_inputs line_array) {
+char* day3_part1(struct problem_inputs line_array){
     int64_t total_jolts = 0;
 
     for (size_t i = 0; i < line_array.count; i++) {
@@ -89,7 +89,7 @@ static int64_t get_jolts(const size_t* pos_array, const char* str);
 
 #define DAY_03_PART_02_NUMBER_OF_BANKS 12
 
-char* day3_part2(struct problem_inputs line_array) {
+char* day3_part2(struct problem_inputs line_array){
     int64_t total_jolts = 0;
     // const size_t DAY_03_PART_02_NUMBER_OF_BANKS = 12;
 
@@ -132,7 +132,7 @@ char* day3_part2(struct problem_inputs line_array) {
     return answer;
 }
 
-static int64_t get_jolts(const size_t* pos_array, const char* str) {
+static int64_t get_jolts(const size_t* pos_array, const char* str){
     size_t c_idx = pos_array[0];
 
 

@@ -18,8 +18,7 @@ const char* DAY8_PART2_ANSWER = "22517595";
 #define PAIRS ((DAY_08_SIZE - 1) * DAY_08_SIZE >> 1) // number of pairs of edges (count {a,b} and {b,a} as one)
 #define CIRCUITS N
 
-struct pair
-{
+struct pair {
     int64_t dist;
     size_t p1;
     size_t p2;

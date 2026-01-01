@@ -22,7 +22,7 @@ struct c_grid build_grid(struct problem_inputs);
 static struct c_grid dup_c_grid(const struct c_grid g);
 
 
-void day4(const char* filename) {
+void day4(const char* filename){
     struct problem_inputs day4_lines = read_by_lines(filename);
     struct c_grid grid = build_grid(day4_lines);
     printf("Advent of Code, Day 04\n");
@@ -55,7 +55,7 @@ void day4(const char* filename) {
 }
 
 
-char* day4_part1(const struct c_grid g) {
+char* day4_part1(const struct c_grid g){
     int64_t accessible_count = 0;
     for (size_t r = 0; r < g.num_rows; r++) {
         for (size_t c = 0; c < g.num_cols; c++) {
@@ -75,7 +75,7 @@ char* day4_part1(const struct c_grid g) {
 }
 
 
-char* day4_part2(const struct c_grid g) {
+char* day4_part2(const struct c_grid g){
     int64_t removed_count = 0;
     bool changed = true;
     struct c_grid current_grid = dup_c_grid(g);
@@ -107,7 +107,7 @@ char* day4_part2(const struct c_grid g) {
 }
 
 
-int64_t count_adjacent_rolls(const struct c_grid* g, size_t row, size_t col) {
+int64_t count_adjacent_rolls(const struct c_grid* g, size_t row, size_t col){
     int64_t adj_count = 0;
     for (ptrdiff_t dr = -1; dr <= 1; dr++) {
         for (ptrdiff_t dc = -1; dc <= 1; dc++) {
@@ -117,7 +117,7 @@ int64_t count_adjacent_rolls(const struct c_grid* g, size_t row, size_t col) {
             size_t n_row = row + (size_t)dr;
             size_t n_col = col + (size_t)dc;
 
-            if ((n_col < g->num_cols)  && (n_row < g->num_rows)) {
+            if ((n_col < g->num_cols) && (n_row < g->num_rows)) {
                 char ch = g->g[n_row][n_col];
                 if (ch == FULL) {
                     adj_count++;
@@ -128,7 +128,7 @@ int64_t count_adjacent_rolls(const struct c_grid* g, size_t row, size_t col) {
     return adj_count;
 }
 
-struct c_grid build_grid(struct problem_inputs line_array) {
+struct c_grid build_grid(struct problem_inputs line_array){
     struct c_grid g;
     g.num_rows = (size_t)line_array.count;
     g.num_cols = (size_t)strlen(line_array.lines[0]);
@@ -147,7 +147,7 @@ struct c_grid build_grid(struct problem_inputs line_array) {
 }
 
 
-static struct c_grid dup_c_grid(const struct c_grid g) {
+static struct c_grid dup_c_grid(const struct c_grid g){
     struct c_grid ng;
     ng.num_rows = g.num_rows;
     ng.num_cols = g.num_cols;
@@ -174,7 +174,7 @@ static struct c_grid dup_c_grid(const struct c_grid g) {
 }
 
 
-void free_c_grid(struct c_grid g) {
+void free_c_grid(struct c_grid g){
     for (size_t l = 0; l < g.num_rows; l++) {
         free(g.g[l]);
     }

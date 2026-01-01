@@ -13,7 +13,7 @@
 const char* DAY2_PART1_ANSWER = "23560874270";
 const char* DAY2_PART2_ANSWER = "44143124633";
 
-void day2(const char* filename) {
+void day2(const char* filename){
     struct problem_inputs day2_entries = read_full_from_csv(filename);
     struct range_inputs day2_ranges = parse_int_ranges(day2_entries);
 
@@ -50,7 +50,7 @@ static bool is_repeated_twice(const char* str, size_t n);
 static bool is_repeated_substring(const char* str, size_t n);
 
 
-char* day2_part1(struct range_inputs i_ranges) {
+char* day2_part1(struct range_inputs i_ranges){
     int64_t invalid_sum = 0;
     char nbuffer[64];
     for (size_t i = 0; i < i_ranges.count; i++) {
@@ -68,7 +68,7 @@ char* day2_part1(struct range_inputs i_ranges) {
     return answer;
 }
 
-char* day2_part2(struct range_inputs i_ranges) {
+char* day2_part2(struct range_inputs i_ranges){
     int64_t invalid_sum = 0;
     char nbuffer[64];
     for (size_t i = 0; i < i_ranges.count; i++) {
@@ -87,7 +87,7 @@ char* day2_part2(struct range_inputs i_ranges) {
     return answer;
 }
 
-static bool is_repeated_twice(const char* str, size_t n) {
+static bool is_repeated_twice(const char* str, size_t n){
     if (n % 2 != 0) {
         return false;
     }
@@ -103,7 +103,7 @@ static bool is_repeated_twice(const char* str, size_t n) {
     return false;
 }
 
-static bool is_repeated_substring(const char* str, size_t n) {
+static bool is_repeated_substring(const char* str, size_t n){
     for (size_t d = 1; d <= n / 2; d++) {
         if (n % d != 0) {
             continue;

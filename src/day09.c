@@ -13,15 +13,13 @@
 const char* DAY9_PART1_ANSWER = "4781377701";
 const char* DAY9_PART2_ANSWER = "1470616992";
 
-struct rect
-{
+struct rect {
     struct point2 bottom_left;
     struct point2 upper_right;
     int64_t area;
 };
 
-struct line_pair
-{
+struct line_pair {
     struct point2 start;
     struct point2 end;
 };

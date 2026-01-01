@@ -36,7 +36,6 @@ struct bucket {
 };
 
 
-
 static inline uint64_t bit_toggle(const uint64_t b, const size_t i){
     return b ^ (uint64_t)(1u << i);
 }
@@ -146,8 +145,6 @@ static bool next_combination(size_t* idx, const size_t k, const size_t n){
         i--;
     }
 }
-
-
 
 
 static void set_parity(const size_t* arr, size_t* p_patt, const size_t size){

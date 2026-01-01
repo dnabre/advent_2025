@@ -10,8 +10,7 @@
 
 #include "ds.h"
 
-int cmp_sizet(const void* p, const void* q)
-{
+int cmp_sizet(const void* p, const void* q){
     const size_t* a = p;
     const size_t* b = q;
     size_t left = *a;
@@ -21,23 +20,22 @@ int cmp_sizet(const void* p, const void* q)
     return 0;
 }
 
-int64_t calc_distance(const struct point3  a, const struct point3 b)
-{
+int64_t calc_distance(const struct point3 a, const struct point3 b){
     const int64_t dx = a.x - b.x;
     const int64_t dy = a.y - b.y;
     const int64_t dz = a.z - b.z;
-    return (dx*dx) + (dy*dy) + (dz*dz);
+    return (dx * dx) + (dy * dy) + (dz * dz);
 }
 
 
- int64_t min_i64(const int64_t a, const int64_t b){
+int64_t min_i64(const int64_t a, const int64_t b){
     if (a < b) {
         return a;
     }
     return b;
 }
 
- int64_t max_i64(const int64_t a, const int64_t b){
+int64_t max_i64(const int64_t a, const int64_t b){
     if (a > b) {
         return a;
     }
@@ -46,14 +44,14 @@ int64_t calc_distance(const struct point3  a, const struct point3 b)
 
 
 size_t min_st(const size_t a, const size_t b){
-    if ( a < b) {
+    if (a < b) {
         return a;
     }
-return b;
+    return b;
 }
 
 size_t max_st(const size_t a, const size_t b){
-    if ( a > b) {
+    if (a > b) {
         return a;
     }
     return b;
@@ -102,6 +100,7 @@ struct fstr_vec* fsplit_on_char(const char* str, const size_t len, const char ch
     }
     return out;
 }
+
 const char* bool2str(const bool b){
     if (b) {
         return "true";

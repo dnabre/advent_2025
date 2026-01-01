@@ -16,7 +16,7 @@ const int DIAL_START = 50;
 const int DIAL_SIZE = 100;
 
 
-void day1(const char* filename) {
+void day1(const char* filename){
     // struct problem_inputs day1_lines = read_full_file_to_lines(filename);
     struct problem_inputs day1_lines = read_by_lines(filename);
 
@@ -48,7 +48,7 @@ void day1(const char* filename) {
 }
 
 
-char* day1_part1(struct problem_inputs line_array) {
+char* day1_part1(struct problem_inputs line_array){
     size_t line_count = line_array.count;
     char** lines = line_array.lines;
 
@@ -63,11 +63,9 @@ char* day1_part1(struct problem_inputs line_array) {
             while (dial < 0) {
                 dial = dial + DIAL_SIZE;
             }
-        }
-        else if (direction == 'R') {
+        } else if (direction == 'R') {
             dial = (dial + amount) % DIAL_SIZE;
-        }
-        else {
+        } else {
             printf("\n ERROR invalid direction: %c, %d, from %s\n", direction, amount, lines[i]);
             exit(-1);
         }
@@ -81,7 +79,7 @@ char* day1_part1(struct problem_inputs line_array) {
 }
 
 
-char* day1_part2(struct problem_inputs line_array) {
+char* day1_part2(struct problem_inputs line_array){
     size_t line_count = line_array.count;
     char** lines = line_array.lines;
     int dial = DIAL_START;
@@ -100,29 +98,24 @@ char* day1_part2(struct problem_inputs line_array) {
         if (turn_direction == 'L') {
             if (amount < dial) {
                 dial -= amount;
-            }
-            else if (amount == dial) {
+            } else if (amount == dial) {
                 dial = 0;
                 if (amount > 0) {
                     clicks++;
                 }
-            }
-            else {
+            } else {
                 do_clicker = true;
                 d_mult = -1;
                 final_dial_shift = DIAL_SIZE;
             }
-        }
-        else //(turn_direction == 'R')
+        } else //(turn_direction == 'R')
         {
             if (dial + amount < DIAL_SIZE) {
                 dial += amount;
-            }
-            else if (dial + amount == DIAL_SIZE) {
+            } else if (dial + amount == DIAL_SIZE) {
                 dial = 0;
                 clicks++;
-            }
-            else {
+            } else {
                 do_clicker = true;
                 d_mult = 1;
                 final_dial_shift = -1 * DIAL_SIZE;

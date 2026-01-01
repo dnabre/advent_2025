@@ -7,7 +7,6 @@
 #include <string.h>
 
 
-
 //---------------- int64_vec functions start------------------
 void push_int64_vec(struct int64_vec* v, const int64_t d){
     if (v->arr == NULL) {
@@ -199,10 +198,11 @@ struct size_vec* size_vec_dup_n(const struct size_vec* v, size_t n){
     memcpy(n_vec->arr, v->arr, sizeof(size_t) * v->len);
     return n_vec;
 }
+
 //newly allocated array is return
 size_t* size_vec_to_array(const struct size_vec* v){
     size_t* r = malloc(sizeof(size_t) * v->len);
-    for (size_t i=0; i < v->len; i++) {
+    for (size_t i = 0; i < v->len; i++) {
         r[i] = v->arr[i];
     }
     return r;
@@ -233,15 +233,17 @@ struct fstring* new_fstringn(const char* s, const size_t n){
     fs->str[n] = '\0';
     return fs;
 }
+
 void free_fstring(struct fstring* s){
     if (s->len != 0) {
         free(s->str);
         s->str = 0;
     }
 }
+
 struct fstring* fstr_dup(const fstring* s){
     struct fstring* f = malloc(sizeof(fstring));
-    if (f==NULL) {
+    if (f == NULL) {
         printf("error, %s:%d:malloc failed for fsrting: %s (%zu)\n", __func__, __LINE__, s->str, s->len);
         exit(-1);
     }
@@ -249,15 +251,15 @@ struct fstring* fstr_dup(const fstring* s){
     f->len = s->len;
     return f;
 }
+
 int fstrcmp(const fstring* s1, const fstring* s2){
     const size_t left = s1->len;
     const size_t right = s2->len;
     if (left != right) {
         return ((left > right) - (left < right));
     }
-    return strncmp(s1->str,s2->str, left);
+    return strncmp(s1->str, s2->str, left);
 }
-
 
 
 struct queue_sv* create_queue_sv(void){
@@ -346,26 +348,27 @@ void print_queue_sv(const struct queue_sv* q){
     print_size_vec(*current->data);
     printf("]");
 }
+
 //----------------  fstr_vec -----------------
 
 void init_fstr_vec(struct fstr_vec* v){
-    v->arr=NULL;
-    v->len=0;
-    v->cap=0;
+    v->arr = NULL;
+    v->len = 0;
+    v->cap = 0;
 }
 
 void init_fstr_vec_n(struct fstr_vec* v, size_t n){
-    if (n ==0) {
+    if (n == 0) {
         v->arr = NULL;
     } else {
         v->arr = malloc(n * sizeof(fstring*));
     }
-    v->len=0;
-    v->cap=n;
+    v->len = 0;
+    v->cap = n;
 }
 
 // takes ownership of the allocated fstring. This is mainly to support push_fstr_vec_cn
-static void push_fstr_vec_raw(struct fstr_vec* v,  fstring* s){
+static void push_fstr_vec_raw(struct fstr_vec* v, fstring* s){
     if (v->arr == NULL) {
         v->arr = malloc(2 * sizeof(fstring*));
         v->len = 1;
@@ -399,10 +402,6 @@ static void push_fstr_vec_raw(struct fstr_vec* v,  fstring* s){
 }
 
 
-
-
-
-
 void push_fstr_vec(struct fstr_vec* v, const fstring* s){
     fstring* new_f = fstr_dup(s);
     push_fstr_vec_raw(v, new_f);
@@ -412,19 +411,20 @@ void push_fstr_vec(struct fstr_vec* v, const fstring* s){
 void push_fstr_vec_c(struct fstr_vec* v, const char* cstr){
     const size_t len = strlen(cstr);
     fstring* new_f = malloc(sizeof(fstring));
-    new_f->str = malloc((len+1) * sizeof(char));
+    new_f->str = malloc((len + 1) * sizeof(char));
     new_f->len = len;
     memcpy(new_f->str, cstr, len);
     new_f->str[len] = '\0';
     push_fstr_vec_raw(v, new_f);
 }
+
 /** inserts newly allocated fstring, a new cstr is allocated with length len (owned by the new fstring)
 *   this is for when you know the length of the string, and are inserting from a buffer that might not be
 *   null-terminated
  */
 void push_fstr_vec_cn(struct fstr_vec* v, const char* cstr, size_t len){
     fstring* new_f = malloc(sizeof(fstring));
-    new_f->str = malloc((len+1) * sizeof(char));
+    new_f->str = malloc((len + 1) * sizeof(char));
     new_f->len = len;
     memcpy(new_f->str, cstr, len);
     new_f->str[len] = '\0';
@@ -433,15 +433,16 @@ void push_fstr_vec_cn(struct fstr_vec* v, const char* cstr, size_t len){
 
 
 void free_fstr_vec(struct fstr_vec* v){
-    for (size_t i=0; i< v->len; i++) {
+    for (size_t i = 0; i < v->len; i++) {
         free_fstring(v->arr[i]);
     }
     if (v->cap != 0) {
         free(v->arr);
-        v->cap =0;
-        v->len =0;
+        v->cap = 0;
+        v->len = 0;
     }
 }
+
 void print_fstr_vec(const struct fstr_vec* v){
     if (v->arr == NULL) {
         printf("Array is NULL\n");
@@ -460,19 +461,13 @@ void print_fstr_vec(const struct fstr_vec* v){
 
 
 bool contains_fstr_vec(const struct fstr_vec* v, const fstring* s){
-    for (size_t i=0; i < v->len; i++) {
+    for (size_t i = 0; i < v->len; i++) {
         if (fstrcmp(v->arr[i], s) == 0) {
             return true;
         }
     }
     return false;
 }
-
-
-
-
-
-
 
 
 //----------------  str_vec -----------------
@@ -519,9 +514,9 @@ void free_str_vec(struct str_vec* v){
     for (size_t i = 0; i < v->len; i++) {
         free(v->arr[i]);
     }
-    if (v->cap !=0) {
+    if (v->cap != 0) {
         free(v->arr);
-        v->cap =0;
+        v->cap = 0;
     }
     v->arr = NULL;
     v->len = 0;
@@ -542,8 +537,9 @@ void print_str_vec(const struct str_vec* v){
     }
     printf("]");
 }
+
 bool contains_str_vec(const struct str_vec* v, const char* s){
-    for (size_t i=0; i < v->len; i++) {
+    for (size_t i = 0; i < v->len; i++) {
         if (strcmp(v->arr[i], s) == 0) {
             return true;
         }
@@ -583,22 +579,24 @@ void push_void_vec(struct void_vec* v, void* d){
         v->arr[v->len] = d;
         v->len++;
     }
-
 }
+
 void init_void_vec(struct void_vec* v){
     v->arr = NULL;
-    v->len=0;
-    v->cap=0;
+    v->len = 0;
+    v->cap = 0;
 }
+
 void init_void_vec_with_size(struct void_vec* v, size_t init_size){
     v->arr = malloc(sizeof(void*) * init_size);
-    v->len=0;
+    v->len = 0;
     v->cap = init_size;
 }
-void free_void_vec(struct void_vec* v ){
+
+void free_void_vec(struct void_vec* v){
     free(v->arr);
-    v->len =0;
-    v->cap =0;
+    v->len = 0;
+    v->cap = 0;
 }
 
 //----------------------------------------------------------------------------
@@ -647,37 +645,35 @@ void push_stst_vec(struct stst_vec* v, const struct size_vec* d){
 }
 
 
-
-
-
 void init_stst_vec(struct stst_vec* v){
     v->arr = NULL;
-    v->len=0;
-    v->cap=0;
+    v->len = 0;
+    v->cap = 0;
 }
+
 void init_stst_vec_with_size(struct stst_vec* v, size_t init_size){
     v->arr = malloc(init_size * sizeof(struct size_vec));
-    v->len =0;
+    v->len = 0;
     v->cap = init_size;
 }
 
 void free_stst_vec(struct stst_vec* v){
-    for (size_t i=0; i < v->len; i++) {
+    for (size_t i = 0; i < v->len; i++) {
         free_size_vec(&v->arr[i]);
     }
     free(v->arr);
     v->arr = NULL;
-    v->len =0;
-    v->cap =0;
+    v->len = 0;
+    v->cap = 0;
 }
 
 // return index if found, SIZE_MAX if not found
-size_t find_stst_vec(const struct stst_vec* v, const struct size_vec *d){
-    for (size_t i=0; i < v->len;i++) {
+size_t find_stst_vec(const struct stst_vec* v, const struct size_vec* d){
+    for (size_t i = 0; i < v->len; i++) {
         if (v->arr[i].len != d->len) {
             continue;
         }
-        for (size_t j=0; j < d->len; j++) {
+        for (size_t j = 0; j < d->len; j++) {
             if (v->arr[i].arr[j] != d->arr[j]) {
                 break;
             }

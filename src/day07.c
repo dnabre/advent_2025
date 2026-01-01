@@ -10,7 +10,7 @@ const char* DAY7_PART1_ANSWER = "1656";
 const char* DAY7_PART2_ANSWER = "76624086587804";
 
 
-void day7(const char* filename) {
+void day7(const char* filename){
     struct problem_inputs day7_lines = read_by_lines(filename);
 
     printf("Advent of Code, Day 07\n");
@@ -41,18 +41,17 @@ void day7(const char* filename) {
 }
 
 
-
-char* day7_part1(struct problem_inputs p_i) {
+char* day7_part1(struct problem_inputs p_i){
     const size_t width = strlen(p_i.lines[0]);
     const size_t height = p_i.count;
     char** grid = p_i.lines;
     int64_t beams[width];
-    for (size_t i=0; i < width; i++) {
+    for (size_t i = 0; i < width; i++) {
         beams[i] = 0;
     }
-    int64_t split_count=0;
-    for (size_t h=0; h < height; h++) {
-       for (size_t w=0; w < width; w++) {
+    int64_t split_count = 0;
+    for (size_t h = 0; h < height; h++) {
+        for (size_t w = 0; w < width; w++) {
             char ch = grid[h][w];
             if (ch == 'S') {
                 beams[w] = 1;
@@ -61,8 +60,8 @@ char* day7_part1(struct problem_inputs p_i) {
                 if (beams[w] == 1) {
                     split_count++;
                     beams[w] = 0;
-                    beams[w-1] = 1;
-                    beams[w+1] = 1;
+                    beams[w - 1] = 1;
+                    beams[w + 1] = 1;
                 }
             }
         }
@@ -73,34 +72,33 @@ char* day7_part1(struct problem_inputs p_i) {
     return answer;
 }
 
-char* day7_part2(struct problem_inputs p_i) {
+char* day7_part2(struct problem_inputs p_i){
     const size_t width = strlen(p_i.lines[0]);
     const size_t height = p_i.count;
     char** grid = p_i.lines;
     int64_t beams[width];
-    for (size_t i=0; i < width; i++) {
+    for (size_t i = 0; i < width; i++) {
         beams[i] = 0;
     }
 
-    for (size_t h=0; h < height; h++) {
-        for (size_t w=0; w < width; w++) {
+    for (size_t h = 0; h < height; h++) {
+        for (size_t w = 0; w < width; w++) {
             char ch = grid[h][w];
             if (ch == 'S') {
-                beams[w]=1;
+                beams[w] = 1;
             }
             if (ch == '^') {
                 if (beams[w] > 0) {
                     const int64_t last = beams[w];
                     beams[w] = 0;
-                    beams[w-1]  += last;
-                    beams[w+1] += last;
-
+                    beams[w - 1] += last;
+                    beams[w + 1] += last;
                 }
             }
         }
     }
-    int64_t tach_count =0;
-    for (size_t w=0; w < width; w++) {
+    int64_t tach_count = 0;
+    for (size_t w = 0; w < width; w++) {
         tach_count += beams[w];
     }
 
