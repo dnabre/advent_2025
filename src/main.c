@@ -71,7 +71,7 @@ void run_all(){
 }
 
 // #define  RUN_ALL true
-#define test true
+// #define test true
 
 int main(){
 #ifdef RUN_ALL

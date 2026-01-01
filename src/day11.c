@@ -7,8 +7,8 @@
 #include "ds.h"
 #include "io.h"
 #include "util.h"
-const char* DAY11_PART1_ANSWER = "0";
-const char* DAY11_PART2_ANSWER = "0";
+const char* DAY11_PART1_ANSWER = "566";
+const char* DAY11_PART2_ANSWER = "331837854931968";
 
 
 void day11(const char* filename){
@@ -24,8 +24,8 @@ void day11(const char* filename){
     // printf("\t part 2: ");
     char* answer_part2 = day11_part2(day11_lines);
 
-    printf("\t %s\n", answer_part2);
-    printf("    ---------------------------------------------\n");
+    // printf("\t %s\n", answer_part2);
+    // printf("    ---------------------------------------------\n");
 
     if (strcmp(answer_part1, DAY11_PART1_ANSWER) != 0) {
         fprintf(stderr, "Day 11, Part 1, answer is WRONG. Expected: %s, Received: %s\n",
@@ -43,13 +43,13 @@ void day11(const char* filename){
 
 #define C_SPAN 26
 bool seen[C_SPAN][C_SPAN][C_SPAN] = {false};
-size_t seen_count =0;
+size_t seen_count = 0;
 
-char int2char(size_t i) {
+static char int2char(size_t i){
     return (char)((unsigned char)i + 'a');
 }
 
-bool mark_seen(const char* str){
+static bool mark_seen(const char* str){
     if (seen[str[0] - 'a'][str[1] - 'a'][str[2] - 'a']) {
         return true;
     }
@@ -58,69 +58,148 @@ bool mark_seen(const char* str){
     return false;
 }
 
+
+// char s[] = "abc";
+// size_t idx = pack3_str(s);
+static size_t pack_str(const char s[3]){
+    return (size_t)(s[0] - 'a') * 26 * 26 +
+        (size_t)(s[1] - 'a') * 26 +
+        (size_t)(s[2] - 'a') + 1;
+}
+
+
+// char decoded[4];
+// unpack3_str(idx, decoded);
+static void unpack_str(const size_t id, char out[4]){
+    if (id == 0) {
+        printf("ERROR: unpack_str called on id==0\n");
+        exit(-1);
+    }
+    size_t x = id - 1;
+    out[0] = (char)((x / (26 * 26)) % 26 + 'a');
+    out[1] = (char)((x / 26) % 26 + 'a');
+    out[2] = (char)(x % 26 + 'a');
+    out[3] = '\0';
+}
+
+static char unpack_buffer[4];
+
+static char* s_unpack(const size_t id){
+    if (id == 0) {
+        printf("ERROR: unpack_str called on id==0\n");
+        exit(-1);
+    }
+    size_t x = id - 1;
+    unpack_buffer[0] = (char)((x / (26 * 26)) % 26 + 'a');
+    unpack_buffer[1] = (char)((x / 26) % 26 + 'a');
+    unpack_buffer[2] = (char)(x % 26 + 'a');
+    unpack_buffer[3] = '\0';
+    return unpack_buffer;
+}
+
+struct vertex {
+    size_t id;
+    size_t n_edges;
+    size_t* edges;
+};
+
+static void print_vertex(const struct vertex* v){
+    char s[4];
+    unpack_str(v->id, s);
+    printf("v=: %5s, [", s);
+
+    for (size_t i = 0; i < v->n_edges; i++) {
+        unpack_str(v->edges[i], s);
+        printf("%s", s);
+        if (i != v->n_edges - 1) {
+            printf(", ");
+        }
+    }
+    printf("]\n");
+}
+static void free_vertex(struct vertex* v){
+    free(v->edges);
+    v->n_edges = 0;
+}
+#define MAX_ID   (C_SPAN * C_SPAN * C_SPAN + 1)
+/*
+ *  id(0) is invalid mapping , though id(0) -> |mqp|
+ *  valid id range: 1 - 17576
+ *
+ *  C_SPAN   = 26
+ *  C_SPAN^3 = 17576
+ *  MAX_ID   = 17577
+ *
+ *  SIZEMAX: 18446744073709551615
+ */
+
+static size_t id_to_index[MAX_ID];
+static size_t v_count;
+static struct vertex* graph;
+
+static size_t count_paths(size_t l_id, size_t r_id){
+    if (l_id == r_id) { return 1; }
+    size_t sum =0;
+    size_t l_idx = id_to_index[l_id];
+    for (size_t i = 0; i < graph[l_idx].n_edges; i++) {
+        sum += count_paths(graph[l_idx].edges[i], r_id);
+    }
+    return sum;
+}
+
 char* day11_part1(const struct problem_inputs p_i){
     println();
-    printf("read %zu lines\n\n", p_i.count);
-    size_t mark_count=0;
+     v_count = p_i.count;
+    struct vertex v[v_count];
 
-    for (size_t i = 0; i < p_i.count; i++)
-        // size_t i=0;
-        {
+
+    for (size_t i = 0; i < p_i.count; i++) {
         const size_t l_len = strlen(p_i.lines[i]);
         struct fstr_vec* pieces = fsplit_on_char(p_i.lines[i], l_len, ' ');
+        // printf("%3zu: parsed line length: %zu, contents: |%s|\n",i, pieces->len, p_i.lines[i]);
+        // printf("\t%zu parts: \n", pieces->len);
 
-        char first[4];;
-        strncpy(first, pieces->arr[0]->str, 3);
-        first[3] = '\0';
-        if (!mark_seen(first) ) {
-            mark_count++;
+        char parse_buffer[4];
+        for (size_t j = 0; j < 3; j++) {
+            parse_buffer[j] = pieces->arr[0]->str[j];
         }
+        parse_buffer[3] = '\0';
+
+        v[i].id = pack_str(parse_buffer);
+        id_to_index[v[i].id] = i;
+        // printf("\tfirst: |%s|, id=%zu, idx=%zu, id_to_index[%zu]=%zu]\n", parse_buffer,v[i].id, i, v[i].id, id_to_index[v[i].id]);
 
 
-        // printf("first: \"%s\" (new: %s)\t", first, bool2str(first_new)); println();
-        char* rest[pieces->len - 1];
-        size_t rest_len = pieces->len - 1;
-        for (size_t j = 1; j < pieces->len; j++) {
-            rest[j - 1] = strdup(pieces->arr[j]->str);
+        const size_t rest_len = pieces->len - 1;
+        v[i].n_edges = rest_len;
+        v[i].edges = malloc(rest_len * sizeof(size_t));
+        // printf("\n\trest of string has %zu pieces\n", rest_len);
+        for (size_t r = 1; r < pieces->len; r++) {
+            // printf("\t\t%zu: %-8s\t packed: %zu\n", r, pieces->arr[r]->str, pack_str(pieces->arr[r]->str));
+            v[i].edges[r - 1] = pack_str(pieces->arr[r]->str);
         }
+        // print_vertex(&v[i]);
+        // println();
         free_fstr_vec(pieces);
-        // printf("rest: ");
-        // print_cstr_array(rest, rest_len); println();
-        for (size_t j = 0; j < rest_len; j++) {
-            if (!mark_seen(rest[j]) ) {
-                mark_count++;
-            }
-        }
-
-
-
-
-        // printf("rest_len: %zu, seen strings: %zu\n", rest_len, seen_count);
-
-        for (size_t j = 0; j < rest_len; j++) {
-            free(rest[j]);
-        }
     }
 
-    size_t s_count=0;
-    for (size_t x=0; x < C_SPAN; x++) {
-        for (size_t y=0; y < C_SPAN; y++) {
-            for (size_t z=0; z < C_SPAN; z++) {
-                if (seen[x][y][z]) {
-                    printf(" %c%c%c  \t %zu \n", int2char(x), int2char(y), int2char(z)  ,s_count);
-                    s_count++;
-                }
+    println();
 
-            }
-        }
+    graph = v;
+
+    size_t you_id = pack_str("you");
+    size_t out_id = pack_str("out");
+    size_t path_count = count_paths(you_id, out_id);
+
+
+
+    for (size_t v_i=0; v_i < v_count; v_i++) {
+        free_vertex(&v[v_i]);
     }
-    println();
-    printf("seen strings: %zu\n", seen_count);
+    printf("\n---------- day11 part1 done------------------\n");
 
-    printf("mark_count: %zu\n", mark_count);
-    println();
     char* answer = malloc(ANSWER_BUFFER_SIZE);
-    sprintf(answer, "%"PRId64, p_i.count);
+    sprintf(answer, "%zu", path_count);
     return answer;
 }
 

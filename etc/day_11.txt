@@ -1,0 +1,23 @@
+for (size_t x=0; x< C_SPAN; x++) {
+        for (size_t y=0; y< C_SPAN; y++) {
+            for (size_t z=0; z< C_SPAN; z++) {
+                char s[4];
+                s[0] = int2char(x);
+                s[1] = int2char(y);
+                s[2] = int2char(z);
+                s[3] = '\0';
+                size_t id = pack_str(s);
+                max_id = max_st(max_id, id);
+                min_id = min_st(min_id, id);
+            }
+        }
+    }
+    printf("max_id: %zu, min_id: %zu\n", max_id, min_id);
+
+      char first[4];;
+            strncpy(first, pieces->arr[0]->str, 3);
+            first[3] = '\0';
+            mark_seen(first);
+            v[i].id = pack_str(first);
+            id_to_index[v[i].id] = i;
+            printf("first: |%s|, id: %zu, idx: %zu, id_to_index[%zu]=%zu\n", first, v[i].id, i, v[i].id, id_to_index[v[i].id]);

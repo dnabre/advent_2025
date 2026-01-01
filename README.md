@@ -84,8 +84,8 @@ Using C17+, though will likely be C99 compatible.
 
   <tr>
     <td><a href="https://adventofcode.com/2025/day/11">Day 11: Reactor</a></td>
-    <td></td>
-    <td><a href="https://github.com/dnabre/advent_2025/blob/master/src/day11.c"> </a></td>
+    <td>Graph Transversal</td>
+    <td><a href="https://github.com/dnabre/advent_2025/blob/master/src/day11.c">*</a></td>
     <td><a href="https://github.com/dnabre/advent_2025/blob/master/src/day11.c"> </a></td>
   </tr> 
   <tr>
