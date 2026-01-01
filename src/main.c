@@ -86,7 +86,7 @@ int main(void){
 
     const clock_t start = clock();
 #ifdef test
-    day11(day_11_test2_file);
+    day11(day_11_test_file);
 #else
     day11(day_11_input_file);
 #endif

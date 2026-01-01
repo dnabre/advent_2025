@@ -29,11 +29,11 @@ void day11(const char* filename){
     printf("\t %s\n", answer_part2);
     printf("    ---------------------------------------------\n");
 
-    if (strcmp(answer_part1, DAY11_PART1_ANSWER) != 0) {
+    if (answer_part1 != NULL && strcmp(answer_part1, DAY11_PART1_ANSWER) != 0) {
         fprintf(stderr, "Day 11, Part 1, answer is WRONG. Expected: %s, Received: %s\n",
                 DAY11_PART1_ANSWER, answer_part1);
     }
-    if (strcmp(answer_part2, DAY11_PART2_ANSWER) != 0) {
+    if (answer_part2 != NULL && strcmp(answer_part2, DAY11_PART2_ANSWER) != 0) {
         fprintf(stderr, "Day 11, Part 2, answer is WRONG. Expected: %s, Received: %s\n",
                 DAY11_PART2_ANSWER, answer_part2);
     }
