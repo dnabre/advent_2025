@@ -1,3 +1,4 @@
+#include "c17_strict.h"
 #include <inttypes.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -185,7 +186,7 @@ char* day11_part1(const struct problem_inputs p_i){
 
 
     graph = v;
-    size_t path_count1;
+    size_t path_count1=0;
     // size_t you_id = pack_str("you");
     // size_t out_id1 = pack_str("out");
     // path_count= count_paths(you_id, out_id1);

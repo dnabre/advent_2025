@@ -1,7 +1,10 @@
+#include "c17_strict.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 #include "main.h"
+
+#include <string.h>
 
 
 #include "days.h"
@@ -49,7 +52,7 @@ const char* day_12_test_file = "inputs/2025/day_12_test_01.txt";
 const char* day_12_input_file = "inputs/2025/day_12_input_01.txt";
 
 
-void run_all(){
+void run_all(void){
     const clock_t whole_start = clock();
 
     day1(day_01_input_file);
@@ -62,7 +65,7 @@ void run_all(){
     day8(day_08_input_file);
     day9(day_09_input_file);
     day10(day_10_input_file);
-    // day11(day_11_input_file);
+    day11(day_11_input_file);
     // day12(day_12_input_file);
 
 
@@ -71,10 +74,14 @@ void run_all(){
     printf("\n  Total runtime of all days: %.3f ms\n", whole_elapsed_ms);
 }
 
-// #define  RUN_ALL true
+#define  RUN_ALL true
 // #define test true
 
-int main(){
+int main(void){
+    char *p = strdup("x");
+
+
+
 #ifdef RUN_ALL
     run_all();
 #else

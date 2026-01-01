@@ -1,6 +1,6 @@
 #ifndef ADVENT_2025_DAYS_H
 #define ADVENT_2025_DAYS_H
-
+#include "c17_strict.h"
 #define ANSWER_BUFFER_SIZE  32
 #include "main.h"
 

@@ -1,4 +1,4 @@
-// ReSharper disable CppDFAMemoryLeak
+#include "c17_strict.h"
 #include "ds.h"
 
 #include <inttypes.h>
@@ -260,7 +260,7 @@ int fstrcmp(const fstring* s1, const fstring* s2){
 
 
 
-struct queue_sv* create_queue_sv(){
+struct queue_sv* create_queue_sv(void){
     struct queue_sv* new_q = malloc(sizeof(struct queue_sv));
     new_q->head = NULL;
     new_q->tail = NULL;

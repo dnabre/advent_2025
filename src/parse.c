@@ -1,3 +1,4 @@
+#include "c17_strict.h"
 #include <stdint.h>
 #include <stdlib.h>
 #include <string.h>

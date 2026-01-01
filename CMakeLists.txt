@@ -31,6 +31,6 @@ target_include_directories(advent_2025 PRIVATE ${CMAKE_SOURCE_DIR}/include)
 
 # --- Compiler flags by configuration ---
 target_compile_options(advent_2025 PRIVATE
-$<$<CONFIG:Debug>:-Wall -O0 -g >
-$<$<CONFIG:Release>:-Wall -O3>
+$<$<CONFIG:Debug>:-Wall -Wextra -Wpedantic  -Werror=implicit-function-declaration -O0 -g>
+$<$<CONFIG:Release>:-Wall -Wextra -Wpedantic   -Werror=implicit-function-declaration -O3>
 )

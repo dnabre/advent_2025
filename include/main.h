@@ -1,6 +1,7 @@
 #ifndef ADVENT_2025_MAIN_H
 #define ADVENT_2025_MAIN_H
 
+#include <c17_strict.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <stddef.h>

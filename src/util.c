@@ -1,4 +1,4 @@
-
+#include "c17_strict.h"
 
 
 #include <stddef.h>

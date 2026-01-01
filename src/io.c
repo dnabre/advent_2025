@@ -1,3 +1,4 @@
+#include "c17_strict.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -5,6 +6,7 @@
 
 #include <inttypes.h>
 #include <string.h>
+
 
 
 char* read_line(FILE* fp) {

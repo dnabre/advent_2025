@@ -1,6 +1,6 @@
 #ifndef ADVENT_2025_DS_H
 #define ADVENT_2025_DS_H
-
+#include "c17_strict.h"
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
@@ -96,7 +96,7 @@ bool contains_fstr_vec(const struct fstr_vec*, const fstring*);
 
 //----------------------
 // gives clean, newly heap allocated
-struct queue_sv* create_queue_sv();
+struct queue_sv* create_queue_sv(void);
 
 // frees the struct queue_fs and any struct node_fs  that in the queue
 void free_queue_sv(struct queue_sv*);

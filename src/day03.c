@@ -1,3 +1,5 @@
+#include "c17_strict.h"
+
 #include <ctype.h>
 #include <inttypes.h>
 #include <stdlib.h>

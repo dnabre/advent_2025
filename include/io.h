@@ -10,6 +10,7 @@
 
 #ifndef ADVENT_2025_IO_H
 #define ADVENT_2025_IO_H
+#include "c17_strict.h"
 #include "main.h"
 /**
  * Reads line from `fp` file stream, returns it as newly alloc string.
@@ -53,7 +54,7 @@ struct problem_inputs read_full_file_to_lines(const char* filename);
 struct problem_inputs read_full_from_csv(const char* filename);
 
 
-static inline void println() {
+static inline void println(void) {
     printf("\n");
 }
 
