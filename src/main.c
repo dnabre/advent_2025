@@ -42,6 +42,7 @@ const char* day_10_test2_file = "inputs/2025/day_10_test_02.txt";
 const char* day_10_input_file = "inputs/2025/day_10_input_01.txt";
 
 const char* day_11_test_file = "inputs/2025/day_11_test_01.txt";
+const char* day_11_test2_file = "inputs/2025/day_11_test_02.txt";
 const char* day_11_input_file = "inputs/2025/day_11_input_01.txt";
 
 const char* day_12_test_file = "inputs/2025/day_12_test_01.txt";
@@ -80,7 +81,7 @@ int main(){
 
     const clock_t start = clock();
 #ifdef test
-    day11(day_11_test_file);
+    day11(day_11_test2_file);
 #else
     day11(day_11_input_file);
 #endif
