@@ -5,7 +5,7 @@
 #include "io.h"
 
 #include <inttypes.h>
-#include <string.h>
+
 
 
 char* read_line(FILE* fp){
@@ -91,12 +91,12 @@ struct problem_inputs read_full_from_csv(const char* filename){
     for (size_t i = 0; i < file_size; i++) {
         if (buffer[i] == ',') {
             buffer[i] = '\0';
-            entries[idx++] = strdup(start);
+            entries[idx++] = c17_strdup(start);
             start = buffer + i + 1;
         }
     }
     if (idx < count) {
-        entries[idx] = strdup(start);
+        entries[idx] = c17_strdup(start);
     }
     free(buffer);
     struct problem_inputs result = {0};
@@ -146,12 +146,12 @@ char** lines_from_buffer(char* buffer, const size_t size, size_t* number_of_line
         if (buffer[i] == '\n') {
             buffer[i] = '\0';
             start = buffer + i + 1;
-            lines[idx++] = strdup(start);
+            lines[idx++] = c17_strdup(start);
         }
     }
 
     if (start < buffer + size) {
-        lines[idx] = strdup(start);
+        lines[idx] = c17_strdup(start);
         idx++;
     }
     *number_of_lines = idx;

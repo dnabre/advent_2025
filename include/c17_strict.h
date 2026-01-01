@@ -19,4 +19,12 @@
 #undef __USE_MINGW_ANSI_STDIO
 #undef __USE_MINGW_STRINGS
 
+
+
+
+char *c17_strdup(const char *str);
+
+
+
+
 #endif //ADVENT_2025_C17_STRICT_H

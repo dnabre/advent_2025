@@ -19,6 +19,7 @@ add_executable(advent_2025
         ${DAY_SRC_FILES}
         src/ds.c
         src/util.c
+        src/c17.c
 
 )
 

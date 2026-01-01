@@ -218,7 +218,7 @@ size_t* size_vec_to_array(const struct size_vec* v){
 struct fstring* new_fstring(const char* s){
     struct fstring* fs = malloc(sizeof(struct fstring));
     fs->len = strlen(s);
-    fs->str = strdup(s);
+    fs->str = c17_strdup(s);
     return fs;
 }
 
@@ -247,7 +247,7 @@ struct fstring* fstr_dup(const fstring* s){
         printf("error, %s:%d:malloc failed for fsrting: %s (%zu)\n", __func__, __LINE__, s->str, s->len);
         exit(-1);
     }
-    f->str = strdup(s->str);
+    f->str = c17_strdup(s->str);
     f->len = s->len;
     return f;
 }
@@ -482,12 +482,12 @@ void push_str_vec(struct str_vec* v, const char* s){
         v->arr = malloc(2 * sizeof(char*));
         v->len = 1;
         v->cap = 2;
-        v->arr[0] = strdup(s);
+        v->arr[0] = c17_strdup(s);
         return;
     }
 
     if (v->len < v->cap) {
-        v->arr[v->len] = strdup(s);
+        v->arr[v->len] = c17_strdup(s);
         v->len++;
         return;
     }
@@ -505,7 +505,7 @@ void push_str_vec(struct str_vec* v, const char* s){
             v->arr = tmp;
         }
         v->cap = new_cap;
-        v->arr[v->len] = strdup(s);
+        v->arr[v->len] = c17_strdup(s);
         v->len++;
     }
 }

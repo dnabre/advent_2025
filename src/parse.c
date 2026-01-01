@@ -66,7 +66,7 @@ void split_on_empty_range_item(struct problem_inputs input_lines, struct range_i
     }
     size_t new_lines_idx = 0;
     for (size_t l = split_line + 1; l < input_lines.count; l++) {
-        out_items->lines[new_lines_idx] = strdup(input_lines.lines[l]);
+        out_items->lines[new_lines_idx] = c17_strdup(input_lines.lines[l]);
         new_lines_idx++;
     }
 }
