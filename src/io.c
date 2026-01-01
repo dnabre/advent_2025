@@ -123,7 +123,7 @@ char* read_full_file(const char* filename, size_t* bytes_read) {
     return buffer;
 }
 
-char** lines_from_buffer(char* buffer, size_t size, size_t* number_of_lines) {
+char** lines_from_buffer(char* buffer, const size_t size, size_t* number_of_lines) {
     if (!buffer) {
         exit(-1);
     }
@@ -158,7 +158,7 @@ char** lines_from_buffer(char* buffer, size_t size, size_t* number_of_lines) {
     return lines;
 }
 
-void print_size_t_array(const size_t* arr, size_t size) {
+void print_size_t_array(const size_t* arr, const size_t size) {
     if (arr == NULL) {
         printf("Array is NULL\n");
         return;
@@ -201,15 +201,31 @@ void print_c_grid(const struct c_grid q) {
     }
 }
 
-void print_point3(struct point3 p) {
+void print_point3(const struct point3 p) {
     printf("[%"PRId64, p.x);
     printf(",%"PRId64, p.y);
     printf(",%"PRId64, p.z);
     printf("]");
 }
 
-void print_point2(struct point2 p) {
+void print_point2(const struct point2 p) {
     printf("[%"PRId64, p.x);
     printf(",%"PRId64, p.y);
+    printf("]");
+}
+
+void print_cstr_array( char** v, const size_t size){
+    if ((v == NULL) || (size==0)) {
+        printf("Array is NULL\n");
+        return;
+    }
+
+    printf("[");
+    for (size_t i = 0; i < size; i++) {
+        printf("\"%s\"", v[i]);
+        if (i + 1 < size) {
+            printf(", ");
+        }
+    }
     printf("]");
 }

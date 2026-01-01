@@ -102,3 +102,9 @@ struct fstr_vec* fsplit_on_char(const char* str, const size_t len, const char ch
     }
     return out;
 }
+const char* bool2str(const bool b){
+    if (b) {
+        return "true";
+    }
+    return "false";
+}

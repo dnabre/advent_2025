@@ -1,5 +1,6 @@
 #ifndef ADVENT_2025_UTIL_H
 #define ADVENT_2025_UTIL_H
+#include <stdbool.h>
 int cmp_sizet(const void* p, const void* q);
 int64_t calc_distance(const struct point3  a, const struct point3 b);
 
@@ -27,6 +28,10 @@ static inline int  size_t_compare_r(const void *p1, const void *p2)
     return ((left > right) - (left < right));
 }
 
+
 // return fstr_vec and the fstring within are newly allocated
 struct fstr_vec* fsplit_on_char(const char* str, const size_t len, const char ch);
+const char* bool2str( bool b);
+
+
 #endif //ADVENT_2025_UTIL_H

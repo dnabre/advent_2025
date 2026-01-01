@@ -58,6 +58,7 @@ static inline void println() {
 }
 
 void print_size_t_array(const size_t* arr, size_t size);
+void print_cstr_array( char** arr, size_t size);
 
 void print_int_pair_range(struct int_pair);
 void print_c_grid(struct c_grid);
